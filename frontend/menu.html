@@ -33,6 +33,100 @@ http://www.templatemo.com/tm-466-cafe-house
       <div class="loader-section section-right"></div>
     </div>
     <!-- End Preloader -->
+    <!-- Cart  -->
+    <div class="wrap-cart">
+      <div class="cart" onclick="showHidePopupsCart()">
+        <a><i class="fas fa-shopping-cart icon-cart"></i></a>
+        <div class="cart-notify">99</div>
+      </div>
+    </div>
+    <!-- popups  -->
+    <div class="wrap-popups-cart hide" id="popups-cart">
+      <div class="text-title"><h2>Giỏ hàng</h2></div>
+      <div class="dash-popups" onclick="showHidePopupsCart()"><i class="fas fa-minus-circle"></i></div>
+      <div class="popups-cart-content">
+        <div class="">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                  <thead>
+                      <tr>
+                          <th scope="col"> </th>
+                          <th scope="col">Tên sản phẩm</th>
+                          <th scope="col" class="text-center">Số lượng</th>
+                          <th scope="col" class="text-right">Giá</th>
+                          <th> </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                          <td>Sản phẩm 1</td>
+                          <td>
+                            <div class="quantity-btn">
+                              <input type="button" value="-" class="arrow" onclick="minus('sp1')"/>
+                              <input class="form-control" type="number" id="sp1" value="1" min="1" max="99" onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
+                              <input type="button" value="+" class="arrow" onclick="plus('sp1')"/>  
+                            </div>
+                          </td>
+                          <td class="text-right">12 VNĐ</td>
+                          <td class="text-right"><button class="btn btn-sm btn-danger outline"><i class="fa fa-trash"></i> </button> </td>
+                      </tr>
+                      <tr>
+                          <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                          <td>Sản phẩm 2</td>
+                          <td>
+                            <div class="quantity-btn">
+                              <input type="button" value="-" class="arrow" onclick="minus('sp2')"/>
+                              <input class="form-control" type="number" id="sp2" value="1" min="1" max="99" onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
+                              <input type="button" value="+" class="arrow" onclick="plus('sp2')"/>  
+                            </div>
+                          </td>
+                          <td class="text-right">23 VNĐ</td>
+                          <td class="text-right"><button class="btn btn-sm btn-danger outline"><i class="fa fa-trash"></i> </button> </td>
+                      </tr>
+                      <tr>
+                          <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                          <td>Sản phẩm 3</td>
+                          <td>
+                            <div class="quantity-btn">
+                              <input type="button" value="-" class="arrow" onclick="minus('sp3')"/>
+                              <input class="form-control" type="number" id="sp3" value="1" min="1" max="99" onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
+                              <input type="button" value="+" class="arrow" onclick="plus('sp3')"/>  
+                            </div>
+                          </td>
+                          <td class="text-right">2 VNĐ</td>
+                          <td class="text-right"><button class="btn btn-sm btn-danger outline"><i class="fa fa-trash"></i> </button> </td>
+                      </tr>
+                      <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td>Tổng tiền sản phẩm</td>
+                          <td class="text-right">235 VNĐ</td>
+                      </tr>
+                      <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td>VAT</td>
+                          <td class="text-right">10 VNĐ</td>
+                      </tr>
+                      <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td><strong>Tổng tiền</strong></td>
+                          <td class="text-right"><strong>346 VNĐ</strong></td>
+                      </tr>
+                  </tbody>
+              </table>
+            </div>
+        </div>
+        <div class="text-right">
+          <button class="btn btn-lg btn-block btn-success text-uppercase outline">Checkout</button>
+        </div>
+      </div>
+    </div>
     <div class="tm-top-header">
       <div class="container">
         <div class="row">
@@ -53,7 +147,6 @@ http://www.templatemo.com/tm-466-cafe-house
                 <li><a href="menu.html" class="active">Menu</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="Singin.html"><i class="fas fa-user icon"></i></a></li>
-                <li><a href="#"><i class="fas fa-shopping-cart icon"></i></a></li>
               </ul>
             </nav>   
           </div>           
@@ -226,6 +319,7 @@ http://www.templatemo.com/tm-466-cafe-house
    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
    <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
    <script defer src="./js/all.js"></script>
+   <script defer src="./js/index.js"></script>
 
  </body>
  </html>
