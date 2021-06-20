@@ -12,12 +12,10 @@ http://www.templatemo.com/tm-466-cafe-house
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
   <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="./css/all.css" rel="stylesheet">
   <link href="css/templatemo-style.css" rel="stylesheet">
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,132 +33,81 @@ http://www.templatemo.com/tm-466-cafe-house
       <div class="loader-section section-right"></div>
     </div>
     <!-- End Preloader -->
-    <!-- Cart  -->
-    <div class="wrap-cart">
-      <div class="cart" onclick="showHidePopupsCart()">
-        <a><i class="fas fa-shopping-cart icon-cart"></i></a>
-        <div class="cart-notify">99</div>
-      </div>
-    </div>
-    <!-- popups  -->
-    <div class="wrap-popups-cart hide" id="popups-cart">
-      <div class="text-title"><h2>Giỏ hàng</h2></div>
-      <div class="dash-popups" onclick="showHidePopupsCart()"><i class="fas fa-minus-circle"></i></div>
-      <div class="popups-cart-content">
-        <div class="">
-            <div class="table-responsive">
-              <table class="table table-striped">
-                  <thead>
-                      <tr>
-                          <th scope="col"> </th>
-                          <th scope="col">Tên sản phẩm</th>
-                          <th scope="col" class="text-center">Số lượng</th>
-                          <th scope="col" class="text-right">Giá</th>
-                          <th> </th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr>
-                          <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                          <td>Sản phẩm 1</td>
-                          <td>
-                            <div class="quantity-btn">
-                              <input type="button" value="-" class="arrow" onclick="minus('sp1')"/>
-                              <input class="form-control" type="number" id="sp1" value="1" min="1" max="99" onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
-                              <input type="button" value="+" class="arrow" onclick="plus('sp1')"/>  
-                            </div>
-                          </td>
-                          <td class="text-right">12 VNĐ</td>
-                          <td class="text-right"><button class="btn btn-sm btn-danger outline"><i class="fa fa-trash"></i> </button> </td>
-                      </tr>
-                      <tr>
-                          <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                          <td>Sản phẩm 2</td>
-                          <td>
-                            <div class="quantity-btn">
-                              <input type="button" value="-" class="arrow" onclick="minus('sp2')"/>
-                              <input class="form-control" type="number" id="sp2" value="1" min="1" max="99" onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
-                              <input type="button" value="+" class="arrow" onclick="plus('sp2')"/>  
-                            </div>
-                          </td>
-                          <td class="text-right">23 VNĐ</td>
-                          <td class="text-right"><button class="btn btn-sm btn-danger outline"><i class="fa fa-trash"></i> </button> </td>
-                      </tr>
-                      <tr>
-                          <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                          <td>Sản phẩm 3</td>
-                          <td>
-                            <div class="quantity-btn">
-                              <input type="button" value="-" class="arrow" onclick="minus('sp3')"/>
-                              <input class="form-control" type="number" id="sp3" value="1" min="1" max="99" onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
-                              <input type="button" value="+" class="arrow" onclick="plus('sp3')"/>  
-                            </div>
-                          </td>
-                          <td class="text-right">2 VNĐ</td>
-                          <td class="text-right"><button class="btn btn-sm btn-danger outline"><i class="fa fa-trash"></i> </button> </td>
-                      </tr>
-                      <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td>Tổng tiền sản phẩm</td>
-                          <td class="text-right">235 VNĐ</td>
-                      </tr>
-                      <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td>VAT</td>
-                          <td class="text-right">10 VNĐ</td>
-                      </tr>
-                      <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td><strong>Tổng tiền</strong></td>
-                          <td class="text-right"><strong>346 VNĐ</strong></td>
-                      </tr>
-                  </tbody>
-              </table>
-            </div>
-        </div>
-        <div class="text-right">
-          <button class="btn btn-lg btn-block btn-success text-uppercase outline">Checkout</button>
-        </div>
-      </div>
-    </div>
+
     <div class="tm-top-header">
       <div class="container">
         <div class="row">
-          <div class="tm-top-header-inner logo-login-center">
-            <div class="tm-logo-container logo-login-center">
+          <div class="tm-top-header-inner">
+            <div class="tm-logo-container">
               <a href="index.html">
                 <img src="img/logo.png" alt="Logo" class="tm-site-logo">
                 <h1 class="tm-site-name tm-handwriting-font">Cafe House</h1>
               </a>
             </div>
+            <div class="mobile-menu-icon">
+              <i class="fa fa-bars"></i>
+            </div>
+            <nav class="tm-nav">
+              <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="today-special.html">Today Special</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="Singin.html"><i class="fas fa-user icon"></i></a></li>
+              </ul>
+            </nav>   
           </div>           
         </div>    
       </div>
     </div>
-    <section class="tm-welcome-section">
-      <div class="container tm-position-relative height-singin">
-        <div class="tm-lights-container">
-          <img src="img/light.png" alt="Light" class="light light-1">
-          <img src="img/light.png" alt="Light" class="light light-2">
-          <img src="img/light.png" alt="Light" class="light light-3">  
-        </div>        
-        <div class="row tm-welcome-content">
-          <div>
-            
-
-            
+    <div class="tm-main-section light-gray-bg">
+      <div class="container" id="main">
+        <div class="container bootdey">
+          <div class="col-md-12">
+            <section class="panel">
+              <div class="panel-body">
+                  <div class="col-md-6">
+                      <div class="pro-img-details">
+                          <img src="https://via.placeholder.com/550x380/FFB6C1/000000" alt="">
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <h2 class="pro-d-title">
+                        Sản phẩm 1
+                      </h2>
+                      <p>
+                        Sản phẩm ngon bổ rẻ mua nha
+                      </p>
+                      <div class="product_meta">
+                          <span class="posted_in"> <strong>Categories:</strong> <a rel="tag" href="#">Đồ uống</a>, <a rel="tag" href="#">Tra sua</a>, <a rel="tag" href="#">Drink</a>, <a rel="tag" href="#">Tra da</a>.</span>
+                          <span class="tagged_as"><strong>Tags:</strong> <a rel="tag" href="#">Ngon</a>, <a rel="tag" href="#">Tra</a>.</span>
+                      </div>
+                      <div class="m-bot15"> <strong>Price : </strong> <span class="amount-old">35 VNĐ</span>  <span class="pro-price"> 30 VNĐ</span></div>
+                      <div class="form-group">
+                        <label >Size :</label>
+                        <select name="size" id="size">
+                          <option value="S">S</option>
+                          <option value="M">M</option>
+                          <option value="L">L</option>
+                        </select>
+                        <br>
+                        <label for="sp1">Số lượng</label>
+                        <div class="quantity-btn-detail">
+                          <input type="button" value="-" class="arrow" onclick="minus('sp1')"/>
+                          <input class="form-control" type="number" id="sp1" value="1" min="1" max="99" onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
+                          <input type="button" value="+" class="arrow" onclick="plus('sp1')"/>  
+                        </div>
+                      </div>
+                      <p>
+                          <button class="btn btn-round btn-danger outline"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
+                      </p>
+                  </div>
+              </div>
+            </section>
           </div>
         </div>
-        <img src="img/table-set.png" alt="Table Set" class="tm-table-set img-responsive">
-      </div>      
-    </section>
-    
+      </div>
+    </div> 
     <footer>
       <div class="tm-black-bg">
         <div class="container">
@@ -201,8 +148,8 @@ http://www.templatemo.com/tm-466-cafe-house
       <div>
         <div class="container">
           <div class="row tm-copyright">
-            <p class="col-lg-12 small copyright-text text-center">Copyright &copy; Nhom 3 - Haui</p>
-          </div>  
+           <p class="col-lg-12 small copyright-text text-center">Copyright &copy; Nhom 3 - Haui</p>
+         </div>  
        </div>
      </div>
    </footer> <!-- Footer content-->  
@@ -211,7 +158,6 @@ http://www.templatemo.com/tm-466-cafe-house
    <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
    <script defer src="./js/all.js"></script>
    <script defer src="./js/index.js"></script>
-
 
  </body>
  </html>
