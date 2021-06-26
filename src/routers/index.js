@@ -1,7 +1,18 @@
-import {home} from '../routers/home.js';
+import home from './home.js';
+import express from 'express';
 
-function route(app){
-    app.use('/home',home)
-}
+// const router = express.Router();
+const app = express();
+const router = express.Router();
 
-module.exports = route;
+router.use("/home",(req, res) => {
+    res.send("hemll");
+});
+router.use("/menu",(req, res) => {
+    res.send("menu");
+})
+
+export default router;
+// export const Home = (req, res) => {
+//     res.send("hemll");
+// }
