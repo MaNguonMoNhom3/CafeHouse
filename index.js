@@ -1,51 +1,50 @@
 import express from "express";
 import mongoose from "mongoose";
-import cors from 'cors';
+import cors from "cors";
 import passport from "passport";
 import session from "express-session";
 
-import path from 'path';
-import { fileURLToPath } from 'url';
+import path from "path";
+import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const URI = 'mongodb+srv://admin:YsMgkjmq9rV85jJP@cluster0.y3awn.mongodb.net/CafeHouse?retryWrites=true&w=majority';
+// router import
+import router from "./src/routers/index.js";
+const URI =
+  "mongodb+srv://admin:YsMgkjmq9rV85jJP@cluster0.y3awn.mongodb.net/CafeHouse?retryWrites=true&w=majority";
 
 const app = express();
 
 const port = 3000;
 
 //add file css js img fonts
-app.use("/public", express.static(__dirname + '/public'));
+app.use("/public", express.static(__dirname + "/public"));
 
 app.use(cors());
-app.use(express.json({limit: '30mb'}));
-app.use(express.urlencoded({extended: true, limit: '30mb'}));
-
-app.get('/', (req, res) => {
-  res.sendFile( __dirname + "/src/views/frontend/" + "index.html" );
-});
-app.get('/login', (req, res) => {
-  res.sendFile( __dirname + "/src/views/frontend/" + "SingIn.html" );
-});
-app.get('/register', (req, res) => {
-  res.sendFile( __dirname + "/src/views/frontend/" + "SingUp.html" );
-});
-app.get('/cart', (req, res) => {
-  res.sendFile( __dirname + "/src/views/frontend/" + "cart.html" );
-});
-app.get('/contact', (req, res) => {
-  res.sendFile( __dirname + "/src/views/frontend/" + "contact.html" );
-});
-app.get('/detail', (req, res) => {
-  res.sendFile( __dirname + "/src/views/frontend/" + "detail.html" );
-});
-app.get('/menu', (req, res) => {
-  res.sendFile( __dirname + "/src/views/frontend/" + "menu.html" );
-});
-app.get('/today-special', (req, res) => {
-  res.sendFile( __dirname + "/src/views/frontend/" + "today-special.html" );
-});
+app.use(express.json({ limit: "30mb" }));
+app.use(express.urlencoded({ extended: true, limit: "30mb" }));
+// app.get("/login", (req, res) => {
+//   res.sendFile(__dirname + "/src/views/frontend/" + "SingIn.html");
+// });
+// app.get("/register", (req, res) => {
+//   res.sendFile(__dirname + "/src/views/frontend/" + "SingUp.html");
+// });
+// app.get("/cart", (req, res) => {
+//   res.sendFile(__dirname + "/src/views/frontend/" + "cart.html");
+// });
+// app.get("/contact", (req, res) => {
+//   res.sendFile(__dirname + "/src/views/frontend/" + "contact.html");
+// });
+// app.get("/detail", (req, res) => {
+//   res.sendFile(__dirname + "/src/views/frontend/" + "detail.html");
+// });
+// app.get("/menu", (req, res) => {
+//   res.sendFile(__dirname + "/src/views/frontend/" + "menu.html");
+// });
+// app.get("/today-special", (req, res) => {
+//   res.sendFile(__dirname + "/src/views/frontend/" + "today-special.html");
+// });
 
 // app.use('/SingIn', customers);
 // app.use(session({
@@ -60,12 +59,12 @@ app.get('/today-special', (req, res) => {
 // app.use('/SingUp',customers);
 //connet DB + run server
 mongoose
-.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() => {
+  .connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
     app.listen(port, () => {
-        console.log(`Server runing on port ${port}`);
+      console.log(`Example app listening at http://localhost:${port}`);
     });
-})
-.catch((err) => {
-    console.log('err', err);
+  })
+  .catch((err) => {
+    console.log("err", err);
   });
