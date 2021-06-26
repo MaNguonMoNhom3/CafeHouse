@@ -30,6 +30,23 @@ function showHidePopups(popups){
         }
     });
 }
+window.onload = function(){
+    var total = 0;
+    $("tr .price").each(function(index,value){
+            currentRow = parseFloat($(this).text());
+            total += currentRow
+        });
+        $("#total").text(total+ "$");
+    $("input[name='quantity']").on('keyup mouseup', function(){
+        let id = this.id;
+        console.log(id);
+        let price = $("#price_"+id).text().replace("$","");
+        let newPrice = parseInt(this.value)*parseInt(price);
+        $("#total_"+ id).text(newPrice+ '$')
+        total += parseInt(price);
+        $("#total").text(total+"$");
+    });
+}
 
 var sliderIce = document.getElementById("optionIce") || null;
 var sliderSugar = document.getElementById("optionSugar") || null;
