@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // router import
-import Home from "./src/routers/index.js";
+import Home from "./routers/index.js";
 const URI =
   "mongodb+srv://admin:YsMgkjmq9rV85jJP@cluster0.y3awn.mongodb.net/CafeHouse?retryWrites=true&w=majority";
 
@@ -21,7 +21,7 @@ const port = 3000;
 app.use("/",Home);
 
 //add file css js img fonts
-app.use("/public", express.static(__dirname + "/public"));
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(cors());
 app.use(express.json({ limit: "30mb" }));

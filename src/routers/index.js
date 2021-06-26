@@ -5,9 +5,7 @@ import express from 'express';
 const app = express();
 const router = express.Router();
 
-router.use("/home",(req, res) => {
-    res.send("hemll");
-});
+router.use("/home", home);
 router.use("/menu",(req, res) => {
     res.send("menu");
 })

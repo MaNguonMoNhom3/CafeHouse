@@ -1,8 +1,4 @@
+
 export const HomeController = (req, res) => {
-    // // GET Home page
-    // index(req, res){
-        // res.sendFile( __dirname + "/src/views/frontend/" + "index.html" );
-        res.send("jeee")
-    // }
+    res.sendFile('/Users/wuyxz/Documents/CafeHouse/src/views/frontend/index.html');
 }
-// export default new HomeController;
