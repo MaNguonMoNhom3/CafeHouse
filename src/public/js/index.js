@@ -20,34 +20,14 @@ function minus(id){
     }
     
 }
-function showHidePopups(popups){
-    var check = document.getElementById(popups).classList;
-    check.forEach(item => {
-        if(item === "hide"){
-            check.remove("hide");
-        }else{
-            check.add("hide");
-        }
-    });
-}
 window.onload = function(){
-    var total = 0;
-    $("tr .price").each(function(index,value){
-            currentRow = parseFloat($(this).text());
-            total += currentRow
-        });
-        $("#total").text(total+ "$");
-    $("input[name='quantity']").on('keyup mouseup', function(){
-        let id = this.id;
-        console.log(id);
-        let price = $("#price_"+id).text().replace("$","");
-        let newPrice = parseInt(this.value)*parseInt(price);
-        $("#total_"+ id).text(newPrice+ '$')
-        total += parseInt(price);
-        $("#total").text(total+"$");
+    $(".cart").click(function(){
+        $("#popups-cart").fadeToggle();
+    });
+    $(".dash-popups").click(function(){
+        $("#popups-cart").fadeOut();
     });
 }
-
 var sliderIce = document.getElementById("optionIce") || null;
 var sliderSugar = document.getElementById("optionSugar") || null;
 var percentIce = document.getElementById("percent-ice") || null;
