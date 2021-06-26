@@ -1,7 +1,3 @@
-// export const index = (req, res) => {
-//   return res.render("frontend/index");
-// }
-
 
 import passport from "passport";
 import passportLocal from "passport-local";
