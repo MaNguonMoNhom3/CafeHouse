@@ -27,7 +27,8 @@ http://www.templatemo.com/tm-466-cafe-house
     </div>
     <!-- End Preloader -->
     <!-- Cart  -->
-  {{#if singinup}}
+  {{#if showHeader}}
+  {{#if showCart}}
     <div class="wrap-cart">
       <div class="cart">
         <a><i class="fas fa-shopping-cart icon-cart"></i></a>
@@ -117,12 +118,13 @@ http://www.templatemo.com/tm-466-cafe-house
             </div>
         </div>
         <div class="text-right">
-          <a href="cart.html">
+          <a href="/cart">
             <button class="btn btn-lg btn-block btn-success text-uppercase outline">Thanh toán</button>
           </a>
         </div>
       </div>
     </div>
+{{/if}}
 {{/if}}
     <div class="tm-top-header">
       <div class="container">
@@ -140,11 +142,11 @@ http://www.templatemo.com/tm-466-cafe-house
             {{#if singinup}}
             <nav class="tm-nav">
               <ul>
-                <li><a href="/menu" class="active">Home</a></li>
-                <li><a href="/today-special">Today Special</a></li>
-                <li><a href="/menu">Menu</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li><a href="/sing-in"><i class="fas fa-user icon"></i></a></li>
+                <li><a href="/home" class="{{#if home }} active {{/if}}">Home</a></li>
+                <li><a href="/today-special" class="{{#if todayspecial  }} active {{/if}}">Today Special</a></li>
+                <li><a href="/menu" class="{{#if menu }} active {{/if}}">Menu</a></li>
+                <li><a href="/contact" class="{{#if contact }} active {{/if}}">Contact</a></li>
+                <li><a href="/sing-in" ><i class="fas fa-user icon"></i></a></li>
               </ul>
             </nav> 
             {{/if}}  
@@ -152,6 +154,7 @@ http://www.templatemo.com/tm-466-cafe-house
         </div>    
       </div>
     </div>
+  {{#if showHeader}}
     <section class="tm-welcome-section">
       <div class="container tm-position-relative height-header">
         <div class="tm-lights-container">
@@ -159,14 +162,14 @@ http://www.templatemo.com/tm-466-cafe-house
           <img src="img/light.png" alt="Light" class="light light-2">
           <img src="img/light.png" alt="Light" class="light light-3">  
         </div>  
-        {{#if singinup}}      
+        {{#if singinup}}   
         <div class="row tm-welcome-content">
           <h2 class="white-text tm-handwriting-font tm-welcome-header"><img src="img/header-line.png" alt="Line" class="tm-header-line">&nbsp;Welcome To&nbsp;&nbsp;<img src="img/header-line.png" alt="Line" class="tm-header-line"></h2>
           <h2 class="gold-text tm-welcome-header-2">Cafe House</h2>
           <p class="gray-text tm-welcome-description">
             Cafe House chuyên cung cấp các thức uống về cafe ! Ngon bổ rẻ ba la ba la vân vân và mây mây....
           </p>
-          <a href="#main" class="tm-more-button tm-more-button-welcome">Details</a>      
+          <a href="#main" class="tm-more-button tm-more-button-welcome">Details</a>   
         </div>
         {{/if}}
         {{#if showSingInUp}}
@@ -175,6 +178,7 @@ http://www.templatemo.com/tm-466-cafe-house
         <img src="img/table-set.png" alt="Table Set" class="tm-table-set img-responsive">             
       </div>      
     </section>
+  {{/if}}
     {{#if singinup}}
         {{{body}}}
     {{/if}}

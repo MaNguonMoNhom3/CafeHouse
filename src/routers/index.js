@@ -3,6 +3,7 @@ import home from './home.js';
 import menu from './menu.js';
 import todaySpecial from './today-special.js';
 import contact from './contact.js';
+import cart from './cart.js';
 import singin from './singin.js';
 import singup from './singup.js';
 
@@ -14,6 +15,7 @@ router.use('/home', home);
 router.use('/menu', menu);
 router.use('/today-special', todaySpecial);
 router.use('/contact', contact);
+router.use('/cart', cart);
 router.use('/sing-in', singin);
 router.use('/sing-up', singup);
 
