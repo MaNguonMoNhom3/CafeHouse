@@ -134,7 +134,13 @@ h2 {
   -webkit-align-items: center;
   -o-align-items: center;
   -ms-align-items: center; }
-
+.social-singin{
+  font-size: 26px;
+}
+.social-singin:hover{
+  transform: scale(1.1);
+  transition-duration: 1s;
+}
 .position-center {
   position: absolute;
   top: 50%;

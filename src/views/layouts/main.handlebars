@@ -13,8 +13,9 @@ http://www.templatemo.com/tm-466-cafe-house
   <link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
-  <link href="./css/all.css" rel="stylesheet">
+  <link href="css/all.css" rel="stylesheet">
   <link href="css/templatemo-style.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
   </head>
   <body>
@@ -26,6 +27,7 @@ http://www.templatemo.com/tm-466-cafe-house
     </div>
     <!-- End Preloader -->
     <!-- Cart  -->
+  {{#if singinup}}
     <div class="wrap-cart">
       <div class="cart">
         <a><i class="fas fa-shopping-cart icon-cart"></i></a>
@@ -121,13 +123,13 @@ http://www.templatemo.com/tm-466-cafe-house
         </div>
       </div>
     </div>
-
+{{/if}}
     <div class="tm-top-header">
       <div class="container">
         <div class="row">
           <div class="tm-top-header-inner">
             <div class="tm-logo-container">
-              <a href="index.html">
+              <a href="/home">
                 <img src="img/logo.png" alt="Logo" class="tm-site-logo">
                 <h1 class="tm-site-name tm-handwriting-font">Cafe House</h1>
               </a>
@@ -135,26 +137,29 @@ http://www.templatemo.com/tm-466-cafe-house
             <div class="mobile-menu-icon">
               <i class="fa fa-bars"></i>
             </div>
+            {{#if singinup}}
             <nav class="tm-nav">
               <ul>
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="today-special.html">Today Special</a></li>
-                <li><a href="menu.html">Menu</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="Singin.html"><i class="fas fa-user icon"></i></a></li>
+                <li><a href="/menu" class="active">Home</a></li>
+                <li><a href="/today-special">Today Special</a></li>
+                <li><a href="/menu">Menu</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/sing-in"><i class="fas fa-user icon"></i></a></li>
               </ul>
-            </nav>   
+            </nav> 
+            {{/if}}  
           </div>           
         </div>    
       </div>
     </div>
     <section class="tm-welcome-section">
-      <div class="container tm-position-relative">
+      <div class="container tm-position-relative height-header">
         <div class="tm-lights-container">
           <img src="img/light.png" alt="Light" class="light light-1">
           <img src="img/light.png" alt="Light" class="light light-2">
           <img src="img/light.png" alt="Light" class="light light-3">  
-        </div>        
+        </div>  
+        {{#if singinup}}      
         <div class="row tm-welcome-content">
           <h2 class="white-text tm-handwriting-font tm-welcome-header"><img src="img/header-line.png" alt="Line" class="tm-header-line">&nbsp;Welcome To&nbsp;&nbsp;<img src="img/header-line.png" alt="Line" class="tm-header-line"></h2>
           <h2 class="gold-text tm-welcome-header-2">Cafe House</h2>
@@ -163,10 +168,16 @@ http://www.templatemo.com/tm-466-cafe-house
           </p>
           <a href="#main" class="tm-more-button tm-more-button-welcome">Details</a>      
         </div>
+        {{/if}}
+        {{#if showSingInUp}}
+          {{{body}}}
+        {{/if}}
         <img src="img/table-set.png" alt="Table Set" class="tm-table-set img-responsive">             
       </div>      
     </section>
+    {{#if singinup}}
         {{{body}}}
+    {{/if}}
     <footer>
       <div class="tm-black-bg">
         <div class="container">

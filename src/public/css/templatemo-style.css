@@ -158,7 +158,8 @@ ul {
   padding: 0;
 }
 * { font-family: 'Open Sans', sans-serif; }
-.container { max-width: 960px; }
+.container { max-width: 960px;}
+.height-header {min-height: 980px;}
 .tm-handwriting-font { font-family: 'Damion', cursive; }
 .tm-top-header {
   background: black;
