@@ -24,9 +24,7 @@ app.use(express.json({ limit: "30mb" }));
 app.use(express.urlencoded({ extended: true, limit: "30mb" }));
 
 // handlebars
-app.engine('handlebars', handlerbars({
-  extname: '.handlebars'
-}));
+app.engine('handlebars', handlerbars());
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'))
 
