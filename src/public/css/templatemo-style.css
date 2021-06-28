@@ -1174,3 +1174,67 @@ button.tm-more-button {
       font-size: 18px;
       font-weight: 300;
   }
+/* checkout */
+.checkout-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+.checkout-left, .checkout-right{
+  flex-grow: 1;
+  margin: 0 15px;
+}
+.flex-col{
+  display: flex;
+  flex-direction: column;
+}
+.flex-col div label{
+  position: relative;
+  top: 0;
+  display: inline;
+  transform: translateY(0);
+  -webkit-transform: translateY(0);
+}
+.flex-col div input, .flex-col select {
+  padding-left: 15px;
+  font-size: 1.2em;
+}
+.flex-col select{
+  padding: 5px 5px 5px 15px;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px solid #999;
+}
+.flex-col select:focus{
+  border-bottom: 1px solid #000;
+}
+.checkout-item-range{
+  margin: 10px 0;
+}
+#checkout{
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px 15px;
+}
+.total-amount{
+  background-color: rgb(235, 235, 235);
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.amount-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+}
+.horizontal-line{
+  border-bottom: 1px solid #000;
+}
+#title-checkout-order h4{
+  font-weight: bold;
+  font-size: 1.2em;
+}
