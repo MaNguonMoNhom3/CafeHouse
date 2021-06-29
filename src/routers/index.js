@@ -4,6 +4,10 @@ import home from "./home.js";
 import cart from "./cart.js";
 //controllers
 import { HomeController } from "../controllers/HomeController.js";
+import {
+  SignUpController,
+  SignInController,
+} from "../controllers/loginController.js";
 const app = express();
 const router = express.Router();
 
@@ -52,23 +56,7 @@ router.use("/checkout", (req, res) => {
   });
 });
 
-router.use("/sign-in", (req, res) => {
-  res.render("frontend/signin", {
-    singinup: false,
-    showHeader: true,
-    showSingInUp: true,
-    flexCenter: "display-flex-center",
-    layout: "home-layout",
-  });
-});
+router.use("/sign-in", SignInController);
 
-router.use("/sign-up", (req, res) => {
-  res.render("frontend/signup", {
-    singinup: false,
-    showHeader: true,
-    showSingInUp: true,
-    flexCenter: "display-flex-center",
-    layout: "home-layout",
-  });
-});
+router.use("/sign-up", SignUpController);
 export default router;

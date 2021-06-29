@@ -1,8 +1,19 @@
+export const SignInController = (req, res) => {
+  res.render("frontend/signin", {
+    singinup: false,
+    showHeader: true,
+    showSingInUp: true,
+    flexCenter: "display-flex-center",
+    layout: "home-layout",
+  });
+};
 
-export const SingInController = (req, res) => {
-    res.render('singin',{singinup:false,showHeader: true, showSingInUp: true, flexCenter: 'display-flex-center'});
-}
-
-export const SingUpController = (req, res) => {
-    res.render('singup',{singinup:false,showHeader: true, showSingInUp: true, flexCenter: 'display-flex-center'});
-}
+export const SignUpController = (req, res) => {
+  res.render("frontend/signup", {
+    singinup: false,
+    showHeader: true,
+    showSingInUp: true,
+    flexCenter: "display-flex-center",
+    layout: "home-layout",
+  });
+};
