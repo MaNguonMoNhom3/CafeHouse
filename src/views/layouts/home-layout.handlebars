@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cafe House</title>
-<!-- 
+  <!-- 
 Cafe House Template
 http://www.templatemo.com/tm-466-cafe-house
 -->
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet'
+    type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -17,221 +19,233 @@ http://www.templatemo.com/tm-466-cafe-house
   <link href="css/templatemo-style.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-  </head>
-  <body>
-    <!-- Preloader -->
-    <div id="loader-wrapper">
-      <div id="loader"></div>
-      <div class="loader-section section-left"></div>
-      <div class="loader-section section-right"></div>
-    </div>
-    <!-- End Preloader -->
-    <!-- Cart  -->
+</head>
+
+<body>
+  <!-- Preloader -->
+  <div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+  </div>
+  <!-- End Preloader -->
+  <!-- Cart  -->
   {{#if showHeader}}
   {{#if showCart}}
-    <div class="wrap-cart">
-      <div class="cart">
-        <a><i class="fas fa-shopping-cart icon-cart"></i></a>
-        <div class="cart-notify">99</div>
+  <div class="wrap-cart">
+    <div class="cart">
+      <a><i class="fas fa-shopping-cart icon-cart"></i></a>
+      <div class="cart-notify">99</div>
+    </div>
+  </div>
+  <!-- popups  -->
+  <div class="wrap-popups-cart" style="display: none;" id="popups-cart">
+    <div class="text-title">
+      <h2>Giỏ hàng</h2>
+    </div>
+    <div class="dash-popups"><i class="fas fa-minus-circle"></i></div>
+    <div class="popups-cart-content">
+      <div class="">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col" class="text-center">Số lượng</th>
+                <th scope="col" class="text-right">Giá</th>
+                <th> </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                <td>Sản phẩm 1</td>
+                <td>
+                  <div class="quantity-btn">
+                    <input type="button" value="-" class="arrow" onclick="minus('sp1')" />
+                    <input class="form-control" type="number" id="sp1" value="1" min="1" max="99"
+                      onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
+                    <input type="button" value="+" class="arrow" onclick="plus('sp1')" />
+                  </div>
+                </td>
+                <td class="text-right">12 VNĐ</td>
+                <td class="text-right"><button class="btn btn-sm btn-danger outline"><i class="fa fa-trash"></i>
+                  </button> </td>
+              </tr>
+              <tr>
+                <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                <td>Sản phẩm 2</td>
+                <td>
+                  <div class="quantity-btn">
+                    <input type="button" value="-" class="arrow" onclick="minus('sp2')" />
+                    <input class="form-control" type="number" id="sp2" value="1" min="1" max="99"
+                      onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
+                    <input type="button" value="+" class="arrow" onclick="plus('sp2')" />
+                  </div>
+                </td>
+                <td class="text-right">23 VNĐ</td>
+                <td class="text-right"><button class="btn btn-sm btn-danger outline"><i class="fa fa-trash"></i>
+                  </button> </td>
+              </tr>
+              <tr>
+                <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                <td>Sản phẩm 3</td>
+                <td>
+                  <div class="quantity-btn">
+                    <input type="button" value="-" class="arrow" onclick="minus('sp3')" />
+                    <input class="form-control" type="number" id="sp3" value="1" min="1" max="99"
+                      onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
+                    <input type="button" value="+" class="arrow" onclick="plus('sp3')" />
+                  </div>
+                </td>
+                <td class="text-right">2 VNĐ</td>
+                <td class="text-right"><button class="btn btn-sm btn-danger outline"><i class="fa fa-trash"></i>
+                  </button> </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Tổng tiền sản phẩm</td>
+                <td class="text-right">235 VNĐ</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>VAT</td>
+                <td class="text-right">10 VNĐ</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><strong>Tổng tiền</strong></td>
+                <td class="text-right"><strong>346 VNĐ</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="text-right">
+        <a href="/cart">
+          <button class="btn btn-lg btn-block btn-success text-uppercase outline">Thanh toán</button>
+        </a>
       </div>
     </div>
-    <!-- popups  -->
-    <div class="wrap-popups-cart" style="display: none;" id="popups-cart">
-      <div class="text-title"><h2>Giỏ hàng</h2></div>
-      <div class="dash-popups"><i class="fas fa-minus-circle"></i></div>
-      <div class="popups-cart-content">
-        <div class="">
-            <div class="table-responsive">
-              <table class="table table-striped">
-                  <thead>
-                      <tr>
-                          <th scope="col"> </th>
-                          <th scope="col">Tên sản phẩm</th>
-                          <th scope="col" class="text-center">Số lượng</th>
-                          <th scope="col" class="text-right">Giá</th>
-                          <th> </th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr>
-                          <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                          <td>Sản phẩm 1</td>
-                          <td>
-                            <div class="quantity-btn">
-                              <input type="button" value="-" class="arrow" onclick="minus('sp1')"/>
-                              <input class="form-control" type="number" id="sp1" value="1" min="1" max="99" onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
-                              <input type="button" value="+" class="arrow" onclick="plus('sp1')"/>  
-                            </div>
-                          </td>
-                          <td class="text-right">12 VNĐ</td>
-                          <td class="text-right"><button class="btn btn-sm btn-danger outline"><i class="fa fa-trash"></i> </button> </td>
-                      </tr>
-                      <tr>
-                          <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                          <td>Sản phẩm 2</td>
-                          <td>
-                            <div class="quantity-btn">
-                              <input type="button" value="-" class="arrow" onclick="minus('sp2')"/>
-                              <input class="form-control" type="number" id="sp2" value="1" min="1" max="99" onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
-                              <input type="button" value="+" class="arrow" onclick="plus('sp2')"/>  
-                            </div>
-                          </td>
-                          <td class="text-right">23 VNĐ</td>
-                          <td class="text-right"><button class="btn btn-sm btn-danger outline"><i class="fa fa-trash"></i> </button> </td>
-                      </tr>
-                      <tr>
-                          <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                          <td>Sản phẩm 3</td>
-                          <td>
-                            <div class="quantity-btn">
-                              <input type="button" value="-" class="arrow" onclick="minus('sp3')"/>
-                              <input class="form-control" type="number" id="sp3" value="1" min="1" max="99" onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
-                              <input type="button" value="+" class="arrow" onclick="plus('sp3')"/>  
-                            </div>
-                          </td>
-                          <td class="text-right">2 VNĐ</td>
-                          <td class="text-right"><button class="btn btn-sm btn-danger outline"><i class="fa fa-trash"></i> </button> </td>
-                      </tr>
-                      <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td>Tổng tiền sản phẩm</td>
-                          <td class="text-right">235 VNĐ</td>
-                      </tr>
-                      <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td>VAT</td>
-                          <td class="text-right">10 VNĐ</td>
-                      </tr>
-                      <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td><strong>Tổng tiền</strong></td>
-                          <td class="text-right"><strong>346 VNĐ</strong></td>
-                      </tr>
-                  </tbody>
-              </table>
-            </div>
-        </div>
-        <div class="text-right">
-          <a href="/cart">
-            <button class="btn btn-lg btn-block btn-success text-uppercase outline">Thanh toán</button>
-          </a>
-        </div>
-      </div>
-    </div>
-{{/if}}
-{{/if}}
-    <div class="tm-top-header">
-      <div class="container">
-        <div class="row">
-          <div class="tm-top-header-inner {{flexCenter}}">
-            <div class="tm-logo-container">
-              <a href="/home">
-                <img src="img/logo.png" alt="Logo" class="tm-site-logo">
-                <h1 class="tm-site-name tm-handwriting-font">Cafe House</h1>
-              </a>
-            </div>
-            <div class="mobile-menu-icon">
-              <i class="fa fa-bars"></i>
-            </div>
-            {{#if singinup}}
-            <nav class="tm-nav">
-              <ul>
-                <li><a href="/" class="{{#if home }} active {{/if}}">Home</a></li>
-                <li><a href="/today-special" class="{{#if todayspecial  }} active {{/if}}">Today Special</a></li>
-                <li><a href="/menu" class="{{#if menu }} active {{/if}}">Menu</a></li>
-                <li><a href="/contact" class="{{#if contact }} active {{/if}}">Contact</a></li>
-                <li><a href="/sing-in" ><i class="fas fa-user icon"></i></a></li>
-              </ul>
-            </nav> 
-            {{/if}}  
-          </div>           
-        </div>    
-      </div>
-    </div>
-  {{#if showHeader}}
-    <section class="tm-welcome-section">
-      <div class="container tm-position-relative height-header">
-        <div class="tm-lights-container">
-          <img src="img/light.png" alt="Light" class="light light-1">
-          <img src="img/light.png" alt="Light" class="light light-2">
-          <img src="img/light.png" alt="Light" class="light light-3">  
-        </div>  
-        {{#if singinup}}   
-        <div class="row tm-welcome-content">
-          <h2 class="white-text tm-handwriting-font tm-welcome-header"><img src="img/header-line.png" alt="Line" class="tm-header-line">&nbsp;Welcome To&nbsp;&nbsp;<img src="img/header-line.png" alt="Line" class="tm-header-line"></h2>
-          <h2 class="gold-text tm-welcome-header-2">Cafe House</h2>
-          <p class="gray-text tm-welcome-description">
-            Cafe House chuyên cung cấp các thức uống về cafe ! Ngon bổ rẻ ba la ba la vân vân và mây mây....
-          </p>
-          <a href="#main" class="tm-more-button tm-more-button-welcome">Details</a>   
-        </div>
-        {{/if}}
-        {{#if showSingInUp}}
-          {{{body}}}
-        {{/if}}
-        <img src="img/table-set.png" alt="Table Set" class="tm-table-set img-responsive">             
-      </div>      
-    </section>
+  </div>
   {{/if}}
-    {{#if singinup}}
-        {{{body}}}
-    {{/if}}
-    <footer>
-      <div class="tm-black-bg">
-        <div class="container">
-          <div class="row margin-bottom-60">
-            <nav class="col-lg-3 col-md-3 tm-footer-nav tm-footer-div">
-              <h3 class="tm-footer-div-title">Main Menu</h3>
-              <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Directory</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Our Services</a></li>
-              </ul>
-            </nav>
-            <div class="col-lg-5 col-md-5 tm-footer-div">
-              <h3 class="tm-footer-div-title">About Us</h3>
-              <p class="margin-top-15">
-                Chúng tôi là cafe Trung Nguyên nguyên chất 99,99%
-              </p>
-              <p class="margin-top-15">
-                Được thành lập năm 2000
-              </p>
+  {{/if}}
+  <div class="tm-top-header">
+    <div class="container">
+      <div class="row">
+        <div class="tm-top-header-inner {{flexCenter}}">
+          <div class="tm-logo-container">
+            <a href="/">
+              <img src="img/logo.png" alt="Logo" class="tm-site-logo">
+              <h1 class="tm-site-name tm-handwriting-font">Cafe House</h1>
+            </a>
+          </div>
+          <div class="mobile-menu-icon">
+            <i class="fa fa-bars"></i>
+          </div>
+          {{#if singinup}}
+          <nav class="tm-nav">
+            <ul>
+              <li><a href="/" class="{{#if home }} active {{/if}}">Home</a></li>
+              <li><a href="/today-special" class="{{#if todayspecial  }} active {{/if}}">Today Special</a></li>
+              <li><a href="/menu" class="{{#if menu }} active {{/if}}">Menu</a></li>
+              <li><a href="/contact" class="{{#if contact }} active {{/if}}">Contact</a></li>
+              <li><a href="/sing-in"><i class="fas fa-user icon"></i></a></li>
+            </ul>
+          </nav>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+  {{#if showHeader}}
+  <section class="tm-welcome-section">
+    <div class="container tm-position-relative height-header">
+      <div class="tm-lights-container">
+        <img src="img/light.png" alt="Light" class="light light-1">
+        <img src="img/light.png" alt="Light" class="light light-2">
+        <img src="img/light.png" alt="Light" class="light light-3">
+      </div>
+      {{#if singinup}}
+      <div class="row tm-welcome-content">
+        <h2 class="white-text tm-handwriting-font tm-welcome-header"><img src="img/header-line.png" alt="Line"
+            class="tm-header-line">&nbsp;Welcome To&nbsp;&nbsp;<img src="img/header-line.png" alt="Line"
+            class="tm-header-line"></h2>
+        <h2 class="gold-text tm-welcome-header-2">Cafe House</h2>
+        <p class="gray-text tm-welcome-description">
+          Cafe House chuyên cung cấp các thức uống về cafe ! Ngon bổ rẻ ba la ba la vân vân và mây mây....
+        </p>
+        <a href="#main" class="tm-more-button tm-more-button-welcome">Details</a>
+      </div>
+      {{/if}}
+      {{#if showSingInUp}}
+      {{{body}}}
+      {{/if}}
+      <img src="img/table-set.png" alt="Table Set" class="tm-table-set img-responsive">
+    </div>
+  </section>
+  {{/if}}
+  {{#if singinup}}
+  {{{body}}}
+  {{/if}}
+  <footer>
+    <div class="tm-black-bg">
+      <div class="container">
+        <div class="row margin-bottom-60">
+          <nav class="col-lg-3 col-md-3 tm-footer-nav tm-footer-div">
+            <h3 class="tm-footer-div-title">Main Menu</h3>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Directory</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Our Services</a></li>
+            </ul>
+          </nav>
+          <div class="col-lg-5 col-md-5 tm-footer-div">
+            <h3 class="tm-footer-div-title">About Us</h3>
+            <p class="margin-top-15">
+              Chúng tôi là cafe Trung Nguyên nguyên chất 99,99%
+            </p>
+            <p class="margin-top-15">
+              Được thành lập năm 2000
+            </p>
+          </div>
+          <div class="col-lg-4 col-md-4 tm-footer-div">
+            <h3 class="tm-footer-div-title">Get Social</h3>
+            <p>Liên hệ chúng tôi qua các hình thức sau</p>
+            <div class="tm-social-icons-container">
+              <a href="#" class="tm-social-icon"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="tm-social-icon"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="tm-social-icon"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" class="tm-social-icon"><i class="fab fa-youtube"></i></a>
+              <a href="#" class="tm-social-icon"><i class="fab fa-behance"></i></a>
             </div>
-            <div class="col-lg-4 col-md-4 tm-footer-div">
-              <h3 class="tm-footer-div-title">Get Social</h3>
-              <p>Liên hệ chúng tôi qua các hình thức sau</p>
-              <div class="tm-social-icons-container">
-                <a href="#" class="tm-social-icon"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="tm-social-icon"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="tm-social-icon"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" class="tm-social-icon"><i class="fab fa-youtube"></i></a>
-                <a href="#" class="tm-social-icon"><i class="fab fa-behance"></i></a>
-              </div>
-            </div>
-          </div>          
-        </div>  
-      </div>      
-      <div>
-        <div class="container">
-          <div class="row tm-copyright">
-           <p class="col-lg-12 small copyright-text text-center">Copyright &copy; Nhom 3 - Haui</p>
-         </div>  
-       </div>
-     </div>
-   </footer> <!-- Footer content-->  
-   <!-- JS -->
-   <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
-   <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
-   <script src="js/all.js"></script>
-   <script src="js/index.js"></script>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="container">
+        <div class="row tm-copyright">
+          <p class="col-lg-12 small copyright-text text-center">Copyright &copy; Nhom 3 - Haui</p>
+        </div>
+      </div>
+    </div>
+  </footer> <!-- Footer content-->
+  <!-- JS -->
+  <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script> <!-- jQuery -->
+  <script type="text/javascript" src="js/templatemo-script.js"></script> <!-- Templatemo Script -->
+  <script src="js/all.js"></script>
+  <script src="js/index.js"></script>
 
- </body>
- </html>
+</body>
+
+</html>
