@@ -1,24 +1,74 @@
-import express from 'express';
-import home from './home.js';
-import menu from './menu.js';
-import todaySpecial from './today-special.js';
-import contact from './contact.js';
-import cart from './cart.js';
-import checkout from './checkout.js';
-import singin from './singin.js';
-import singup from './singup.js';
-
-// const router = express.Router();
+import express from "express";
+// router
+import home from "./home.js";
+import cart from "./cart.js";
+//controllers
+import { HomeController } from "../controllers/HomeController.js";
 const app = express();
 const router = express.Router();
 
-router.use('/home', home);
-router.use('/menu', menu);
-router.use('/today-special', todaySpecial);
-router.use('/contact', contact);
-router.use('/cart', cart);
-router.use('/checkout', checkout);
-router.use('/sing-in', singin);
-router.use('/sing-up', singup);
+router.get("/", HomeController);
 
+router.use("/admin", home);
+
+router.get("/menu", (req, res) => {
+  res.render("frontend/menu", {
+    singinup: true,
+    showHeader: true,
+    menu: true,
+    showCart: true,
+    layout: "home-layout.handlebars",
+  });
+});
+
+router.use("/today-special", (req, res) => {
+  res.render("frontend/today-special", {
+    singinup: true,
+    showHeader: true,
+    todayspecial: true,
+    showCart: true,
+    layout: "home-layout",
+  });
+});
+
+router.use("/contact", (req, res) => {
+  res.render("frontend/contact", {
+    singinup: true,
+    showHeader: true,
+    contact: true,
+    showCart: true,
+    layout: "home-layout",
+  });
+});
+
+router.use("/cart", cart);
+
+router.use("/checkout", (req, res) => {
+  res.render("frontend/checkout", {
+    showHeader: false,
+    showCart: false,
+    singinup: true,
+    layout: "home-layout",
+  });
+});
+
+router.use("/sign-in", (req, res) => {
+  res.render("frontend/signin", {
+    singinup: false,
+    showHeader: true,
+    showSingInUp: true,
+    flexCenter: "display-flex-center",
+    layout: "home-layout",
+  });
+});
+
+router.use("/sign-up", (req, res) => {
+  res.render("frontend/signup", {
+    singinup: false,
+    showHeader: true,
+    showSingInUp: true,
+    flexCenter: "display-flex-center",
+    layout: "home-layout",
+  });
+});
 export default router;
