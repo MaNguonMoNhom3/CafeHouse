@@ -9,10 +9,11 @@ import { fileURLToPath } from "url";
 import { connect } from "./config/database/index.js";
 // router import
 import router from "./routers/index.js";
+import admin_router from "./routers/admin.js";
 //
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const port = 3000;
+const port = 5500;
 
 const app = express();
 connect();
@@ -21,7 +22,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 app.use(express.json({ limit: "30mb" }));
 app.use(express.urlencoded({ extended: true, limit: "30mb" }));
-
+app.use("/", router);
+app.use("/admin", admin_router);
 // handlebars
 app.engine("handlebars", handlerbars());
 app.set("view engine", "handlebars");
@@ -33,7 +35,6 @@ app.engine(
     defaultLayout: "admin-layout.handlebars",
   })
 );
-app.use("/", router);
 
 //run server
 app.listen(port, () => {

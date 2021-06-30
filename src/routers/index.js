@@ -68,7 +68,16 @@ router.use("/detail", (req, res) => {
 router.use("/sign-in", SignInController);
 
 router.use("/sign-up", SignUpController);
+//
+//
+//
+//
+//
+//
+// ADMIN
+//
 
-router.use('/menu/categories', category);
+
+
 
 export default router;

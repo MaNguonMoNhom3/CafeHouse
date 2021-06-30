@@ -1,11 +1,11 @@
-import { CategoryModel } from '../models/Category.js';
+import { CategoryModel } from "../models/Category.js";
 
-export const CategoryController = async (req, res) => {
-    try {
-        const categorys = await CategoryModel.find();
-
-        res.status(200).json(categorys);
-    } catch (err) {
-        res.status(500).json('error', err);
-    }
-}
+export const index = async (req, res) => {
+  try {
+    res.render("backend/category", { layout: "admin-layout" });
+    // const categorys = await CategoryModel.find();
+    // res.status(200).json(categorys);
+  } catch (err) {
+    res.status(500).json("error", err);
+  }
+};
