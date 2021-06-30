@@ -658,6 +658,7 @@ ol li:before {
   display: block;
   -webkit-transition: all 0.3s ease;
           transition: all 0.3s ease;
+  cursor: pointer;
 }
 .tm-side-menu li a:hover,
 .tm-side-menu li a:focus {
@@ -1237,4 +1238,9 @@ button.tm-more-button {
 #title-checkout-order h4{
   font-weight: bold;
   font-size: 1.2em;
+}
+.form-group label{
+  position: relative ;
+  transform: translate(0);
+  -webkit-transform: translateY(0);
 }

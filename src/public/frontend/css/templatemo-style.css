@@ -1086,3 +1086,6 @@ button.tm-more-button {
       font-size: 18px;
       font-weight: 300;
   }
+  .form-group label{
+    position: relative !important;
+  }

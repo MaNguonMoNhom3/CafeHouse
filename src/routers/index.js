@@ -2,6 +2,7 @@ import express from "express";
 // router
 import home from "./home.js";
 import cart from "./cart.js";
+import category from "./category.js";
 //controllers
 import { HomeController } from "../controllers/HomeController.js";
 import {
@@ -55,8 +56,19 @@ router.use("/checkout", (req, res) => {
     layout: "home-layout",
   });
 });
+router.use("/detail", (req, res) => {
+  res.render("frontend/detail", {
+    showHeader: false,
+    showCart: false,
+    singinup: true,
+    layout: "home-layout",
+  });
+});
 
 router.use("/sign-in", SignInController);
 
 router.use("/sign-up", SignUpController);
+
+router.use('/menu/categories', category);
+
 export default router;
