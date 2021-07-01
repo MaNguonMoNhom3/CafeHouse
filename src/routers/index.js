@@ -1,16 +1,25 @@
 import express from "express";
 // router
 import cart from "./cart.js";
+import category from './category.js';
+import products from './product.js';
 //controllers
-import { index } from "../controllers/HomeController.js";
+// import { index, fetchCategories } from "../controllers/HomeController.js";
 import {
   SignUpController,
   SignInController,
 } from "../controllers/loginController.js";
+
 const app = express();
 const router = express.Router();
 
-router.get("/", index);
+router.use("/categories", category);
+router.use("/products", products);
+
+//
+//
+//
+//
 router.get("/menu", (req, res) => {
   res.render("frontend/menu", {
     singinup: true,

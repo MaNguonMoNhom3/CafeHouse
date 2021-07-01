@@ -45,17 +45,65 @@ if (sliderSugar !== null) {
     percentSugar.innerHTML = this.value;
   }
 }
-fetch('http://localhost:3000/menu/categories')
+fetch('http://localhost:5500/categories/DB')
   .then((res) => {
     return res.json();
   })
   .then((json) => {
     var menu = document.getElementById("side-menu");
     json.map((item, index) => {
-      menu.innerHTML += `<li><a> ${item.name} </a></li>`
+      let src = item.name.replace(/\s+/g, '').toLowerCase();
+      src = src.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      menu.innerHTML += `<li><a onClick="onSubmit('${item._id}');"> ${item.name} </a></li>`;
     })
     console.log('Request successful', json);
   })
   .catch((error) => {
     log('Request failed', error)
   });
+
+// const options = {
+//   method: 'POST',
+//   body: JSON.stringify(params)
+// };
+// fetch('http://localhost:5500/products/menu-products', options)
+//   .then((res) => {
+//     return res.json();
+//   })
+//   .then(json => {
+//     console.log(json);
+//   })
+//   .catch((error) => {
+//     log('Request failed', error)
+//   });
+function onSubmit(id) {
+  fetch(`http://localhost:5500/products/DB`,
+    {
+      method: 'POST',
+      headers: { id: id }
+    })
+    .then((res) => {
+      return res.json();
+    })
+    .then(json => {
+      let listProducts = document.getElementById("listProducts");
+      let string = "";
+      json.map((item, index) => {
+        string +=
+          `<div class="tm-product">
+        <img src="frontend/img/${item.Image}" alt="${item.Name}">
+        <div class="tm-product-text">
+          <h3 class="tm-product-title">${item.Name}</h3>
+          <p class="tm-product-description">${item.Description}</p>
+        </div>
+        <div class="tm-product-price">
+          <a href="#" class="tm-product-price-link tm-handwriting-font"><span
+              class="tm-product-price-currency">$</span>${item.Price}</a>
+        </div>`
+      });
+      listProducts.innerHTML = string;
+    })
+    .catch((error) => {
+      console.log('Request failed', error)
+    });
+}

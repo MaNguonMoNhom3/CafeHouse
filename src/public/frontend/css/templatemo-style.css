@@ -1239,8 +1239,6 @@ button.tm-more-button {
   font-weight: bold;
   font-size: 1.2em;
 }
-.form-group label{
-  position: relative ;
-  transform: translate(0);
-  -webkit-transform: translateY(0);
+.form-group span{
+  font-weight: bold;
 }
