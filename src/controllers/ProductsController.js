@@ -1,10 +1,9 @@
-import { ProductModel } from '../models/Product.js';
+import { ProductModel } from "../models/Product.js";
 
-export const ProductController = async (req, res) => {
-    try {
-        const product = await ProductModel.find();
-        res.status(200).json(product);
-    } catch (err) {
-        res.status(500).json('error', err);
-    }
-}
+export const index = async (req, res) => {
+  try {
+    res.render("backend/products", { layout: "admin-layout" });
+  } catch (err) {
+    res.status(500).json("error", err);
+  }
+};

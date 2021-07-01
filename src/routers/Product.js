@@ -1,8 +1,8 @@
 import express from "express";
-import { ProductController } from "../../controllers/Product.js";
+import { index } from "../controllers/ProductsController.js";
 
 const router = express.Router();
 
-router.get("/::slug", ProductController);
+router.get("/", index);
 
 export default router;

@@ -1,10 +1,8 @@
 import express from "express";
 // router
-import home from "./home.js";
 import cart from "./cart.js";
-import category from "./category.js";
 //controllers
-import { HomeController } from "../controllers/HomeController.js";
+import { index } from "../controllers/HomeController.js";
 import {
   SignUpController,
   SignInController,
@@ -12,10 +10,7 @@ import {
 const app = express();
 const router = express.Router();
 
-router.get("/", HomeController);
-
-router.use("/admin", home);
-
+router.get("/", index);
 router.get("/menu", (req, res) => {
   res.render("frontend/menu", {
     singinup: true,
@@ -76,8 +71,5 @@ router.use("/sign-up", SignUpController);
 //
 // ADMIN
 //
-
-
-
 
 export default router;
