@@ -165,6 +165,9 @@ ul {
   background: black;
   color: white;
 }
+.tm-top-header div.container{
+  min-width: 88%;
+}
 .tm-site-logo,
  .tm-site-name {
   vertical-align: bottom;
@@ -202,6 +205,10 @@ ul {
 .tm-nav li a:hover,
  .tm-nav li a:focus,
  .tm-nav li a.active {  
+  color: #c79c60;
+  text-decoration: none;
+}
+#side-menu li a.active, #side-menu li a:hover , #side-menu li a:focus{
   color: #c79c60;
   text-decoration: none;
 }

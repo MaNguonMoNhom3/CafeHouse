@@ -32,6 +32,7 @@ var sliderIce = document.getElementById("optionIce") || null;
 var sliderSugar = document.getElementById("optionSugar") || null;
 var percentIce = document.getElementById("percent-ice") || null;
 var percentSugar = document.getElementById("percent-sugar") || null;
+var categories = [];
 
 if (sliderIce !== null) {
   percentIce.innerHTML = sliderIce.value;
@@ -51,10 +52,13 @@ fetch('http://localhost:5500/categories/DB')
   })
   .then((json) => {
     var menu = document.getElementById("side-menu");
+    categories = categories.concat(json);
     json.map((item, index) => {
-      let src = item.name.replace(/\s+/g, '').toLowerCase();
-      src = src.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      menu.innerHTML += `<li><a onClick="onSubmit('${item._id}');"> ${item.name} </a></li>`;
+      if (index === 0) {
+        onSubmit(item._id);
+        menu.innerHTML += `<li ><a onClick="onSubmit('${item._id}');activeCategory('${item._id}'); " class="active" id="category${index}"> ${item.name} </a></li>`;
+      } else
+        menu.innerHTML += `<li ><a onClick="onSubmit('${item._id}'); activeCategory('${item._id}');" id="category${index}" > ${item.name} </a></li>`;
     })
     console.log('Request successful', json);
   })
@@ -106,4 +110,10 @@ function onSubmit(id) {
     .catch((error) => {
       console.log('Request failed', error)
     });
+}
+function activeCategory(id) {
+  categories.map((item, index) => {
+    if (item._id === id) document.getElementById(`category${index}`).classList.add('active');
+    else document.getElementById(`category${index}`).classList.remove('active');
+  })
 }

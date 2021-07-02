@@ -20,6 +20,15 @@ router.use("/products", products);
 //
 //
 //
+router.get("/", (req, res) => {
+  res.render("frontend/home", {
+    singinup: true,
+    showHeader: true,
+    home: true,
+    showCart: true,
+    layout: "home-layout.handlebars",
+  });
+});
 router.get("/menu", (req, res) => {
   res.render("frontend/menu", {
     singinup: true,
