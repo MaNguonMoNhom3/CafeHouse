@@ -691,6 +691,18 @@ ol li:before {
           align-items: center;
   background-color: white;
   padding: 20px;
+  animation-name: product;
+  animation-duration: 1.5s;
+}
+@keyframes product {
+  from {
+    opacity: 0;
+    transform: translatey(-100px) ;
+  }
+  to {
+    opacity: 1;
+    transform: translatey(0px) ;
+  }
 }
 .tm-product-text { max-width: 325px; flex-grow: 2; }
 .tm-product-price {

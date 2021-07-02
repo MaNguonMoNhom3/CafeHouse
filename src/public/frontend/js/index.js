@@ -55,12 +55,11 @@ fetch('http://localhost:5500/categories/DB')
     categories = categories.concat(json);
     json.map((item, index) => {
       if (index === 0) {
-        onSubmit(item._id);
-        menu.innerHTML += `<li ><a onClick="onSubmit('${item._id}');activeCategory('${item._id}'); " class="active" id="category${index}"> ${item.name} </a></li>`;
+        onSubmit(item._id, 1);
+        menu.innerHTML += `<li ><a onClick="onSubmit('${item._id}', 1);activeCategory('${item._id}');" class="active" id="category${index}"> ${item.name} </a></li>`;
       } else
-        menu.innerHTML += `<li ><a onClick="onSubmit('${item._id}'); activeCategory('${item._id}');" id="category${index}" > ${item.name} </a></li>`;
+        menu.innerHTML += `<li ><a onClick="onSubmit('${item._id}', 1); activeCategory('${item._id}'); " id="category${index}" > ${item.name} </a></li>`;
     })
-    console.log('Request successful', json);
   })
   .catch((error) => {
     log('Request failed', error)
@@ -80,36 +79,44 @@ fetch('http://localhost:5500/categories/DB')
 //   .catch((error) => {
 //     log('Request failed', error)
 //   });
-function onSubmit(id) {
+var currentpage = 1;
+function onSubmit(id, currentpage) {
   fetch(`http://localhost:5500/products/DB`,
     {
       method: 'POST',
-      headers: { id: id }
+      headers: { id: id, page: currentpage }
     })
     .then((res) => {
       return res.json();
     })
     .then(json => {
       let listProducts = document.getElementById("listProducts");
-      let string = "";
-      json.map((item, index) => {
-        string +=
+      let pagination = document.getElementById("pagination");
+      let strProducts = "";
+      pages = json.pages;
+      json.products.map((item, index) => {
+        strProducts +=
           `<div class="tm-product">
-        <img src="frontend/img/${item.Image}" alt="${item.Name}">
-        <div class="tm-product-text">
-          <h3 class="tm-product-title">${item.Name}</h3>
-          <p class="tm-product-description">${item.Description}</p>
-        </div>
-        <div class="tm-product-price">
-          <a href="#" class="tm-product-price-link tm-handwriting-font"><span
-              class="tm-product-price-currency">$</span>${item.Price}</a>
-        </div>`
+              <img src="frontend/img/${item.Image}" alt="${item.Name}">
+              <div class="tm-product-text">
+                <h3 class="tm-product-title">${item.Name}</h3>
+                <p class="tm-product-description">${item.Description}</p>
+              </div>
+              <div class="tm-product-price">
+                <a href="#" class="tm-product-price-link tm-handwriting-font">
+                  <span class="tm-product-price-currency">$</span>${item.Price}
+                </a>
+              </div>
+            </div>`
       });
-      listProducts.innerHTML = string;
+      listProducts.innerHTML = strProducts;
+      loadPagination(id, pages, currentpage);
     })
     .catch((error) => {
       console.log('Request failed', error)
     });
+
+
 }
 function activeCategory(id) {
   categories.map((item, index) => {
@@ -117,3 +124,15 @@ function activeCategory(id) {
     else document.getElementById(`category${index}`).classList.remove('active');
   })
 }
+function loadPagination(id, pages, currentpage) {
+  let strPagination = "";
+  pages = Math.ceil(pages)
+  for (let i = 0; i < pages; i++) {
+    strPagination += `<li class="page-item ${(currentpage == (i + 1)) ? "active" : ""}"><a class="page-link" onClick="onSubmit('${id}', ${i + 1});">${i + 1}</a></li>`;
+  }
+  pagination.innerHTML = `<li class="page-item "><a class="page-link" onClick="onSubmit('${id}', ${(currentpage > 1) ? currentpage - 1 : currentpage});">Previous</a></li>
+    ${strPagination}
+    <li class="page-item"><a class="page-link" onClick="onSubmit('${id}', ${(currentpage < pages) ? currentpage + 1 : currentpage});">Next</a></li>`
+}
+
+
