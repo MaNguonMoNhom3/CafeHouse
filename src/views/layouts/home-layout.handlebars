@@ -187,8 +187,10 @@ http://www.templatemo.com/tm-466-cafe-house
             class="tm-header-line">&nbsp;Welcome To&nbsp;&nbsp;<img src="frontend/img/header-line.png" alt="Line"
             class="tm-header-line"></h2>
         <h2 class="gold-text tm-welcome-header-2">Cafe House</h2>
-        <p class="gray-text tm-welcome-description">
-          Cafe House chuyên cung cấp các thức uống về cafe ! Ngon bổ rẻ ba la ba la vân vân và mây mây....
+        <p class="gray-text tm-welcome-description" id="description" style="height: 90px;">
+          Every day, across the globe, our partners support the communities in our stores and the neighborhoods we are a
+          part of. From open mic nights to service projects to spreading messages of hope, we are making our communities
+          stronger.
         </p>
         <a href="#main" class="tm-more-button tm-more-button-welcome">Chi tiết</a>
       </div>
@@ -253,7 +255,24 @@ http://www.templatemo.com/tm-466-cafe-house
   <script type="text/javascript" src="frontend/js/templatemo-script.js"></script> <!-- Templatemo Script -->
   <script src="frontend/js/all.js"></script>
   <script src="frontend/js/index.js"></script>
-
+  <script>
+    $(document).ready(function () {
+      var n = 1;
+      var arrTitle = new Array();
+      arrTitle[0] = "Every day, across the globe, our partners support the communities in our stores and the neighborhoods we are a part of. From open mic nights to service projects to spreading messages of hope, we are making our communities stronger.";
+      arrTitle[1] = "Cafe House template is a mobile-friendly responsive layout by . Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculusnec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.";
+      arrTitle[2] = "Cafe House template is a mobile-friendly responsive layout by . Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculusnec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.";
+      setInterval(function () {
+        $("#description").fadeOut(1000, function () {
+          $("#description").text(arrTitle[n])
+          $("#description").fadeIn(1000);
+          n++;
+          if (n == 3)
+            n = 0;
+        })
+      }, 4000)
+    });
+  </script>
 </body>
 
 </html>
