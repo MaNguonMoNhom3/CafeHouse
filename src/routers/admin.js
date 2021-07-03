@@ -10,7 +10,7 @@ const app = express();
 const router = express.Router();
 // ngon ngu rac vcl
 // Rác rưởi
-router.use("/", (req, res) => {
+router.use("/dashboard", (req, res) => {
   res.render("backend/home", { layout: "admin-layout" });
 });
 router.use("/category", category);
