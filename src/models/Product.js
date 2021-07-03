@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 const schema = new mongoose.Schema(
   {
     Name: {
-        type: String,
-        unique: true,
+      type: String,
+      unique: true,
     },
     Price: {
       type: Number,
@@ -24,4 +24,4 @@ const schema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-export const ProductModel = mongoose.model("products", schema);
+export const Product = mongoose.model("products", schema);

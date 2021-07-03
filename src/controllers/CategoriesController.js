@@ -1,4 +1,4 @@
-import { CategoryModel } from '../models/Category.js';
+import { Category } from '../models/Category.js';
 
 export const index = async (req, res) => {
   try {
@@ -9,7 +9,7 @@ export const index = async (req, res) => {
 };
 export const getCategories = async (req, res) => {
   try {
-    const categorys = await CategoryModel.find();
+    const categorys = await Category.find();
     res.status(200).json(categorys);
   } catch (err) {
     res.status(500).json("error", err);

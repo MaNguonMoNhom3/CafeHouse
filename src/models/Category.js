@@ -4,7 +4,7 @@ const schema = new mongoose.Schema(
     {
         name: {
             type: String,
-            require: true
+            unique: true
         },
         description: {
             type: String,
@@ -13,4 +13,4 @@ const schema = new mongoose.Schema(
     },
     { timestamps: true }
 )
-export const CategoryModel = mongoose.model("categories", schema);
+export const Category = mongoose.model("categories", schema);
