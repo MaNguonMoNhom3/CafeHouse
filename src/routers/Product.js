@@ -1,10 +1,12 @@
 import express from "express";
-import { index, getProducts } from "../controllers/ProductsController.js";
+import { index, getProductsByCategory, getProductByHot } from "../controllers/ProductsController.js";
 
 const router = express.Router();
 
 router.get("/", index);
 
-router.post('/DB', getProducts);
+router.post('/ByCategory', getProductsByCategory);
+
+router.get("/ByHot", getProductByHot);
 
 export default router;

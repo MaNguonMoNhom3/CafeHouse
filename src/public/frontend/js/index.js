@@ -62,7 +62,7 @@ fetch('http://localhost:5500/categories/DB')
     })
   })
   .catch((error) => {
-    log('Request failed', error)
+    log('Request failed category', error)
   });
 
 // const options = {
@@ -81,7 +81,7 @@ fetch('http://localhost:5500/categories/DB')
 //   });
 var currentpage = 1;
 function onSubmit(id, currentpage) {
-  fetch(`http://localhost:5500/products/DB`,
+  fetch(`http://localhost:5500/products/ByCategory`,
     {
       method: 'POST',
       headers: { id: id, page: currentpage }
@@ -113,7 +113,7 @@ function onSubmit(id, currentpage) {
       loadPagination(id, pages, currentpage);
     })
     .catch((error) => {
-      console.log('Request failed', error)
+      console.log('Request failed products by cateogry', error)
     });
 
 
@@ -134,5 +134,43 @@ function loadPagination(id, pages, currentpage) {
     ${strPagination}
     <li class="page-item"><a class="page-link" onClick="onSubmit('${id}', ${(currentpage < pages) ? currentpage + 1 : currentpage});">Next</a></li>`
 }
+//menu today + home
+function popularItemHome(id, count) {
+  fetch("http://localhost:5500/products/ByHot")
+    .then((res) => { return res.json(); })
+    .then(json => {
+      let str = "";
+      json.map((item, index) => {
+        if (index < count) {
+          str += popularItem(item);
+        }
+      });
+      document.getElementById(id).innerHTML = str;
+    })
+    .catch((error) => {
+      log('Request failed products hot', error)
+    });
+}
 
-
+function popularItemToday(productItems) {
+  document.getElementById("popular-items-today").innerHTML += productItems;
+}
+popularItemHome("popular-items-today", 6);
+popularItemHome("popular-items-home", 3);
+function popularItem(item) {
+  return (`<div class="tm-popular-item">
+    <div class="tm-popular-item-img-wrap">
+      <img src="frontend/img/${item.Image}" alt="${item.Name}" class="tm-popular-item-img">
+    </div>
+    <div class="tm-popular-item-description">
+      <h3 class="tm-handwriting-font tm-popular-item-title fontPacifico">
+        ${item.Name}
+      </h3>
+      <hr class="tm-popular-item-hr">
+      <p>${item.Description}</p>
+      <div class="order-now-container">
+        <a href="#" class="order-now-link tm-handwriting-font">Order Now</a>
+      </div>
+    </div>
+  </div>`);
+}

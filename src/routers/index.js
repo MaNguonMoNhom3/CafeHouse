@@ -4,12 +4,10 @@ import cart from "./cart.js";
 import category from './category.js';
 import products from './product.js';
 //controllers
-// import { index, fetchCategories } from "../controllers/HomeController.js";
 import {
   SignUpController,
   SignInController,
 } from "../controllers/loginController.js";
-
 const app = express();
 const router = express.Router();
 

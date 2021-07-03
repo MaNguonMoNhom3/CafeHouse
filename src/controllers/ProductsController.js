@@ -8,15 +8,13 @@ export const index = async (req, res) => {
     res.status(500).json("error", err);
   }
 };
+
 //get products by name category
-export const getProducts = (req, res) => {
+export const getProductsByCategory = (req, res) => {
   try {
     const headers = req.headers;
     const perPage = 3;
     let page = headers.page;
-    let pages = 1;
-    // const listProducts = await ProductModel.find({ CategoryId: headers.id });
-    // res.status(200).json(listProducts);
     ProductModel
       .find({ CategoryId: headers.id })
       .skip((perPage * page) - perPage)
@@ -31,4 +29,20 @@ export const getProducts = (req, res) => {
   } catch (err) {
     res.status(500).json("error", err);
   }
+}
+
+//get product by hot
+export const getProductByHot = (req, res, next) => {
+  try {
+    ProductModel.find()
+      .sort({ "Hot": -1 })
+      .limit(6)
+      .exec((err, products) => {
+        if (err) return next(err);
+        res.status(200).json(products);
+      });
+  } catch (err) {
+    res.status(500).json("error", err);
+  }
+
 }
