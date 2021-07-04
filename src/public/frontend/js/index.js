@@ -46,6 +46,7 @@ if (sliderSugar !== null) {
     percentSugar.innerHTML = this.value;
   }
 }
+
 // fetch('http://localhost:5500/categories/DB')
 //   .then((res) => {
 //     return res.json();
@@ -104,12 +105,12 @@ if (sliderSugar !== null) {
 
 
 // }
-// function activeCategory(id) {
-//   categories.map((item, index) => {
-//     if (item._id === id) document.getElementById(`category${index}`).classList.add('active');
-//     else document.getElementById(`category${index}`).classList.remove('active');
-//   })
-// }
+function activeCategory(id) {
+  categories.map((item, index) => {
+    if (item._id === id) document.getElementById(`category${id}`).classList.add('active');
+    else document.getElementById(`category${id}`).classList.remove('active');
+  })
+}
 // function loadPagination(id, pages, currentpage) {
 //   let strPagination = "";
 //   pages = Math.ceil(pages)

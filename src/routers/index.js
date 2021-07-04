@@ -4,8 +4,10 @@ import cart from "./cart.js";
 import category from './category.js';
 import products from './product.js';
 import home from './home.js';
+import menu from './menu.js';
 //controllers
 import { getProductForTodaySpecial } from '../controllers/ProductsController.js';
+
 import {
   SignUpController,
   SignInController,
@@ -21,15 +23,7 @@ router.use("/products", products);
 //
 //
 router.use("/", home);
-router.get("/menu", (req, res) => {
-  res.render("frontend/menu", {
-    singinup: true,
-    showHeader: true,
-    menu: true,
-    showCart: true,
-    layout: "home-layout.handlebars",
-  });
-});
+router.use("/menu", menu);
 
 router.get("/today-special", getProductForTodaySpecial);
 

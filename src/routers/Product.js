@@ -5,7 +5,5 @@ const router = express.Router();
 
 router.get("/", index);
 
-router.post('/ByCategory', getProductsByCategory);
-
 
 export default router;

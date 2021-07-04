@@ -27,19 +27,35 @@
         <div class="col-lg-3 col-md-3">
           <div class="tm-position-relative margin-bottom-30">
             <nav class="tm-side-menu">
-              {{!-- <form method="POST" action="http://localhost:5500/products/menu-products"> --}}
+              <form method="POST">
                 <ul id="side-menu">
-
+                  {{#each categories}}
+                  <li><a onclick=""> {{name}} </a></li>
+                  {{/each}}
                 </ul>
-                {{!--
-              </form> --}}
+              </form>
             </nav>
             <img src="frontend/img/vertical-menu-bg.png" alt="Menu bg" class="tm-side-menu-bg">
           </div>
         </div>
         <div class="tm-menu-product-content col-lg-9 col-md-9" id="listProducts">
           <!-- menu content -->
-
+          {{#each products}}
+          {{#if_equal CategoryId ../idCurrent}}
+          <div class="tm-product">
+            <img src="frontend/img/{{Image}}" alt="{{Name}}">
+            <div class="tm-product-text">
+              <h3 class="tm-product-title">{{Name}}</h3>
+              <p class="tm-product-description">{{Description}}</p>
+            </div>
+            <div class="tm-product-price">
+              <a href="#" class="tm-product-price-link tm-handwriting-font">
+                <span class="tm-product-price-currency">$</span>{{Price}}
+              </a>
+            </div>
+          </div>
+          {{/if_equal}}
+          {{/each}}
         </div>
         <div id="pagination-wrap">
           <nav>

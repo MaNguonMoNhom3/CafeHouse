@@ -1,5 +1,5 @@
-import { json } from "express";
 import { Product } from "../models/Product.js";
+import { Category } from '../models/Category.js';
 
 export const index = async (req, res) => {
   try {
@@ -10,25 +10,46 @@ export const index = async (req, res) => {
 };
 
 //get products by name category
-export const getProductsByCategory = (req, res) => {
-  try {
-    const headers = req.headers;
-    const perPage = 3;
-    let page = headers.page;
-    Product
-      .find({ CategoryId: headers.id })
-      .skip((perPage * page) - perPage)
-      .limit(perPage)
-      .exec((err, products) => {
-        Product.countDocuments({ CategoryId: headers.id }, (err, count) => {
-          if (err) return next(err);
-          if (count == 0) count = 1;
-          res.status(200).json({ products: products, pages: count / perPage });
-        });
-      });
-  } catch (err) {
-    res.status(500).json("error", err);
-  }
+export const getProductsByCategory = (req, res, next) => {
+  // const headers = req.headers;
+  // const perPage = 3;
+  // let page = headers.page;
+  Product
+    .find({ CategoryId: req.params.id })
+    // .skip((perPage * page) - perPage)
+    // .limit(perPage)
+    // .exec((err, products) => {
+    //   Product.countDocuments({ CategoryId: headers.id }, (err, count) => {
+    //     if (err) return next(err);
+    //     if (count == 0) count = 1;
+    //     res.status(200).json({ products: products, pages: count / perPage });
+    //   });
+    // });
+    .then(json => {
+      json = json.map(item => item.toObject());
+      return json;
+    })
+    .then(products => {
+      Category.find()
+        .then(json => {
+          json = json.map(item => item.toObject());
+          return json;
+        })
+        .then(categories => {
+          res.render("frontend/menu", {
+            singinup: true,
+            showHeader: true,
+            menu: true,
+            showCart: true,
+            layout: "home-layout.handlebars",
+            categories: categories,
+            products: products
+          });
+          // res.send(categories)
+        })
+
+    })
+    .catch(next)
 }
 
 //get product by hot
