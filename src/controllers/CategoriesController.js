@@ -2,12 +2,21 @@ import { Category } from '../models/Category.js';
 import { Product } from "../models/Product.js";
 import handlebars from "koa-handlebars";
 
-export const index = async (req, res) => {
+export const index = async (req, res, next) => {
   try {
-    res.render("backend/categories", {
-      layout: "admin-layout",
-      title: "Categoryy",
-    });
+    CategoryModel.find({})
+      .then((category) => {
+        category = category.map((category) => category.toObject());
+        return category;
+      })
+      .then((category) => {
+        res.render("backend/categories", {
+          layout: "admin-layout",
+          title: "Category",
+          category: category,
+        });
+      })
+      .catch(next);
   } catch (err) {
     res.status(500).json("error", err);
   }
