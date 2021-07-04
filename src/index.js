@@ -26,16 +26,25 @@ app.use(express.urlencoded({ extended: true, limit: "30mb" }));
 app.use("/admin", admin_router);
 app.use("/", router);
 // handlebars
-app.engine("handlebars", handlerbars());
 app.set("view engine", "handlebars");
+app.engine("handlebars", handlerbars({
+  helpers: {
+    math: function (lvalue, operator, rvalue) {
+      lvalue = parseFloat(lvalue);
+      rvalue = parseFloat(rvalue);
+      return {
+        "+": lvalue + rvalue,
+        "-": lvalue - rvalue,
+        "*": lvalue * rvalue,
+        "/": lvalue / rvalue,
+        "%": lvalue % rvalue
+      }[operator];
+    }
+  },
+  extname: "handlebars",
+  defaultLayout: "admin-layout.handlebars",
+}));
 app.set("views", path.join(__dirname, "views"));
-app.engine(
-  "handlebars",
-  handlerbars({
-    extname: "handlebars",
-    defaultLayout: "admin-layout.handlebars",
-  })
-);
 
 //run server
 app.listen(port, () => {

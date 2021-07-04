@@ -7,7 +7,7 @@
         <p class="tm-welcome-description">
           Tóm lại cafe ngon không nói nhiều nhé
         </p>
-        <a href="#" class="tm-more-button margin-top-30">Xem thêm</a>
+        <a href="#" class="tm-more-button margin-top-30">Read more</a>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-4 tm-welcome-img-container">
         <div class="inline-block shadow-img">
@@ -29,7 +29,11 @@
             <nav class="tm-side-menu">
               <ul id="side-menu">
                 {{#each categories}}
+                {{#if_equal _id ../idCurrent}}
+                <li><a href="/menu/{{@index}}" class="active"> {{name}}</a></li>
+                {{else}}
                 <li><a href="/menu/{{@index}}"> {{name}}</a></li>
+                {{/if_equal}}
                 {{/each}}
               </ul>
             </nav>
@@ -58,7 +62,16 @@
         <div id="pagination-wrap">
           <nav>
             <ul class="pagination" id="pagination">
+              <li class="page-item "><a class="page-link">Previous</a></li>
 
+              {{#times countPage}}
+              <li class="page-item"><a class="page-link" href="/menu/{{current}}/{{math @index '+' 1}}">{{math @index
+                  "+"
+                  1}}</a>
+              </li>
+              {{/times}}
+
+              <li class="page-item"><a class="page-link">Next</a></li>
             </ul>
           </nav>
           <h2>{{{pages}}}</h2>
