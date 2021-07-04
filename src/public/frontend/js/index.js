@@ -7,7 +7,6 @@ function plus(id) {
   if (current >= 100) {
     document.getElementById(id).value = 99;
   }
-
 }
 function minus(id) {
   var current = document.getElementById(id).value;
@@ -18,7 +17,6 @@ function minus(id) {
   if (current <= 0) {
     document.getElementById(id).value = 1;
   }
-
 }
 window.onload = function () {
   $(".cart").click(function () {
@@ -27,7 +25,7 @@ window.onload = function () {
   $(".dash-popups").click(function () {
     $("#popups-cart").fadeOut();
   });
-}
+};
 var sliderIce = document.getElementById("optionIce") || null;
 var sliderSugar = document.getElementById("optionSugar") || null;
 var percentIce = document.getElementById("percent-ice") || null;
@@ -38,13 +36,13 @@ if (sliderIce !== null) {
   percentIce.innerHTML = sliderIce.value;
   sliderIce.oninput = function () {
     percentIce.innerHTML = this.value;
-  }
+  };
 }
 if (sliderSugar !== null) {
   percentSugar.innerHTML = sliderSugar.value;
   sliderSugar.oninput = function () {
     percentSugar.innerHTML = this.value;
-  }
+  };
 }
 
 // fetch('http://localhost:5500/categories/DB')
@@ -84,7 +82,7 @@ if (sliderSugar !== null) {
 //       json.products.map((item, index) => {
 //         strProducts +=
 //           `<div class="tm-product">
-//               <img src="frontend/img/${item.Image}" alt="${item.Name}">
+//               <img src="/frontend/img/${item.Image}" alt="${item.Name}">
 //               <div class="tm-product-text">
 //                 <h3 class="tm-product-title">${item.Name}</h3>
 //                 <p class="tm-product-description">${item.Description}</p>
@@ -103,13 +101,13 @@ if (sliderSugar !== null) {
 //       console.log('Request failed products by cateogry', error)
 //     });
 
-
 // }
 function activeCategory(id) {
   categories.map((item, index) => {
-    if (item._id === id) document.getElementById(`category${id}`).classList.add('active');
-    else document.getElementById(`category${id}`).classList.remove('active');
-  })
+    if (item._id === id)
+      document.getElementById(`category${id}`).classList.add("active");
+    else document.getElementById(`category${id}`).classList.remove("active");
+  });
 }
 // function loadPagination(id, pages, currentpage) {
 //   let strPagination = "";
@@ -147,7 +145,7 @@ function activeCategory(id) {
 // function popularItem(item) {
 //   return (`<div class="tm-popular-item">
 //     <div class="tm-popular-item-img-wrap">
-//       <img src="frontend/img/${item.Image}" alt="${item.Name}" class="tm-popular-item-img">
+//       <img src="/frontend/img/${item.Image}" alt="${item.Name}" class="tm-popular-item-img">
 //     </div>
 //     <div class="tm-popular-item-description">
 //       <h3 class="tm-handwriting-font tm-popular-item-title fontPacifico">
