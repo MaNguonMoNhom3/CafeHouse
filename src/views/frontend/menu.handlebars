@@ -27,13 +27,11 @@
         <div class="col-lg-3 col-md-3">
           <div class="tm-position-relative margin-bottom-30">
             <nav class="tm-side-menu">
-              <form method="POST">
-                <ul id="side-menu">
-                  {{#each categories}}
-                  <li><a onclick=""> {{name}} </a></li>
-                  {{/each}}
-                </ul>
-              </form>
+              <ul id="side-menu">
+                {{#each categories}}
+                <li><a href="/menu/{{@index}}"> {{name}}</a></li>
+                {{/each}}
+              </ul>
             </nav>
             <img src="frontend/img/vertical-menu-bg.png" alt="Menu bg" class="tm-side-menu-bg">
           </div>

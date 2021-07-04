@@ -29,7 +29,6 @@ const isEqualHelperHandlerbar = function (a, b, opts) {
   }
 }
 export const getCategories = (req, res, next) => {
-  let category = [];
   Category.find()
     .then(categories => categories = categories.map(item => item.toObject()))
     .then(categories => {
@@ -39,7 +38,11 @@ export const getCategories = (req, res, next) => {
           return json;
         })
         .then(products => {
-          res.render("frontend/menu", {
+          let category = categories[0]._id;;
+          if (req.params.index)
+            category = categories[req.params.index]._id;
+
+          res.render("frontend/menu.handlebars", {
             singinup: true,
             showHeader: true,
             menu: true,
@@ -47,7 +50,7 @@ export const getCategories = (req, res, next) => {
             layout: "home-layout.handlebars",
             categories: categories,
             products: products,
-            idCurrent: categories[0]._id,
+            idCurrent: category,
             helpers: {
               if_equal: isEqualHelperHandlerbar
             }
@@ -55,6 +58,4 @@ export const getCategories = (req, res, next) => {
         })
     })
     .catch(err => next(err));
-  console.log(category);
-
 };
