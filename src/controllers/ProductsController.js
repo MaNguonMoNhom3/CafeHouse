@@ -32,17 +32,48 @@ export const getProductsByCategory = (req, res) => {
 }
 
 //get product by hot
-export const getProductByHot = (req, res, next) => {
-  try {
-    Product.find()
-      .sort({ "Hot": -1 })
-      .limit(6)
-      .exec((err, products) => {
-        if (err) return next(err);
-        res.status(200).json(products);
+export const getProductForHome = (req, res, next) => {
+  // try {
+  Product.find()
+    .sort({ "Hot": -1 })
+    .limit(3)
+    .then(products => {
+      products = products.map(item => item.toObject());
+      return products;
+    })
+    .then(products => {
+      res.render("frontend/home", {
+        singinup: true,
+        showHeader: true,
+        home: true,
+        showCart: true,
+        layout: "home-layout.handlebars",
+        products: products
       });
-  } catch (err) {
-    res.status(500).json("error", err);
-  }
-
+    })
+    .catch(err => {
+      next(err);
+    });
+}
+export const getProductForTodaySpecial = (req, res, next) => {
+  Product.find()
+    .sort({ "Hot": -1 })
+    .limit(6)
+    .then(products => {
+      let pro = products.map(item => item.toObject());
+      return pro;
+    })
+    .then(products => {
+      res.render("frontend/today-special", {
+        singinup: true,
+        showHeader: true,
+        todayspecial: true,
+        showCart: true,
+        layout: "home-layout",
+        products: products,
+      });
+    })
+    .catch(err => {
+      next(err);
+    });
 }

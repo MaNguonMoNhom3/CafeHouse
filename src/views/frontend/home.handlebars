@@ -23,8 +23,25 @@
           <hr class="tm-hr">
         </div>
       </div>
-      <div class="col-lg-12 tm-popular-items-container" id="popular-items-home">
+      <div class="col-lg-12 tm-popular-items-container" id="popular-items-home-wrap">
         {{!-- popular item --}}
+        {{#each products}}
+        <div class="tm-popular-item">
+          <div class="tm-popular-item-img-wrap">
+            <img src="frontend/img/{{Image}}" alt="{{Name}}" class="tm-popular-item-img">
+          </div>
+          <div class="tm-popular-item-description">
+            <h3 class="tm-handwriting-font tm-popular-item-title fontPacifico">
+              {{Name}}
+            </h3>
+            <hr class="tm-popular-item-hr">
+            <p>{{Description}}</p>
+            <div class="order-now-container">
+              <a href="#" class="order-now-link tm-handwriting-font">Order Now</a>
+            </div>
+          </div>
+        </div>
+        {{/each}}
       </div>
     </section>
     <section class="tm-section row">

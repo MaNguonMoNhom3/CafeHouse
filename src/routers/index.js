@@ -3,7 +3,9 @@ import express from "express";
 import cart from "./cart.js";
 import category from './category.js';
 import products from './product.js';
+import home from './home.js';
 //controllers
+import { getProductForTodaySpecial } from '../controllers/ProductsController.js';
 import {
   SignUpController,
   SignInController,
@@ -18,15 +20,7 @@ router.use("/products", products);
 //
 //
 //
-router.get("/", (req, res) => {
-  res.render("frontend/home", {
-    singinup: true,
-    showHeader: true,
-    home: true,
-    showCart: true,
-    layout: "home-layout.handlebars",
-  });
-});
+router.use("/", home);
 router.get("/menu", (req, res) => {
   res.render("frontend/menu", {
     singinup: true,
@@ -37,15 +31,7 @@ router.get("/menu", (req, res) => {
   });
 });
 
-router.use("/today-special", (req, res) => {
-  res.render("frontend/today-special", {
-    singinup: true,
-    showHeader: true,
-    todayspecial: true,
-    showCart: true,
-    layout: "home-layout",
-  });
-});
+router.get("/today-special", getProductForTodaySpecial);
 
 router.use("/contact", (req, res) => {
   res.render("frontend/contact", {
