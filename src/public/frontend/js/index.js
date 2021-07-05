@@ -7,7 +7,6 @@ function plus(id) {
   if (current >= 100) {
     document.getElementById(id).value = 99;
   }
-
 }
 function minus(id) {
   var current = document.getElementById(id).value;
@@ -18,7 +17,6 @@ function minus(id) {
   if (current <= 0) {
     document.getElementById(id).value = 1;
   }
-
 }
 window.onload = function () {
   $(".cart").click(function () {
@@ -27,7 +25,7 @@ window.onload = function () {
   $(".dash-popups").click(function () {
     $("#popups-cart").fadeOut();
   });
-}
+};
 var sliderIce = document.getElementById("optionIce") || null;
 var sliderSugar = document.getElementById("optionSugar") || null;
 var percentIce = document.getElementById("percent-ice") || null;
@@ -38,15 +36,15 @@ if (sliderIce !== null) {
   percentIce.innerHTML = sliderIce.value;
   sliderIce.oninput = function () {
     percentIce.innerHTML = this.value;
-  }
+  };
 }
 if (sliderSugar !== null) {
   percentSugar.innerHTML = sliderSugar.value;
   sliderSugar.oninput = function () {
     percentSugar.innerHTML = this.value;
-  }
+  };
 }
-fetch('http://localhost:5500/categories/DB')
+fetch("http://localhost:5500/categories/DB")
   .then((res) => {
     return res.json();
   })
@@ -59,10 +57,10 @@ fetch('http://localhost:5500/categories/DB')
         menu.innerHTML += `<li ><a onClick="onSubmit('${item._id}', 1);activeCategory('${item._id}');" class="active" id="category${index}"> ${item.name} </a></li>`;
       } else
         menu.innerHTML += `<li ><a onClick="onSubmit('${item._id}', 1); activeCategory('${item._id}'); " id="category${index}" > ${item.name} </a></li>`;
-    })
+    });
   })
   .catch((error) => {
-    log('Request failed category', error)
+    log("Request failed category", error);
   });
 
 // const options = {
@@ -81,23 +79,21 @@ fetch('http://localhost:5500/categories/DB')
 //   });
 var currentpage = 1;
 function onSubmit(id, currentpage) {
-  fetch(`http://localhost:5500/products/ByCategory`,
-    {
-      method: 'POST',
-      headers: { id: id, page: currentpage }
-    })
+  fetch(`http://localhost:5500/products/ByCategory`, {
+    method: "POST",
+    headers: { id: id, page: currentpage },
+  })
     .then((res) => {
       return res.json();
     })
-    .then(json => {
+    .then((json) => {
       let listProducts = document.getElementById("listProducts");
       let pagination = document.getElementById("pagination");
       let strProducts = "";
       pages = json.pages;
       json.products.map((item, index) => {
-        strProducts +=
-          `<div class="tm-product">
-              <img src="frontend/img/${item.Image}" alt="${item.Name}">
+        strProducts += `<div class="tm-product">
+              <img src="/frontend/img/${item.Image}" alt="${item.Name}">
               <div class="tm-product-text">
                 <h3 class="tm-product-title">${item.Name}</h3>
                 <p class="tm-product-description">${item.Description}</p>
@@ -107,38 +103,47 @@ function onSubmit(id, currentpage) {
                   <span class="tm-product-price-currency">$</span>${item.Price}
                 </a>
               </div>
-            </div>`
+            </div>`;
       });
       listProducts.innerHTML = strProducts;
       loadPagination(id, pages, currentpage);
     })
     .catch((error) => {
-      console.log('Request failed products by cateogry', error)
+      console.log("Request failed products by cateogry", error);
     });
-
-
 }
 function activeCategory(id) {
   categories.map((item, index) => {
-    if (item._id === id) document.getElementById(`category${index}`).classList.add('active');
-    else document.getElementById(`category${index}`).classList.remove('active');
-  })
+    if (item._id === id)
+      document.getElementById(`category${index}`).classList.add("active");
+    else document.getElementById(`category${index}`).classList.remove("active");
+  });
 }
 function loadPagination(id, pages, currentpage) {
   let strPagination = "";
-  pages = Math.ceil(pages)
+  pages = Math.ceil(pages);
   for (let i = 0; i < pages; i++) {
-    strPagination += `<li class="page-item ${(currentpage == (i + 1)) ? "active" : ""}"><a class="page-link" onClick="onSubmit('${id}', ${i + 1});">${i + 1}</a></li>`;
+    strPagination += `<li class="page-item ${
+      currentpage == i + 1 ? "active" : ""
+    }"><a class="page-link" onClick="onSubmit('${id}', ${i + 1});">${
+      i + 1
+    }</a></li>`;
   }
-  pagination.innerHTML = `<li class="page-item "><a class="page-link" onClick="onSubmit('${id}', ${(currentpage > 1) ? currentpage - 1 : currentpage});">Previous</a></li>
+  pagination.innerHTML = `<li class="page-item "><a class="page-link" onClick="onSubmit('${id}', ${
+    currentpage > 1 ? currentpage - 1 : currentpage
+  });">Previous</a></li>
     ${strPagination}
-    <li class="page-item"><a class="page-link" onClick="onSubmit('${id}', ${(currentpage < pages) ? currentpage + 1 : currentpage});">Next</a></li>`
+    <li class="page-item"><a class="page-link" onClick="onSubmit('${id}', ${
+    currentpage < pages ? currentpage + 1 : currentpage
+  });">Next</a></li>`;
 }
 //menu today + home
 function popularItemHome(id, count) {
   fetch("http://localhost:5500/products/ByHot")
-    .then((res) => { return res.json(); })
-    .then(json => {
+    .then((res) => {
+      return res.json();
+    })
+    .then((json) => {
       let str = "";
       json.map((item, index) => {
         if (index < count) {
@@ -148,7 +153,7 @@ function popularItemHome(id, count) {
       document.getElementById(id).innerHTML = str;
     })
     .catch((error) => {
-      log('Request failed products hot', error)
+      log("Request failed products hot", error);
     });
 }
 
@@ -158,9 +163,9 @@ function popularItemToday(productItems) {
 popularItemHome("popular-items-today", 6);
 popularItemHome("popular-items-home", 3);
 function popularItem(item) {
-  return (`<div class="tm-popular-item">
+  return `<div class="tm-popular-item">
     <div class="tm-popular-item-img-wrap">
-      <img src="frontend/img/${item.Image}" alt="${item.Name}" class="tm-popular-item-img">
+      <img src="/frontend/img/${item.Image}" alt="${item.Name}" class="tm-popular-item-img">
     </div>
     <div class="tm-popular-item-description">
       <h3 class="tm-handwriting-font tm-popular-item-title fontPacifico">
@@ -172,5 +177,5 @@ function popularItem(item) {
         <a href="#" class="order-now-link tm-handwriting-font">Order Now</a>
       </div>
     </div>
-  </div>`);
+  </div>`;
 }
