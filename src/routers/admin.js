@@ -8,8 +8,9 @@ import customer from "./customer.js";
 import blog from "./blog.js";
 const app = express();
 const router = express.Router();
-// ngon ngu rac vcl
-// Rác rưởi
+
+
+
 router.get("/", (req, res) => {
   res.render("backend/home", { layout: "admin-layout" });
 });
