@@ -47,6 +47,7 @@ export const getCategories = (req, res, next) => {
     })
     .then((categories) => {
       let page = req.params.page || 1;
+      
       let category = categories[0]._id;
       if (req.params.index)
         category = categories[req.params.index]._id;
@@ -54,6 +55,22 @@ export const getCategories = (req, res, next) => {
         .then(pro => {
           let count = Math.ceil(pro.length / 3);
           if (count == 0) count = 1;
+          let pre = false; let next = false;
+          if(page > 0 && page <= count) {
+            if(page == 1){
+              pre = false;
+              next = true;
+            }else
+            if(page == count)
+            {
+              pre = true;
+              next = false;
+            }
+            if(count==1){
+              pre = false;
+              next = false;
+            }
+          }
           Product.find({ CategoryId: category })
             .skip((3 * page) - 3)
             .limit(3)
@@ -73,7 +90,10 @@ export const getCategories = (req, res, next) => {
                 products: products,
                 idCurrent: category,
                 countPage: count,
-                current: req.params.index,
+                currentCategory: req.params.index,
+                currentPage: page-1,
+                previous : pre,
+                next : next,
                 helpers: {
                   if_equal: isEqualHelperHandlerbar,
                   times: times

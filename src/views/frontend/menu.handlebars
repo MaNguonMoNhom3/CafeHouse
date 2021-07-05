@@ -62,16 +62,18 @@
         <div id="pagination-wrap">
           <nav>
             <ul class="pagination" id="pagination">
-              <li class="page-item "><a class="page-link">Previous</a></li>
+              
+              <li class="page-item "><a class="page-link" href="/menu/{{currentCategory}}/{{#if previous}}{{currentPage}}{{else}}{{math currentPage "+" 1}}{{/if}}">Previous</a></li>
 
               {{#times countPage}}
-              <li class="page-item"><a class="page-link" href="/menu/{{current}}/{{math @index '+' 1}}">{{math @index
+              <li class="page-item {{#if_equal @index currentPage}}active{{/if_equal}}"><a class="page-link" href="/menu/{{currentCategory}}/{{math @index '+' 1}}">{{math
+                  @index
                   "+"
                   1}}</a>
               </li>
               {{/times}}
 
-              <li class="page-item"><a class="page-link">Next</a></li>
+              <li class="page-item"><a class="page-link" href="/menu/{{currentCategory}}/{{#if next}}{{math currentPage "+" 2}}{{else}}{{math currentPage "+" 1}}{{/if}}">Next</a></li>
             </ul>
           </nav>
           <h2>{{{pages}}}</h2>
