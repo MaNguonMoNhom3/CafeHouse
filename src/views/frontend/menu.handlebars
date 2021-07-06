@@ -30,9 +30,9 @@
               <ul id="side-menu">
                 {{#each categories}}
                 {{#if_equal _id ../idCurrent}}
-                <li><a href="/menu/{{@index}}" class="active"> {{name}}</a></li>
+                <li><a href="/menu?category={{@index}}" class="active"> {{name}}</a></li>
                 {{else}}
-                <li><a href="/menu/{{@index}}"> {{name}}</a></li>
+                <li><a href="/menu?category={{@index}}"> {{name}}</a></li>
                 {{/if_equal}}
                 {{/each}}
               </ul>
@@ -63,17 +63,17 @@
           <nav>
             <ul class="pagination" id="pagination">
               
-              <li class="page-item "><a class="page-link" href="/menu/{{currentCategory}}/{{#if previous}}{{currentPage}}{{else}}{{math currentPage "+" 1}}{{/if}}">Previous</a></li>
+              <li class="page-item "><a class="page-link" href="/menu?category={{currentCategory}}&page={{#if previous}}{{currentPage}}{{else}}{{math currentPage "+" 1}}{{/if}}">Previous</a></li>
 
               {{#times countPage}}
-              <li class="page-item {{#if_equal @index currentPage}}active{{/if_equal}}"><a class="page-link" href="/menu/{{currentCategory}}/{{math @index '+' 1}}">{{math
+              <li class="page-item {{#if_equal @index currentPage}}active{{/if_equal}}"><a class="page-link" href="/menu?category={{currentCategory}}&page={{math @index '+' 1}}">{{math
                   @index
                   "+"
                   1}}</a>
               </li>
               {{/times}}
 
-              <li class="page-item"><a class="page-link" href="/menu/{{currentCategory}}/{{#if next}}{{math currentPage "+" 2}}{{else}}{{math currentPage "+" 1}}{{/if}}">Next</a></li>
+              <li class="page-item"><a class="page-link" href="/menu?category={{currentCategory}}&page={{#if next}}{{math currentPage "+" 2}}{{else}}{{math currentPage "+" 1}}{{/if}}">Next</a></li>
             </ul>
           </nav>
           <h2>{{{pages}}}</h2>

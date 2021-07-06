@@ -263,7 +263,8 @@ input[type=checkbox]:not(old) {
 input[type=checkbox]:not(old) + label {
   display: inline-block;
   line-height: 1.5em;
-  margin-top: 6px; }
+  margin-top: 6px; 
+  cursor: pointer;}
 
 input[type=checkbox]:not(old) + label > span {
   display: inline-block;
@@ -286,14 +287,13 @@ input[type=checkbox]:not(old) + label > span {
   vertical-align: bottom; }
 
 input[type=checkbox]:not(old):checked + label > span {
-  background-image: -moz-linear-gradient(white, white);
-  background-image: -ms-linear-gradient(white, white);
-  background-image: -o-linear-gradient(white, white);
-  background-image: -webkit-linear-gradient(white, white);
-  background-image: linear-gradient(white, white); }
-
+  background-image: -moz-linear-gradient(#fff, #fff);
+  background-image: -ms-linear-gradient(#fff, #fff);
+  background-image: -o-linear-gradient(#fff, #fff);
+  background-image: -webkit-linear-gradient(#fff, #fff);
+  background-image: linear-gradient(#fff, #fff); }
 input[type=checkbox]:not(old):checked + label > span:before {
-  content: '\f26b';
+  content:"X";
   display: block;
   color: #222;
   font-size: 11px;
