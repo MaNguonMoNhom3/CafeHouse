@@ -1,12 +1,12 @@
 import express from "express";
 // router
 import cart from "./cart.js";
-import category from "./category.js";
-import products from "./product.js";
-import home from "./home.js";
-import menu from "./menu.js";
+import category from './category.js';
+import products from './product.js';
+import home from './home.js';
+import menu from './menu.js';
 //controllers
-import { getProductForTodaySpecial } from "../controllers/ProductsController.js";
+import { getProductForTodaySpecial } from '../controllers/ProductsController.js';
 
 import {
   SignUpController,
