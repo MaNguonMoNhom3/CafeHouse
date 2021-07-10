@@ -7,7 +7,7 @@
         <p class="tm-welcome-description">
           Tóm lại cafe ngon không nói nhiều nhé
         </p>
-        <a href="#" class="tm-more-button margin-top-30">Xem thêm</a>
+        <a href="#" class="tm-more-button margin-top-30">Read more</a>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-4 tm-welcome-img-container">
         <div class="inline-block shadow-img">
@@ -18,7 +18,7 @@
     <section class="tm-section row relative" id="list-products-height">
       <div class="col-lg-12 tm-section-header-container margin-bottom-30">
         <h2 class="tm-section-header gold-text tm-handwriting-font"><img src="/frontend/img/logo.png" alt="Logo"
-            class="tm-site-logo">Menu</h2>
+            class="tm-site-logo">Our Menu</h2>
         <div class="tm-hr-container">
           <hr class="tm-hr">
         </div>
@@ -27,24 +27,53 @@
         <div class="col-lg-3 col-md-3">
           <div class="tm-position-relative margin-bottom-30">
             <nav class="tm-side-menu">
-              {{!-- <form method="POST" action="http://localhost:5500/products/menu-products"> --}}
-                <ul id="side-menu">
-
-                </ul>
-                {{!--
-              </form> --}}
+              <ul id="side-menu">
+                {{#each categories}}
+                {{#if_equal _id ../idCurrent}}
+                <li><a href="/menu/{{@index}}" class="active"> {{name}}</a></li>
+                {{else}}
+                <li><a href="/menu/{{@index}}"> {{name}}</a></li>
+                {{/if_equal}}
+                {{/each}}
+              </ul>
             </nav>
             <img src="/frontend/img/vertical-menu-bg.png" alt="Menu bg" class="tm-side-menu-bg">
           </div>
         </div>
         <div class="tm-menu-product-content col-lg-9 col-md-9" id="listProducts">
           <!-- menu content -->
-
+          {{#each products}}
+          {{#if_equal CategoryId ../idCurrent}}
+          <div class="tm-product">
+            <img src="/frontend/img/{{Image}}" alt="{{Name}}">
+            <div class="tm-product-text">
+              <h3 class="tm-product-title">{{Name}}</h3>
+              <p class="tm-product-description">{{Description}}</p>
+            </div>
+            <div class="tm-product-price">
+              <a href="#" class="tm-product-price-link tm-handwriting-font">
+                <span class="tm-product-price-currency">$</span>{{Price}}
+              </a>
+            </div>
+          </div>
+          {{/if_equal}}
+          {{/each}}
         </div>
         <div id="pagination-wrap">
           <nav>
             <ul class="pagination" id="pagination">
+              
+              <li class="page-item "><a class="page-link" href="/menu/{{currentCategory}}/{{#if previous}}{{currentPage}}{{else}}{{math currentPage "+" 1}}{{/if}}">Previous</a></li>
 
+              {{#times countPage}}
+              <li class="page-item {{#if_equal @index currentPage}}active{{/if_equal}}"><a class="page-link" href="/menu/{{currentCategory}}/{{math @index '+' 1}}">{{math
+                  @index
+                  "+"
+                  1}}</a>
+              </li>
+              {{/times}}
+
+              <li class="page-item"><a class="page-link" href="/menu/{{currentCategory}}/{{#if next}}{{math currentPage "+" 2}}{{else}}{{math currentPage "+" 1}}{{/if}}">Next</a></li>
             </ul>
           </nav>
           <h2>{{{pages}}}</h2>
