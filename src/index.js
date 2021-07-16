@@ -39,6 +39,13 @@ app.engine("handlebars", handlerbars({
         "/": lvalue / rvalue,
         "%": lvalue % rvalue
       }[operator];
+    },
+    if_equal: function(a, b, opts) {
+        if (a == b) {
+            return opts.fn(this)
+        } else {
+            return opts.inverse(this)
+        }
     }
   },
   extname: "handlebars",

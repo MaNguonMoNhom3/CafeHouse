@@ -1,17 +1,16 @@
 import express from "express";
+import {check, validationResult} from 'express-validator';
 // router
 import cart from "./cart.js";
 import category from './category.js';
 import products from './product.js';
 import home from './home.js';
 import menu from './menu.js';
+import signin from './signinUser.js';
+import signup from './signupUser.js';
 //controllers
 import { getProductForTodaySpecial } from '../controllers/ProductsController.js';
 
-import {
-  SignUpController,
-  SignInController,
-} from "../controllers/loginController.js";
 const app = express();
 const router = express.Router();
 
@@ -55,16 +54,21 @@ router.use("/detail", (req, res) => {
   });
 });
 
-router.use("/sign-in", SignInController);
+router.use("/sign-in", signin);
 
-router.use("/sign-up", SignUpController);
-//
-//
-//
-//
-//
-//
-// ADMIN
-//
+router.use("/sign-up",[
+  check('name', 'Tên của bạn phải có ít nhất 2 ký tự')
+  .exists()
+  .isLength({min:2}),
+  check('email','Email không được để trống')
+  .isEmail()
+  .normalizeEmail(),
+  check('pass', 'Vui lòng kiểm tra lại mật khẩu')
+  .exists()
+  .isLength({min:6}),
+  check('re_pass', 'Vui lòng kiểm tra lại mật khẩu xác nhận')
+  .exists()
+  .isLength({min:6}),
+], signup);
 
 export default router;

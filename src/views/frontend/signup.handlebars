@@ -3,22 +3,42 @@
         <div class="signup-content">
             <div class="signup-form">
                 <h2 class="form-title">Sign up</h2>
-                <form method="POST" class="register-form" id="register-form">
+                <form action="sign-up" method="POST" class="register-form" id="register-form">
                     <div class="form-group">
                         <label for="name"><i class="icon-singin fas fa-user"></i></label>
                         <input type="text" name="name" id="name" placeholder="Your Name" />
+                        {{#each alert}}
+                        {{#if_equal param "name"}}
+                        <div class="form-text waring">Name must 2+ characters long</div>
+                        {{/if_equal}}
+                        {{/each}}
                     </div>
                     <div class="form-group">
                         <label for="email"><i class="fas fa-envelope icon-singin"></i></label>
-                        <input type="email" name="email" id="email" placeholder="Your Email" />
+                        <input type="email"  name="email" id="email" aria-describedby="emailHelp" placeholder="Your Email">
+                        {{#each alert}}
+                        {{#if_equal param "email"}}
+                        <div class="form-text waring">Email is not valid</div>
+                        {{/if_equal}}
+                        {{/each}}
                     </div>
                     <div class="form-group">
                         <label for="pass"><i class="fas fa-lock icon-singin"></i></label>
                         <input type="password" name="pass" id="pass" placeholder="Password" />
+                        {{#each alert}}
+                        {{#if_equal param "pass"}}
+                        <div class="form-text waring">Password is not valid</div>
+                        {{/if_equal}}
+                        {{/each}}
                     </div>
                     <div class="form-group">
                         <label for="re-pass"><i class="fas fa-lock icon-singin"></i></label>
                         <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password" />
+                        {{#each alert}}
+                        {{#if_equal param "re_pass"}}
+                        <div class="form-text waring">Password Comfirm is not valid</div>
+                        {{/if_equal}}
+                        {{/each}}
                     </div>
                     <div class="form-group">
                         <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
@@ -27,13 +47,12 @@
                     </div>
                     <div class="btnSingUp">
                         <div class="form-group form-button">
-                            <input type="submit" name="signup" id="signup" class="form-submit" value="Register" />
+                            <input type="submit" id="signup" class="form-submit" value="Register" />
                         </div>
                         <div>
                             <a href="/sign-in" class="signup-image-link">I am already member</a>
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>
