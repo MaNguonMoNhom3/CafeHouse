@@ -9,7 +9,7 @@ export const getLoginUser = (req, res) => {
   });
 };
 
-export const createUser = (req, res)=> {
+export const createUser = (req, res, next)=> {
   const errors = validationResult(req);
   if(!errors.isEmpty()){
     // return res.status(422).json(errors.array());
@@ -21,6 +21,7 @@ export const createUser = (req, res)=> {
       flexCenter: "display-flex-center",
       layout: "home-layout",
       alert,
+      dataRequest: req.body
     });
   }
 }

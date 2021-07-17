@@ -6,7 +6,7 @@
                 <form action="sign-up" method="POST" class="register-form" id="register-form">
                     <div class="form-group">
                         <label for="name"><i class="icon-singin fas fa-user"></i></label>
-                        <input type="text" name="name" id="name" placeholder="Your Name" />
+                        <input type="text" name="name" id="name" placeholder="Your Name" value="{{dataRequest.name}}" />
                         {{#each alert}}
                         {{#if_equal param "name"}}
                         <div class="form-text waring">Name must 2+ characters long</div>
@@ -15,7 +15,7 @@
                     </div>
                     <div class="form-group">
                         <label for="email"><i class="fas fa-envelope icon-singin"></i></label>
-                        <input type="email"  name="email" id="email" aria-describedby="emailHelp" placeholder="Your Email">
+                        <input type="email"  name="email" id="email" aria-describedby="emailHelp" placeholder="Your Email" value="{{dataRequest.email}}">
                         {{#each alert}}
                         {{#if_equal param "email"}}
                         <div class="form-text waring">Email is not valid</div>
@@ -32,18 +32,23 @@
                         {{/each}}
                     </div>
                     <div class="form-group">
-                        <label for="re-pass"><i class="fas fa-lock icon-singin"></i></label>
+                        <label for="re_pass"><i class="fas fa-lock icon-singin"></i></label>
                         <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password" />
-                        {{#each alert}}
+                        {{!-- {{#each alert}}
                         {{#if_equal param "re_pass"}}
                         <div class="form-text waring">Password Comfirm is not valid</div>
                         {{/if_equal}}
-                        {{/each}}
+                        {{/each}} --}}
                     </div>
                     <div class="form-group">
                         <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
                         <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all
                             statements in <a href="#" class="term-service">Terms of service</a></label>
+                        {{#each alert}}
+                        {{#if_equal param "agree-term"}}
+                        <div class="form-text waring">Read and agree to terms of service</div>
+                        {{/if_equal}}
+                        {{/each}}
                     </div>
                     <div class="btnSingUp">
                         <div class="form-group form-button">
