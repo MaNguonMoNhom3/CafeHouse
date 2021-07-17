@@ -1,6 +1,6 @@
 import passport from "passport";
 import passportLocal from "passport-local";
-import { CustomersModel } from "../models/Customer.js";
+import { Customers } from "../models/Customer.js";
 
 const LocalStrategy = passportLocal.Strategy;
 
@@ -22,7 +22,7 @@ export const initPassportLocal = () => {
       },
       async (req, username, password, done) => {
         try {
-          let user = await CustomersModel.findByEmail(username);
+          let user = await Customers.findByEmail(username);
           if (!user) {
             return done(null, false);
           }
@@ -55,7 +55,7 @@ export const CreateUser = async (req, res) => {
   try {
     const newUser = req.body;
     console.log(newUser);
-    const user = new CustomersModel(newUser);
+    const user = new Customers(newUser);
     await user.save();
     res.status(200).json(user);
   } catch (err) {

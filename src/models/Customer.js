@@ -1,26 +1,29 @@
 import mongoose from "mongoose";
 let Schema = mongoose.Schema;
-let Customers = new Schema({
-  username: {
+let Customer = new Schema({
+  email: {
     type: String,
     require: true,
+    unique: true
   },
   password: {
     type: String,
     require: true,
   },
-  Name: {
+  name: {
     type: String,
     require: true,
   },
   address: {
     type: String,
-    require: true,
+    default:""
   },
   phone: {
     type: Number,
-    require: true,
+    default:"",
+    // unique: true
   },
-});
+},
+{ timestamps: true });
 
-export const CustomersModel = mongoose.model("Customers", Customers);
+export const Customers = mongoose.model("Customers", Customer);
