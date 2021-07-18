@@ -54,7 +54,7 @@ export const createUser = (req, res, next)=> {
               showSingInUp: true,
               flexCenter: "display-flex-center",
               layout: "home-layout",
-              errorEmail: true,
+              // errorEmail: true,
               dataRequest: req.body
             });
           }
