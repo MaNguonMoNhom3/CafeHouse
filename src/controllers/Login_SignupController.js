@@ -11,6 +11,16 @@ export const getLoginUser = (req, res) => {
   });
 };
 
+export const getSignUpUser = (req, res) => {
+  res.render("frontend/signup", {
+    singinup: false,
+    showHeader: true,
+    showSingInUp: true,
+    flexCenter: "display-flex-center",
+    layout: "home-layout",
+  });
+};
+
 export const createUser = (req, res, next)=> {
   const errors = validationResult(req);
   if(!errors.isEmpty()){
@@ -26,53 +36,55 @@ export const createUser = (req, res, next)=> {
       dataRequest: req.body
     });
   }else{
-    bcrypt.hash(req.body.pass, 10)
-    .then((hash) => {
-        const customer = new Customers({
-          email: req.body.email,
-          password: hash,
-          name: req.body.name
-        });
-        customer.save()
-        .then(() => {
-          res.status(201)
-          .render("frontend/signin", {
-            singinup: false,
-            showHeader: true,
-            showSingInUp: true,
-            flexCenter: "display-flex-center",
-            layout: "home-layout",
-            email: req.body.email
+    var salt = bcrypt.genSaltSync(10);
+      bcrypt.hashSync(req.body.pass, salt)
+      .then((hash) => {
+          const customer = new Customers({
+            email: req.body.email,
+            password: hash,
+            name: req.body.name
           });
-          }
-        ).catch(
-          (error) => {
-            res.status(500)
-            .render("frontend/signup", {
+          customer.save()
+          .then(() => {
+            res.status(201)
+            .render("frontend/signin", {
               singinup: false,
               showHeader: true,
               showSingInUp: true,
               flexCenter: "display-flex-center",
               layout: "home-layout",
-              // errorEmail: true,
-              dataRequest: req.body
+              email: req.body.email
             });
-          }
-        );
-      }
-    );
+            }
+          )
+          .catch(
+            (error) => {
+              res.status(500)
+              .render("frontend/signup", {
+                singinup: false,
+                showHeader: true,
+                showSingInUp: true,
+                flexCenter: "display-flex-center",
+                layout: "home-layout",
+                // errorEmail: true,
+                dataRequest: req.body
+              });
+            }
+          );
+        }
+      );
+    }
+}
+
+export const Login = async (req, res, next) => {
+  let {your_pass, email} = req.body;
+  const user = await Customers.find({email: email});
+  if(bcrypt.compareSync(your_pass, user[0].password))
+  {
+    res.redirect("http://localhost:5500")
   }
 }
 
-export const getSignUpUser = (req, res) => {
-  res.render("frontend/signup", {
-    singinup: false,
-    showHeader: true,
-    showSingInUp: true,
-    flexCenter: "display-flex-center",
-    layout: "home-layout",
-  });
-};
 //
 //
 //admin
