@@ -5,6 +5,7 @@ A simple Cafe Application Web.
 
 # 1.Technology used
 
+- NodeJs
 - ExpressJs
 - MongoDB
 
