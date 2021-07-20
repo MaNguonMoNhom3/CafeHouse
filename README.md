@@ -16,7 +16,8 @@ A simple Cafe Application Web.
 
 ```
 $ cd CafeHouse
-$ npm install
+$ npm install -g nodemon
+$ npm install #All the dependencies from package.js
 ```
 
 # 3. Run project
