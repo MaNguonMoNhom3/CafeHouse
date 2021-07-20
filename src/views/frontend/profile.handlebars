@@ -4,12 +4,11 @@
         <div class="profile-content">
                 <h2>Thông tin cá nhân</h2>
                 <form action="/profile" method="POST" id="form-profile">
-                    {{!-- <input type="text" name="id" value="{{user.user._id}}" class="hide"/> --}}
                     <div id="form-profile_info">
                         <div>
                             <div class="form-group">
                             <label for="name"><i class="icon-singin fas fa-user"></i></label>
-                            <input type="text" name="name" id="name" placeholder="Your Name" value="{{user.user.name}}" />
+                            <input type="text" name="name" id="name" required placeholder="Your Name" value="{{user.user.name}}" />
                             </div>
                             <div class="form-group">
                                 <label for="email"><i class="fas fa-envelope icon-singin"></i></label>
@@ -17,11 +16,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="pass"><i class="fas fa-lock icon-singin"></i></label>
-                                <input type="password" name="pass" id="pass" placeholder="Password" pattern="^[a-zA-Z0-9]+$" title="Password contains only letters and numbers"/>
+                                <input type="password" name="pass" id="pass" required placeholder="Password" pattern="^[a-zA-Z0-9]+$" title="Password contains only letters and numbers"/>
                             </div>
                             <div class="form-group">
                                 <label for="re_pass"><i class="fas fa-lock icon-singin"></i></label>
-                                <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password" pattern="^[a-zA-Z0-9]+$" title="Password contains only letters and numbers" />
+                                <input type="password" name="re_pass" id="re_pass" required placeholder="Repeat your password" pattern="^[a-zA-Z0-9]+$" title="Password contains only letters and numbers" />
                             </div>
                         </div>
                         <div>
@@ -36,39 +35,27 @@
                             <div class="flex-col choose-address">
                                 <div class="checkout-item-range text-align_left">
                                     <label for="address_provinces">Tỉnh/ Thành phố</label>
-                                    <select name="address_provinces" id="address_provinces" required="">
+                                    <select name="address_provinces" id="address_provinces" required="" >
                                     <option>Vui lòng chọn Tỉnh/ Thành phố</option>
-                                    <option>Hà Nội</option>
-                                    <option>Nam Định</option>
                                     </select>
+                                    <input class="billing_address_1" name="" type="hidden" value="">
                                 </div>
                                 <div class="checkout-item-range text-align_left">
                                     <label for="address_district">Quận/ Huyện</label>
-                                    <select name="address_district" id="address_district" required="">
+                                    <select name="address_district" id="address_district" required="" >
                                     <option>Vui lòng chọn Quận/ Huyện</option>
                                     </select>
-                                </div>
-                                <div class="checkout-item-range text-align_left">
-                                    <label for="address_commune">Phường/ Xã</label>
-                                    <select name="address_commune" id="address_commune" required="">
-                                    <option>Vui lòng chọn Phường/ Xã</option>
-                                    </select>
-                                </div>
-                                <input class="billing_address_1" name="" type="hidden" value="">
-                                <input class="billing_address_2" name="" type="hidden" value="">
+                                    <input class="billing_address_2" name="" type="hidden" value="">
+                                </div>                                
                             </div>
                         </div>
                     </div>
-                   
-                    
                     <div class="btnUpdate">
                         <div class="form-group form-button">
                             <input type="submit" id="profile_update" class="form-submit" value="Cập nhật" />
                         </div>
                     </div>
                 </form>
-                
-
         </div>
     </div>
 </section>

@@ -86,11 +86,12 @@ export const updateProfile = async (req, res) => {
   try{
     var salt = bcrypt.genSaltSync(10);
     let pass = bcrypt.hashSync(profile.pass, salt)
+    let strAddress = `${profile.address}(${profile.address_district}-${profile.address_provinces})`
     const up = {
       name: profile.name,
       password: pass,
       phone: profile.phone,
-      address: profile.address
+      address: strAddress
     }
     const update = await Customers.findOneAndUpdate({email: profile.email}, up )
     await update.save();

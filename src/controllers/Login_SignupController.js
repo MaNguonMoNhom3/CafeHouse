@@ -75,13 +75,35 @@ export const createUser = (req, res, next)=> {
 
 export const Login = async (req, res, next) => {
   let {your_pass, email} = req.body;
-  const user = await Customers.find({email: email});
-  if(bcrypt.compareSync(your_pass, user[0].password))
-  {
-    let sess = req.session;
-    sess.user = user[0];
-    res.redirect("http://localhost:5500");
-    res.end("done");
+  try{
+    const user = await Customers.find({email: email});
+    if(bcrypt.compareSync(your_pass, user[0].password))
+    {
+      let sess = req.session;
+      sess.user = user[0];
+      res.redirect("http://localhost:5500");
+      res.end("done");
+    }else{
+      res.render("frontend/signin", {
+        singinup: false,
+        showHeader: true,
+        showSingInUp: true,
+        flexCenter: "display-flex-center",
+        layout: "home-layout",
+        email: email,
+        errorEmailOrPass: true
+      });
+    }
+  } catch(err){
+    res.render("frontend/signin", {
+      singinup: false,
+      showHeader: true,
+      showSingInUp: true,
+      flexCenter: "display-flex-center",
+      layout: "home-layout",
+      email: email,
+      errorEmailOrPass: true
+    });
   }
 }
 

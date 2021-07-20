@@ -12,6 +12,9 @@
                     <div class="form-group">
                         <label for="your_pass"><i class="fas fa-lock icon-singin"></i></label>
                         <input type="password" name="your_pass" id="your_pass" placeholder="Password" />
+                        {{#if errorEmailOrPass}}
+                        <div class="form-text waring">Please check your email or password</div>
+                        {{/if}}
                     </div>
                     <div class="form-group left">
                         <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
