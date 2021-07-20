@@ -7,6 +7,8 @@ import home from './home.js';
 import menu from './menu.js';
 import signin from './signinUser.js';
 import signup from './signupUser.js';
+import customer from './customer.js';
+import profile from './profileUser.js';
 //controllers
 import { getProductForTodaySpecial } from '../controllers/ProductsController.js';
 
@@ -30,6 +32,7 @@ router.use("/contact", (req, res) => {
     showHeader: true,
     contact: true,
     showCart: true,
+    showHeaderContent: true,
     layout: "home-layout",
   });
 });
@@ -41,6 +44,7 @@ router.use("/checkout", (req, res) => {
     showHeader: false,
     showCart: false,
     singinup: true,
+    showHeaderContent: false,
     layout: "home-layout",
   });
 });
@@ -49,6 +53,7 @@ router.use("/detail", (req, res) => {
     showHeader: false,
     showCart: false,
     singinup: true,
+    showHeaderContent: false,
     layout: "home-layout",
   });
 });
@@ -56,5 +61,7 @@ router.use("/detail", (req, res) => {
 router.use("/sign-in", signin);
 
 router.use("/sign-up", signup);
+
+router.use("/profile", profile);
 
 export default router;

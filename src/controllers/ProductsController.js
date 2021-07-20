@@ -11,20 +11,8 @@ export const index = async (req, res) => {
 
 //get products by name category
 export const getProductsByCategory = (req, res, next) => {
-  // const headers = req.headers;
-  // const perPage = 3;
-  // let page = headers.page;
   Product
     .find({ CategoryId: req.params.id })
-    // .skip((perPage * page) - perPage)
-    // .limit(perPage)
-    // .exec((err, products) => {
-    //   Product.countDocuments({ CategoryId: headers.id }, (err, count) => {
-    //     if (err) return next(err);
-    //     if (count == 0) count = 1;
-    //     res.status(200).json({ products: products, pages: count / perPage });
-    //   });
-    // });
     .then(json => {
       json = json.map(item => item.toObject());
       return json;
@@ -41,11 +29,11 @@ export const getProductsByCategory = (req, res, next) => {
             showHeader: true,
             menu: true,
             showCart: true,
+            showHeaderContent: true,
             layout: "home-layout.handlebars",
             categories: categories,
             products: products
           });
-          // res.send(categories)
         })
 
     })
@@ -54,7 +42,8 @@ export const getProductsByCategory = (req, res, next) => {
 
 //get product by hot
 export const getProductForHome = (req, res, next) => {
-  // try {
+  let sess = req.session;
+  let user = sess.user || "";
   Product.find()
     .sort({ "Hot": -1 })
     .limit(3)
@@ -68,8 +57,10 @@ export const getProductForHome = (req, res, next) => {
         showHeader: true,
         home: true,
         showCart: true,
+        showHeaderContent: true,
         layout: "home-layout.handlebars",
-        products: products
+        products: products,
+        user: {user: user, isExist: user ? true : false},
       });
     })
     .catch(err => {
@@ -90,6 +81,7 @@ export const getProductForTodaySpecial = (req, res, next) => {
         showHeader: true,
         todayspecial: true,
         showCart: true,
+        showHeaderContent: true,
         layout: "home-layout",
         products: products,
       });

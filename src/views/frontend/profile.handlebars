@@ -1,0 +1,48 @@
+<section>
+    <div class="container-form_profile">
+        <div class="profile-content">
+                <h2>Thông tin cá nhân</h2>
+                <form action="/profile" method="POST" id="form-profile">
+                    <div id="form-profile_info">
+                        <div>
+                            <div class="form-group">
+                            <label for="name"><i class="icon-singin fas fa-user"></i></label>
+                            <input type="text" name="name" id="name" placeholder="Your Name" value="{{dataRequest.name}}" />
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><i class="fas fa-envelope icon-singin"></i></label>
+                                <input type="email"  name="email" id="email" aria-describedby="emailHelp" placeholder="Your Email" value="{{dataRequest.email}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="pass"><i class="fas fa-lock icon-singin"></i></label>
+                                <input type="password" name="pass" id="pass" placeholder="Password" pattern="^[a-zA-Z0-9]+$" title="Password contains only letters and numbers"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="re_pass"><i class="fas fa-lock icon-singin"></i></label>
+                                <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password" pattern="^[a-zA-Z0-9]+$" title="Password contains only letters and numbers" />
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group">
+                            <label for="phone"><i class="fas fa-phone icon-singin"></i></label>
+                            <input type="text" name="phone" id="phone" placeholder="Your PhoneNumber" />
+                            </div>
+                            <div class="form-group">
+                                <label for="address"><i class="fas fa-map-marker-alt icon-singin"></i></label>
+                                <input type="text"  name="address" id="address" placeholder="Your Address"/>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    
+                    <div class="btnUpdate">
+                        <div class="form-group form-button">
+                            <input type="submit" id="profile_update" class="form-submit" value="Cập nhật" />
+                        </div>
+                    </div>
+                </form>
+                
+
+        </div>
+    </div>
+</section>

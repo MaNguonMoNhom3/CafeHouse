@@ -62,3 +62,17 @@ export const CreateUser = async (req, res) => {
     res.status(500).json({ error: err });
   }
 };
+
+export const getProfile = (req, res) => {
+  try {
+    res.render("frontend/profile", {
+      singinup: true,
+      showHeader: true,
+      showHeaderContent: false,
+      showCart: true,
+      layout: "home-layout",
+    });
+  } catch (err) {
+    res.status(500).json("error", err);
+  }
+}

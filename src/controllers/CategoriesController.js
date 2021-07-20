@@ -91,6 +91,7 @@ export const getCategories = (req, res, next) => {
                 showHeader: true,
                 menu: true,
                 showCart: true,
+                showHeaderContent: true,
                 layout: "home-layout.handlebars",
                 categories: categories,
                 products: products,

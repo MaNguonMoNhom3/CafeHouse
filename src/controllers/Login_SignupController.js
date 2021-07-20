@@ -81,7 +81,10 @@ export const Login = async (req, res, next) => {
   const user = await Customers.find({email: email});
   if(bcrypt.compareSync(your_pass, user[0].password))
   {
-    res.redirect("http://localhost:5500")
+    let sess = req.session;
+    sess.user = user[0];
+    res.redirect("http://localhost:5500");
+    res.end("done");
   }
 }
 
