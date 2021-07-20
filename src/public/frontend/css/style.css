@@ -133,6 +133,23 @@ h2 {
   flex-grow: 1;
   padding: 0 30px
 }
+.text-align_left{
+  /* text-align: left; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.text-align_left label{
+  margin-bottom: 0px;
+}
+.text-align_left select{
+  width: 73%;
+}
+.choose-address{
+  padding: 5px;
+  border: 2px dashed rgb(83, 83, 83);
+}
 .btnUpdate{
   margin: 0 auto;
   margin: 10px 0 20px 0;

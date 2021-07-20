@@ -1,4 +1,5 @@
 import passport from "passport";
+import bcrypt from 'bcryptjs';
 import passportLocal from "passport-local";
 import { Customers } from "../models/Customer.js";
 
@@ -65,14 +66,46 @@ export const CreateUser = async (req, res) => {
 
 export const getProfile = (req, res) => {
   try {
+    let sess = req.session;
+    let user = sess.user || "";
     res.render("frontend/profile", {
       singinup: true,
       showHeader: true,
       showHeaderContent: false,
       showCart: true,
       layout: "home-layout",
+      user: {user: user, isExist: user ? true : false},
     });
   } catch (err) {
+    res.status(500).json("error", err);
+  }
+}
+
+export const updateProfile = async (req, res) => {
+  const profile = req.body;
+  try{
+    var salt = bcrypt.genSaltSync(10);
+    let pass = bcrypt.hashSync(profile.pass, salt)
+    const up = {
+      name: profile.name,
+      password: pass,
+      phone: profile.phone,
+      address: profile.address
+    }
+    const update = await Customers.findOneAndUpdate({email: profile.email}, up )
+    await update.save();
+    let sess = req.session;
+    let proUpdate = {email: profile.email, ...up};
+    sess.user = proUpdate;
+    res.render("frontend/profile", {
+      singinup: true,
+      showHeader: true,
+      showHeaderContent: false,
+      showCart: true,
+      layout: "home-layout",
+      user: {user: proUpdate, isExist: proUpdate ? true : false},
+    });
+  } catch(err){
     res.status(500).json("error", err);
   }
 }

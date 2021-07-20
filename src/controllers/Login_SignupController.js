@@ -37,40 +37,37 @@ export const createUser = (req, res, next)=> {
     });
   }else{
     var salt = bcrypt.genSaltSync(10);
-      bcrypt.hashSync(req.body.pass, salt)
-      .then((hash) => {
-          const customer = new Customers({
-            email: req.body.email,
-            password: hash,
-            name: req.body.name
+      let hash = bcrypt.hashSync(req.body.pass, salt)
+      const customer = new Customers({
+        email: req.body.email,
+        password: hash,
+        name: req.body.name
+      });
+      customer.save()
+      .then(() => {
+        res.status(201)
+        .render("frontend/signin", {
+          singinup: false,
+          showHeader: true,
+          showSingInUp: true,
+          flexCenter: "display-flex-center",
+          layout: "home-layout",
+          email: req.body.email
+        });
+        }
+      )
+      .catch(
+        (error) => {
+          res.status(500)
+          .render("frontend/signup", {
+            singinup: false,
+            showHeader: true,
+            showSingInUp: true,
+            flexCenter: "display-flex-center",
+            layout: "home-layout",
+            // errorEmail: true,
+            dataRequest: req.body
           });
-          customer.save()
-          .then(() => {
-            res.status(201)
-            .render("frontend/signin", {
-              singinup: false,
-              showHeader: true,
-              showSingInUp: true,
-              flexCenter: "display-flex-center",
-              layout: "home-layout",
-              email: req.body.email
-            });
-            }
-          )
-          .catch(
-            (error) => {
-              res.status(500)
-              .render("frontend/signup", {
-                singinup: false,
-                showHeader: true,
-                showSingInUp: true,
-                flexCenter: "display-flex-center",
-                layout: "home-layout",
-                // errorEmail: true,
-                dataRequest: req.body
-              });
-            }
-          );
         }
       );
     }

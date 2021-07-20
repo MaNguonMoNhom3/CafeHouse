@@ -1,17 +1,19 @@
+{{#if user.isExist}}
 <section>
     <div class="container-form_profile">
         <div class="profile-content">
                 <h2>Thông tin cá nhân</h2>
                 <form action="/profile" method="POST" id="form-profile">
+                    {{!-- <input type="text" name="id" value="{{user.user._id}}" class="hide"/> --}}
                     <div id="form-profile_info">
                         <div>
                             <div class="form-group">
                             <label for="name"><i class="icon-singin fas fa-user"></i></label>
-                            <input type="text" name="name" id="name" placeholder="Your Name" value="{{dataRequest.name}}" />
+                            <input type="text" name="name" id="name" placeholder="Your Name" value="{{user.user.name}}" />
                             </div>
                             <div class="form-group">
                                 <label for="email"><i class="fas fa-envelope icon-singin"></i></label>
-                                <input type="email"  name="email" id="email" aria-describedby="emailHelp" placeholder="Your Email" value="{{dataRequest.email}}">
+                                <input type="email" readonly name="email" id="email" aria-describedby="emailHelp" placeholder="Your Email" value="{{user.user.email}}">
                             </div>
                             <div class="form-group">
                                 <label for="pass"><i class="fas fa-lock icon-singin"></i></label>
@@ -25,11 +27,35 @@
                         <div>
                             <div class="form-group">
                             <label for="phone"><i class="fas fa-phone icon-singin"></i></label>
-                            <input type="text" name="phone" id="phone" placeholder="Your PhoneNumber" />
+                            <input type="text" name="phone" id="phone" placeholder="Your Phone Number" value="{{user.user.phone}}"  title="Invalid phone number"/>
                             </div>
                             <div class="form-group">
                                 <label for="address"><i class="fas fa-map-marker-alt icon-singin"></i></label>
-                                <input type="text"  name="address" id="address" placeholder="Your Address"/>
+                                <input type="text"  name="address" id="address" placeholder="Your Address" value="{{user.user.address}}"/>
+                            </div>
+                            <div class="flex-col choose-address">
+                                <div class="checkout-item-range text-align_left">
+                                    <label for="address_provinces">Tỉnh/ Thành phố</label>
+                                    <select name="address_provinces" id="address_provinces" required="">
+                                    <option>Vui lòng chọn Tỉnh/ Thành phố</option>
+                                    <option>Hà Nội</option>
+                                    <option>Nam Định</option>
+                                    </select>
+                                </div>
+                                <div class="checkout-item-range text-align_left">
+                                    <label for="address_district">Quận/ Huyện</label>
+                                    <select name="address_district" id="address_district" required="">
+                                    <option>Vui lòng chọn Quận/ Huyện</option>
+                                    </select>
+                                </div>
+                                <div class="checkout-item-range text-align_left">
+                                    <label for="address_commune">Phường/ Xã</label>
+                                    <select name="address_commune" id="address_commune" required="">
+                                    <option>Vui lòng chọn Phường/ Xã</option>
+                                    </select>
+                                </div>
+                                <input class="billing_address_1" name="" type="hidden" value="">
+                                <input class="billing_address_2" name="" type="hidden" value="">
                             </div>
                         </div>
                     </div>
@@ -46,3 +72,4 @@
         </div>
     </div>
 </section>
+{{/if}}

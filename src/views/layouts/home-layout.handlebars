@@ -50,7 +50,11 @@
               <li><a href="/today-special" class="{{#if todayspecial  }} active {{/if}}">Today Special</a></li>
               <li><a href="/menu" class="{{#if menu }} active {{/if}}">Menu</a></li>
               <li><a href="/contact" class="{{#if contact }} active {{/if}}">Contact</a></li>
-              <li><a href="/sign-in"><i class="fas fa-user icon"></i> {{#if user.isExist}} Hi, {{user.user.name}}{{else}}Đăng nhập{{/if}}</a></li>
+              {{#if user.isExist}}
+              <li><a href="/profile"><i class="fas fa-user icon"></i> Hi, {{user.user.name}}</a></li>
+              {{else}}
+              <li><a href="/sign-in"><i class="fas fa-user icon"></i> Đăng nhập</a></li>
+              {{/if}}
             </ul>
           </nav>
           {{/if}}
