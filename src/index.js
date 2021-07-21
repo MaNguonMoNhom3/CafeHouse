@@ -17,11 +17,13 @@ const port = 5500;
 
 const app = express();
 connect();
+app.use(session({secret: 'ssshhhhh',saveUninitialized: true,resave: true}));
 //add file css js img fonts
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 app.use(express.json({ limit: "30mb" }));
 app.use(express.urlencoded({ extended: true, limit: "30mb" }));
+//
 //
 app.use("/admin", admin_router);
 app.use("/", router);
@@ -39,6 +41,13 @@ app.engine("handlebars", handlerbars({
         "/": lvalue / rvalue,
         "%": lvalue % rvalue
       }[operator];
+    },
+    if_equal: function(a, b, opts) {
+        if (a == b) {
+            return opts.fn(this)
+        } else {
+            return opts.inverse(this)
+        }
     }
   },
   extname: "handlebars",

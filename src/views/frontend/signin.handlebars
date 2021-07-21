@@ -4,14 +4,17 @@
 
             <div class="signin-form">
                 <h2 class="form-title">Sign in</h2>
-                <form method="POST" class="register-form" id="login-form">
+                <form action="/sign-in" method="POST" class="register-form" id="login-form">
                     <div class="form-group">
-                        <label for="your_name"><i class="icon-singin fas fa-user"></i></label>
-                        <input type="text" name="your_name" id="your_name" placeholder="Your Name" />
+                        <label for="email"><i class="fas fa-envelope icon-singin"></i></label>
+                        <input type="email"  name="email" id="email" aria-describedby="emailHelp" placeholder="Your Email" value="{{email}}">
                     </div>
                     <div class="form-group">
                         <label for="your_pass"><i class="fas fa-lock icon-singin"></i></label>
                         <input type="password" name="your_pass" id="your_pass" placeholder="Password" />
+                        {{#if errorEmailOrPass}}
+                        <div class="form-text waring">Please check your email or password</div>
+                        {{/if}}
                     </div>
                     <div class="form-group left">
                         <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />

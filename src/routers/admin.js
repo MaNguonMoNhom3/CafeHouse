@@ -1,7 +1,7 @@
 import express from "express";
 // router
 import category from "./category.js";
-import { login, signUp } from "../controllers/loginController.js";
+import { login, signUp } from "../controllers/Login_SignupController.js";
 import product from "./product.js";
 import order from "./order.js";
 import customer from "./customer.js";

@@ -46,12 +46,18 @@ export const getCategories = (req, res, next) => {
       return categories;
     })
     .then((categories) => {
-      let page = req.params.page || 1;
-      
-      let category = categories[0]._id;
-      if (req.params.index)
-        category = categories[req.params.index]._id;
-      Product.find({ CategoryId: category })
+      let page = 1;
+      let category = 0;
+      let pageAsNumber = req.query.page;
+      let categoryAsNumber = req.query.category;
+      if(!isNaN(pageAsNumber) && pageAsNumber > 0){
+        page = pageAsNumber;
+      }
+      if(!isNaN(categoryAsNumber) && categoryAsNumber < categories.length && categoryAsNumber >= 0){
+        category = categoryAsNumber;
+      }
+      let categoryId = categories[category]._id;
+      Product.find({ CategoryId: categoryId })
         .then(pro => {
           let count = Math.ceil(pro.length / 3);
           if (count == 0) count = 1;
@@ -71,7 +77,7 @@ export const getCategories = (req, res, next) => {
               next = false;
             }
           }
-          Product.find({ CategoryId: category })
+          Product.find({ CategoryId: categoryId })
             .skip((3 * page) - 3)
             .limit(3)
             .then((json) => {
@@ -85,12 +91,13 @@ export const getCategories = (req, res, next) => {
                 showHeader: true,
                 menu: true,
                 showCart: true,
+                showHeaderContent: true,
                 layout: "home-layout.handlebars",
                 categories: categories,
                 products: products,
-                idCurrent: category,
+                idCurrent: categoryId,
                 countPage: count,
-                currentCategory: req.params.index,
+                currentCategory: category,
                 currentPage: page-1,
                 previous : pre,
                 next : next,

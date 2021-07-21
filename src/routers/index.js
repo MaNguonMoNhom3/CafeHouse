@@ -5,13 +5,13 @@ import category from './category.js';
 import products from './product.js';
 import home from './home.js';
 import menu from './menu.js';
+import signin from './signinUser.js';
+import signup from './signupUser.js';
+import customer from './customer.js';
+import profile from './profileUser.js';
 //controllers
 import { getProductForTodaySpecial } from '../controllers/ProductsController.js';
 
-import {
-  SignUpController,
-  SignInController,
-} from "../controllers/loginController.js";
 const app = express();
 const router = express.Router();
 
@@ -20,8 +20,7 @@ router.use("/products", products);
 
 //
 //
-//
-//
+
 router.use("/", home);
 router.use("/menu", menu);
 
@@ -33,6 +32,7 @@ router.use("/contact", (req, res) => {
     showHeader: true,
     contact: true,
     showCart: true,
+    showHeaderContent: true,
     layout: "home-layout",
   });
 });
@@ -44,6 +44,7 @@ router.use("/checkout", (req, res) => {
     showHeader: false,
     showCart: false,
     singinup: true,
+    showHeaderContent: false,
     layout: "home-layout",
   });
 });
@@ -52,20 +53,15 @@ router.use("/detail", (req, res) => {
     showHeader: false,
     showCart: false,
     singinup: true,
+    showHeaderContent: false,
     layout: "home-layout",
   });
 });
 
-router.use("/sign-in", SignInController);
+router.use("/sign-in", signin);
 
-router.use("/sign-up", SignUpController);
-//
-//
-//
-//
-//
-//
-// ADMIN
-//
+router.use("/sign-up", signup);
+
+router.use("/profile", profile);
 
 export default router;

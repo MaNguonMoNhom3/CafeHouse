@@ -158,7 +158,7 @@ ul {
 }
 * { font-family: 'Open Sans', sans-serif; }
 .container { max-width: 960px;}
-.height-header {min-height: 980px;}
+.height-header {min-height: 1040px;}
 .tm-handwriting-font { font-family: 'Damion', cursive; }
 .fontPacifico{font-family: 'Pacifico', cursive;}
 .tm-top-header {
@@ -409,7 +409,7 @@ ul {
 
 /* Main content */
 .light-gray-bg { background-color: #e4e4e4; }
-.tm-main-section { padding: 60px 0 100px 0; min-height: 850px; }
+.tm-main-section { padding: 130px 0 100px 0; min-height: 850px; }
 .img-thumbnail { padding: 8px; }
 .inline-block { display: inline-block; }
 .shadow-img {
@@ -422,7 +422,7 @@ ul {
 .tm-black-bg {
   background-color: #302f2f;
   color: white;
-  padding-top: 50px;
+  padding-top: 150px;
 }
 .tm-footer-div-title {
   color: white;
