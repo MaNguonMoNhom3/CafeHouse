@@ -1,6 +1,6 @@
 import express from "express";
 import {check, validationResult} from 'express-validator';
-import {getSignUpUser, createUser} from '../controllers/Login_SignupController.js';
+import {getSignUpUser, SignUp} from '../controllers/HomeController.js';
 const router = express.Router();
 
 router.get("/", getSignUpUser);
@@ -25,6 +25,6 @@ router.post("/", [
     check('agree-term', 'Vui lòng đọc và đồng ý với điều khoản')
     .exists()
   ],
-  createUser)
+  SignUp)
 
 export default router;
