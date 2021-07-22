@@ -17,6 +17,9 @@
                             <div class="form-group">
                                 <label for="pass"><i class="fas fa-lock icon-singin"></i></label>
                                 <input type="password" name="pass" id="pass" placeholder="Password" pattern="^[a-zA-Z0-9]+$" title="Password contains only letters and numbers"/>
+                                {{#if errorPass}}
+                                <div class="form-text waring">Please check password !</div>
+                                {{/if}}
                             </div>
                             <div class="form-group">
                                 <label for="re_pass"><i class="fas fa-lock icon-singin"></i></label>
@@ -26,11 +29,11 @@
                         <div>
                             <div class="form-group">
                             <label for="phone"><i class="fas fa-phone icon-singin"></i></label>
-                            <input type="text" name="phone" id="phone" placeholder="Your Phone Number" value="{{user.user.phone}}"  title="Invalid phone number"/>
+                            <input type="number" name="phone" id="phone" placeholder="Your Phone Number" value="{{user.user.phone}}"  title="Invalid phone number"/>
                             </div>
                             <div class="form-group">
                                 <label for="address"><i class="fas fa-map-marker-alt icon-singin"></i></label>
-                                <input type="text"  name="address" id="address" placeholder="Your Address" value="{{user.user.detail}}"/>
+                                <input type="text" name="address" id="address" placeholder="Your Address" value="{{user.user.detail}}"/>
                             </div>
                             <div class="flex-col choose-address">
                                 <div class="checkout-item-range text-align_left">
