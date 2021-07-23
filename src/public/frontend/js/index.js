@@ -37,21 +37,15 @@ window.onload = function () {
     $("#popups-cart").fadeOut();
   });
 };
-var sliderIce = document.getElementById("optionIce") || null;
-var sliderSugar = document.getElementById("optionSugar") || null;
-var percentIce = document.getElementById("percent-ice") || null;
-var percentSugar = document.getElementById("percent-sugar") || null;
-var categories = [];
-
-if (sliderIce !== null) {
-  percentIce.innerHTML = sliderIce.value;
-  sliderIce.oninput = function () {
-    percentIce.innerHTML = this.value;
+const
+  range = document.getElementById('range'),
+  rangeV = document.getElementById('rangeV'),
+  setValue = ()=>{
+    const
+      newValue = Number((range.value - range.min)),
+      newPosition = 40 - (newValue * 0.8);
+    rangeV.innerHTML = `<span>${range.value}</span>`;
+    rangeV.style.left = `calc(${newValue}% + (${newPosition}px))`;
   };
-}
-if (sliderSugar !== null) {
-  percentSugar.innerHTML = sliderSugar.value;
-  sliderSugar.oninput = function () {
-    percentSugar.innerHTML = this.value;
-  };
-}
+document.addEventListener("DOMContentLoaded", setValue);
+range.addEventListener('input', setValue);

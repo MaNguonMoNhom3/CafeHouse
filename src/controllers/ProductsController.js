@@ -97,7 +97,7 @@ export const detailProduct = async (req, res, next) => {
   const user = req.session.user;
   await res.render("frontend/detail", {
     showHeader: false,
-    showCart: false,
+    showCart: true,
     singinup: true,
     showHeaderContent: false,
     layout: "home-layout",
