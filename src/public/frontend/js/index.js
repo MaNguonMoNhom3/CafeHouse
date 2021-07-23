@@ -1,22 +1,33 @@
 function plus(id) {
   var current = document.getElementById(id).value;
-  if (current < 100) {
-    current = Number(current) + 1;
-    document.getElementById(id).value = current;
-  }
-  if (current >= 100) {
-    document.getElementById(id).value = 99;
+  var quantity = Number(document.getElementById("product-quantity").value);
+  if(quantity===0){
+    document.getElementById(id).value = quantity;
+  }else {
+    if (current < quantity) {
+      current = Number(current) + 1;
+      document.getElementById(id).value = current;
+    }
+    if (current >= quantity) {
+      document.getElementById(id).value = quantity;
+    }
   }
 }
 function minus(id) {
   var current = document.getElementById(id).value;
-  if (current > 0) {
-    current = Number(current) - 1;
-    document.getElementById(id).value = current;
+  var quantity = Number(document.getElementById("product-quantity").value);
+  if(quantity===0){
+    document.getElementById(id).value = quantity;
+  }else{
+    if (current > 0) {
+      current = Number(current) - 1;
+      document.getElementById(id).value = current;
+    }
+    if (current <= 0) {
+      document.getElementById(id).value = 1;
+    }
   }
-  if (current <= 0) {
-    document.getElementById(id).value = 1;
-  }
+  
 }
 window.onload = function () {
   $(".cart").click(function () {

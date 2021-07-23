@@ -51,7 +51,13 @@
               <li><a href="/menu" class="{{#if menu }} active {{/if}}">Menu</a></li>
               <li><a href="/contact" class="{{#if contact }} active {{/if}}">Contact</a></li>
               {{#if user.isExist}}
-              <li><a href="/profile"><i class="fas fa-user icon"></i> Hi, {{user.user.name}}</a></li>
+              <li id="menu-account_wrap">
+                <a href="/profile"><i class="fas fa-user icon"></i> Hi, {{user.user.name}}</a>
+                <ul id="menu-account">
+                  <li><a href="/profile">Profile</a></li>
+                  <li><a>Logout</a></li>
+                </ul>
+              </li>
               {{else}}
               <li><a href="/sign-in"><i class="fas fa-user icon"></i> Đăng nhập</a></li>
               {{/if}}
