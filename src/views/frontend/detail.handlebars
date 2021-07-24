@@ -5,7 +5,7 @@
                 alt="{{#each product}}{{Name}}{{/each}}">
             </div>
             <div class="detail-content-wrap">
-                <h2 class="pro-d-title">
+                <h2 class="pro-d-title" id="name">
                     {{#each product}}
                     {{Name}}
                     {{/each}}
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <div class="detailProductOption">
-                        <span for="sp1">Lượng đường:</span>
+                        <span for="range">Lượng đường:</span>
                         <div class="range-wrap">
                             <div class="range-value" id="rangeV"></div>
                             <input id="range" type="range" min="0" max="100" value="100" step="10">
@@ -59,9 +59,12 @@
                     
                 </div>
                 <p>
-                    <button class="btn btn-round btn-danger outline">
-                            <i class="fa fa-shopping-cart"></i>
-                            Thêm vào giỏ hàng
+                    <button class="btn btn-round btn-danger outline" 
+                    onclick="addToCart('{{#each product}}{{_id}}{{/each}}',
+                    {{priceDiscount}},
+                    '{{#each product}}{{Image}}{{/each}}')">
+                        <i class="fa fa-shopping-cart"></i>
+                        Thêm vào giỏ hàng
                     </button>
                 </p>
                 <input type="number" id="product-quantity" class="hide" value="{{#each product}}{{Quantity}}{{/each}}"/>

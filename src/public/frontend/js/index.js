@@ -37,6 +37,7 @@ window.onload = function () {
     $("#popups-cart").fadeOut();
   });
 };
+//range sugar of detail product
 const
   range = document.getElementById('range'),
   rangeV = document.getElementById('rangeV'),
@@ -49,3 +50,21 @@ const
   };
 document.addEventListener("DOMContentLoaded", setValue);
 range.addEventListener('input', setValue);
+//add product to cart
+function addToCart(id, discount,img){
+  const data = JSON.parse(window.localStorage.getItem('cart')) || [];
+  const name = document.getElementById("name").innerHTML.trim();
+  const size = document.getElementById("size").value;
+  const quantity = Number(document.getElementById("sp1").value);
+  const percentSugar = Number(document.getElementById("range").value);
+  let check = true;
+  data.map((item,index) => {
+    if(item.id === id && item.size === size && item.percentSugar === percentSugar){
+      item.quantity = item.quantity + quantity;
+      check = false;
+    }
+  })
+  if(check)
+    data.push({id: id, name: name, img: img, price: discount, size: size, quantity: quantity, percentSugar: percentSugar});
+  window.localStorage.setItem('cart', JSON.stringify(data));  
+}
