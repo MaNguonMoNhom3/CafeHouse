@@ -10,17 +10,17 @@ export const index = async (req, res) => {
   }
 };
 
-// export const CreateUser = async (req, res) => {
-//   try {
-//     const newUser = req.body;
-//     console.log(newUser);
-//     const user = new Customers(newUser);
-//     await user.save();
-//     res.status(200).json(user);
-//   } catch (err) {
-//     res.status(500).json({ error: err });
-//   }
-// };
+export const CreateUser = async (req, res) => {
+  try {
+    const newUser = req.body;
+    console.log(newUser);
+    const user = new Customers(newUser);
+    await user.save();
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
+};
 
 
 export const updateCustomers = async (req, res) => {
