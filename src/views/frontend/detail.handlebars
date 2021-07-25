@@ -10,11 +10,6 @@
                     {{Name}}
                     {{/each}}
                 </h2>
-                <p>
-                    {{#each product}}
-                    {{Description}}
-                    {{/each}}
-                </p>
                 <div class="m-bot15 horizontal-line-detail" id="priceSale">
                     <div>
                         <strong>Price : </strong> 
@@ -50,10 +45,13 @@
                         </div>
                     </div>
                     <div class="detailProductOption">
-                        <span for="range">Lượng đường:</span>
-                        <div class="range-wrap">
-                            <div class="range-value" id="rangeV"></div>
-                            <input id="range" type="range" min="0" max="100" value="100" step="10">
+                        <span for="sugar">Lượng đường:</span>
+                        <div id="sugar-wrap">
+                            <div><input name="sugar" class="optionSugar" type="radio" value="0" />0%</div>
+                            <div><input name="sugar" class="optionSugar" type="radio" value="25" />25%</div>
+                            <div><input name="sugar" class="optionSugar" type="radio" value="50" />50%</div>
+                            <div><input name="sugar" class="optionSugar" type="radio" value="75" />75%</div>
+                            <div><input name="sugar" class="optionSugar" type="radio" value="100" checked/>100%</div>
                         </div>
                     </div>
                     
@@ -70,4 +68,10 @@
                 <input type="number" id="product-quantity" class="hide" value="{{#each product}}{{Quantity}}{{/each}}"/>
             </div>
     </section>
+    <div id="title-detail"><hr><h4>Detail</h4></div>
+    <div id="detailProduct_content">
+        {{#each product}}
+        {{Description}}
+        {{/each}}
+    </div>
 </div>

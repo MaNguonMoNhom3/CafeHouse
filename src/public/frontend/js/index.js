@@ -37,26 +37,18 @@ window.onload = function () {
     $("#popups-cart").fadeOut();
   });
 };
-//range sugar of detail product
-const
-  range = document.getElementById('range'),
-  rangeV = document.getElementById('rangeV'),
-  setValue = ()=>{
-    const
-      newValue = Number((range.value - range.min)),
-      newPosition = 40 - (newValue * 0.8);
-    rangeV.innerHTML = `<span>${range.value}</span>`;
-    rangeV.style.left = `calc(${newValue}% + (${newPosition}px))`;
-  };
-document.addEventListener("DOMContentLoaded", setValue);
-range.addEventListener('input', setValue);
+//
 //add product to cart
 function addToCart(id, discount,img){
   const data = JSON.parse(window.localStorage.getItem('cart')) || [];
   const name = document.getElementById("name").innerHTML.trim();
   const size = document.getElementById("size").value;
   const quantity = Number(document.getElementById("sp1").value);
-  const percentSugar = Number(document.getElementById("range").value);
+  const radioSugar = document.getElementsByName('sugar');
+  let percentSugar;
+  for (let i = 0; i < radioSugar.length; i++)
+    if (radioSugar[i].checked)
+      percentSugar = Number(radioSugar[i].value);
   let check = true;
   data.map((item,index) => {
     if(item.id === id && item.size === size && item.percentSugar === percentSugar){
