@@ -743,7 +743,7 @@ ol li:before {
     transform: translatey(0px) ;
   }
 }
-.tm-product-text { max-width: 325px; flex-grow: 2; }
+.tm-product-text { max-width: 325px; flex-grow: 2; max-height: 125px; overflow: hidden;}
 .tm-product-price {
   width: 100px;
   height: 100px;
