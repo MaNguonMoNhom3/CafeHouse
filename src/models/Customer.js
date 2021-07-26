@@ -14,15 +14,20 @@ let Customer = new Schema({
     type: String,
     require: true,
   },
-  address: {
-    type: String,
-    default:""
-  },
   phone: {
     type: Number,
-    default:"",
+    default:null,
     // unique: true
   },
+  province: {
+    type: String,
+  },
+  district: {
+      type: String,
+  },
+  detail: {
+      type: String
+  }
 },
 { timestamps: true });
 
