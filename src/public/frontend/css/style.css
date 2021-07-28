@@ -651,3 +651,6 @@ label.valid {
   margin-bottom: 0px;
   min-height: 680px;
 }
+.horizontal-line{
+  border-top: 1px solid #000;
+}

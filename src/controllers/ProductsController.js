@@ -90,3 +90,19 @@ export const getProductForTodaySpecial = (req, res, next) => {
       next(err);
     });
 }
+
+export const detailProduct = async (req, res, next) => {
+  const product = await Product.findOne({Name: req.params.name});
+  let price2 = product.Price - product.Price * (product.Discount/100);
+  const user = req.session.user;
+  await res.render("frontend/detail", {
+    showHeader: false,
+    showCart: true,
+    singinup: true,
+    showHeaderContent: false,
+    layout: "home-layout",
+    product: product,
+    priceDiscount: Math.round(price2),
+    user: {user: user, isExist: user ? true : false},
+  });
+}

@@ -1,56 +1,77 @@
-<div class="tm-main-section light-gray-bg">
-    <div class="container" id="main">
-        <div class="container bootdey">
-            <div class="col-md-12">
-                <section class="panel">
-                    <div class="panel-body">
-                        <div class="col-md-6">
-                            <div class="pro-img-details">
-                                <img src="https://via.placeholder.com/550x380/FFB6C1/000000" alt="">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <h2 class="pro-d-title">
-                                Sản phẩm 1
-                            </h2>
-                            <p>
-                                Sản phẩm ngon bổ rẻ mua nha
-                            </p>
-                            <div class="product_meta">
-                                <span class="posted_in"> <strong>Categories:</strong> <a rel="tag" href="#">Đồ uống</a>,
-                                    <a rel="tag" href="#">Tra sua</a>, <a rel="tag" href="#">Drink</a>, <a rel="tag"
-                                        href="#">Tra da</a>.</span>
-                                <span class="tagged_as"><strong>Tags:</strong> <a rel="tag" href="#">Ngon</a>, <a
-                                        rel="tag" href="#">Tra</a>.</span>
-                            </div>
-                            <div class="m-bot15"> <strong>Price : </strong> <span class="amount-old">35 VNĐ</span> <span
-                                    class="pro-price"> 30 VNĐ</span></div>
-                            <div class="form-group">
-                                <span>Size :</span>
-                                <select name="size" id="size">
-                                    <option value="S">S</option>
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                </select>
-                                <br>
-                                <span for="sp1">Số lượng</span>
-                                <div class="quantity-btn-detail">
-                                    <input type="button" value="-" class="arrow" onclick="minus('sp1')" />
-                                    <input class="form-control" type="number" id="sp1" value="1" min="1" max="99"
-                                        onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
-                                    <input type="button" value="+" class="arrow" onclick="plus('sp1')" />
-                                </div>
-                            </div>
-                            <p>
-                                <button class="btn btn-round btn-danger outline">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    Thêm vào giỏ hàng
-                                </button>
-                            </p>
+<div class="tm-main-section light-gray-bg detail-wrap">
+    <section class="panel">
+            <div class="pro-img-details">
+                <img src="/frontend/img/{{#each product}}{{Image}}{{/each}}" 
+                alt="{{#each product}}{{Name}}{{/each}}">
+            </div>
+            <div class="detail-content-wrap">
+                <h2 class="pro-d-title" id="name">
+                    {{#each product}}
+                    {{Name}}
+                    {{/each}}
+                </h2>
+                <div class="m-bot15 horizontal-line-detail" id="priceSale">
+                    <div>
+                        <strong>Price : </strong> 
+                        <span class="amount-old">
+                        {{#each product}}
+                        {{Price}}
+                        {{/each}}
+                        $
+                        </span>
+                    </div>
+                    <div>
+                        <strong>Sale : </strong>
+                        <span class="pro-price"> {{priceDiscount}} $</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="detailProductOption">
+                        <span>Size :</span>
+                        <select name="size" id="size">
+                            <option value="S" selected>S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                        </select>
+                    </div>
+                    <div class="detailProductOption">
+                        <span for="sp1">Số lượng:</span>
+                        <div class="quantity-btn-detail">
+                            <input type="button" value="-" class="arrow" onclick="minus('sp1')" />
+                            <input class="quantity-detail form-control" type="number" id="sp1" 
+                            value="1" 
+                                onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
+                            <input type="button" value="+" class="arrow" onclick="plus('sp1')" />
                         </div>
                     </div>
-                </section>
+                    <div class="detailProductOption">
+                        <span for="sugar">Lượng đường:</span>
+                        <div id="sugar-wrap">
+                            <div><input name="sugar" class="optionSugar" type="radio" value="0" />0%</div>
+                            <div><input name="sugar" class="optionSugar" type="radio" value="25" />25%</div>
+                            <div><input name="sugar" class="optionSugar" type="radio" value="50" />50%</div>
+                            <div><input name="sugar" class="optionSugar" type="radio" value="75" />75%</div>
+                            <div><input name="sugar" class="optionSugar" type="radio" value="100" checked/>100%</div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <p>
+                    <button class="btn btn-round btn-danger outline" 
+                    onclick="addToCart('{{#each product}}{{_id}}{{/each}}',
+                    {{priceDiscount}},
+                    '{{#each product}}{{Image}}{{/each}}')">
+                        <i class="fa fa-shopping-cart"></i>
+                        Thêm vào giỏ hàng
+                    </button>
+                </p>
+                <input type="number" id="product-quantity" class="hide" value="{{#each product}}{{Quantity}}{{/each}}"/>
             </div>
-        </div>
+    </section>
+    <div id="title-detail"><hr><h4>Detail</h4></div>
+    <div id="detailProduct_content">
+        {{#each product}}
+        {{Description}}
+        {{/each}}
     </div>
 </div>
