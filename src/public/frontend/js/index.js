@@ -70,68 +70,96 @@ function addToCart(id, discount,img){
 //
 //get list product for cart
 
-const count = document.getElementById("count-pro-cart");
+let count = document.getElementById("count-pro-cart");
 let getData = JSON.parse(sessionStorage.getItem('cart')) || [];
-count.innerHTML = getData.length;
+count.innerHTML = CountProduct(getData);
+function CountProduct(data){
+  let countProduct = 0;
+  data.map(item => {
+    countProduct += item.quantity;
+  });
+  return countProduct;
+}
 function loadCart(){
   const cart = document.getElementById("form-cart");
   let data = JSON.parse(sessionStorage.getItem('cart')) || [];
-  count.innerHTML = data.length;
-  let str = "";
-  let percent = "";
+  count.innerHTML = CountProduct(data);
+  let str = str2 = "";
   let total = 0;
+  let vat = 0;
   data.map(item => {
     let percentArr = [0,25,50,75,100];
+    let sizeArr = ['S', 'M', 'L'];
+    let percent = "";
+    let size = "";
     percentArr.map(i => {
       if(i === item.percentSugar)
         percent += `<option value="${i}" selected>${i}%</option>`;
       else percent += `<option value="${i}">${i}%</option>`;
     });
+    sizeArr.map(i => {
+      if(i === item.size)
+        size += `<option value="${i}" selected>${i}</option>`;
+      else size += `<option value="${i}">${i}</option>`;
+    });
     total += Number(item.quantity) * Number(item.price);
-    str += `<tr>
-              <td><img src="../frontend/img/${item.img}" /> </td>
-              <td>${item.name}</td>
-              <td>
-                <div class="quantity-btn">
+    if(total > 0) vat = 30;
+    str += `
+    <tr>
+              <td style = "display:inline"><img style = "margin-top:-10px" src="../frontend/img/${item.img}" /> </td>
+              <td style = "width: 50px;"><div style = "width: 100px; height: 20px; overflow: hidden;">${item.name}</div></td>
+              <td style="width: 150px;">
+                <div class="quantity-btn" style="transform: scale(.8);">
                   <input type="button" value="-" class="arrow" onclick="minus('${item.id + item.percentSugar}')" />
                   <input class="form-control" type="number" id="${item.id + item.percentSugar}" value="${Number(item.quantity)}" min="1" max="99"
                     onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
-                  <input type="button" value="+" class="arrow" onclick="plus('${item.id + item.percentSugar}')" />
+                  <input type="button" value="+" class="arrow" onclick="plus('${item.id + item.percentSugar}')"/>
                 </div>
               </td>
               <td >
-                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <select class="form-select form-select-lg mb-3" onchange="saveProductSess(event,2)" aria-label=".form-select-lg example" style="width: 50px;margin-top:10px;">
+                  ${size}
+                </select>
+              </td>
+              <td >
+                <select class="form-select form-select-lg mb-3" onchange="saveProductSess(event,3)" aria-label=".form-select-lg example" style="margin-top:10px;">
                   ${percent}
                 </select>
               </td>
-              <td class="text-center">${item.price} VNĐ</td>
-              <td class="text-right"><button class="btn btn-sm btn-danger outline"><i class="fa fa-trash"></i>
-                </button> </td>
+              <td class="text-right">${item.price} VNĐ</td>
+              <td class="text-right" style="display: inline; float: right;">
+                <button class="btn btn-sm btn-danger outline" style="margin-top:15px;" onclick="removeProduct('${item.id}','${item.percentSugar}', '${item.size}')"><i class="fa fa-trash"></i></button> 
+              </td>
             </tr>`;
   });
+  str = `<tr><td colspan="7"><div id="tbl-list-cart">
+  <table >
+    ${str}
+  </table></div></td></tr>`
   str += `<tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>Tổng tiền sản phẩm</td>
+          <td colspan="6">Tổng tiền sản phẩm</td>
           <td class="text-right">${total} VNĐ</td>
           </tr>
           <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>VAT</td>
-          <td class="text-right">30 VNĐ</td>
+          <td colspan="5">VAT</td>
+          <td colspan="2" class="text-right">${vat} VNĐ</td>
           </tr>
           <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><strong>Tổng tiền</strong></td>
-          <td class="text-right"><strong>${total + 30} VNĐ</strong></td>
+          <td colspan="5"><strong>Tổng tiền</strong></td>
+          <td colspan="2" class="text-right"><strong>${total + vat} VNĐ</strong></td>
           </tr>`;
   cart.innerHTML = str;
+}
+function removeProduct(id, sugar, size){
+  const data = JSON.parse(sessionStorage.getItem("cart")) || [];
+  data.map((item,index) => {
+    if(item.id === id && item.size === size && item.percentSugar === Number(sugar)){
+      let remo = data.splice(index,1);
+    }
+  });
+  sessionStorage.setItem("cart", JSON.stringify(data));
+  loadCart();
+}
+function saveProductSess(event,sub){
+  console.log(event.target.value)
 }

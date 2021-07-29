@@ -105,7 +105,7 @@
   <div class="wrap-cart">
     <div class="cart" onclick="loadCart()">
       <a><i class="fas fa-shopping-cart icon-cart"></i></a>
-      <div class="cart-notify" id="count-pro-cart">99</div>
+      <div class="cart-notify" id="count-pro-cart">0</div>
     </div>
   </div>
   <!-- popups  -->
@@ -120,12 +120,13 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th scope="col"> </th>
+                <th scope="col" id="tbl-list-cart-img"> </th>
                 <th scope="col">Tên sản phẩm</th>
                 <th scope="col" >Số lượng</th>
+                <th scope="col" >Size</th>
                 <th scope="col" >Lượng đường</th>
                 <th scope="col" >Giá</th>
-                <th> </th>
+                <th id="deleteIcon"> </th>
               </tr>
             </thead>
             <tbody id="form-cart">

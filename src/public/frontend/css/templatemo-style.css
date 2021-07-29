@@ -295,6 +295,18 @@ ul {
   width: 50px;
   height: 50px;
 }
+#deleteIcon{
+  width: 30px;
+}
+#tbl-list-cart{
+  height:150px; overflow:auto;
+}
+#tbl-list-cart table{
+  width: 100%;
+}
+#tbl-list-cart-img{
+  width: 35px;
+}
 /* popups cart  */
 .wrap-popups-cart{
   display: flex;
@@ -302,6 +314,7 @@ ul {
   justify-content: center;
 
   min-height: 500px;
+  min-width: 700px;
 
   padding: 20px;
 
@@ -319,7 +332,6 @@ ul {
   background-color: rgb(254, 255, 247);
 
   z-index: 10;
-
 }
 .dash-popups{
   position: absolute;
