@@ -54,14 +54,37 @@ function minus(id, sugar) {
   sessionStorage.setItem("cart", JSON.stringify(data));
   loadCart();
 }
-window.onload = function () {
-  $(".cart").click(function () {
-    $("#popups-cart").fadeToggle();
-  });
-  $(".dash-popups").click(function () {
-    $("#popups-cart").fadeOut();
-  });
-};
+function plusDetail(id) {
+  var current = document.getElementById(id).value;
+  var quantity = Number(document.getElementById("product-quantity").value);
+  if(quantity===0){
+    document.getElementById(id).value = quantity;
+  }else {
+    if (current < quantity) {
+      current = Number(current) + 1;
+      document.getElementById(id).value = current;
+    }
+    if (current >= quantity) {
+      document.getElementById(id).value = quantity;
+    }
+  }
+}
+function minusDetail(id) {
+  var current = document.getElementById(id).value;
+  var quantity = Number(document.getElementById("product-quantity").value);
+  if(quantity===0){
+    document.getElementById(id).value = quantity;
+  }else{
+    if (current > 0) {
+      current = Number(current) - 1;
+      document.getElementById(id).value = current;
+    }
+    if (current <= 0) {
+      document.getElementById(id).value = 1;
+    }
+  }
+  
+}
 //
 //add product to cart
 function addToCart(id, discount, total, img){
@@ -96,10 +119,8 @@ function addToCart(id, discount, total, img){
 }
 //
 //get list product for cart
-
-let count = document.getElementById("count-pro-cart");
+let str2 = "";
 let getData = JSON.parse(sessionStorage.getItem('cart')) || [];
-count.innerHTML = CountProduct(getData);
 function CountProduct(data){
   let countProduct = 0;
   data.map(item => {
@@ -108,10 +129,12 @@ function CountProduct(data){
   return countProduct;
 }
 const loadCart = () => {
-  const cart = document.getElementById("form-cart");
+  let count = document.getElementById("count-pro-cart") || "";
+  const cart = document.getElementById("form-cart-popups") || "";
   let data = JSON.parse(sessionStorage.getItem('cart')) || [];
   count.innerHTML = CountProduct(data);
-  let str = str2 = "";
+  let str = "";
+  str2 = "";
   let total = 0;
   let vat = 0;
   data.map(item => {
@@ -133,10 +156,10 @@ const loadCart = () => {
     if(total > 0) vat = 30;
     str += `
     <tr>
-              <td style = "display:inline"><img style = "margin-top:-10px" src="../frontend/img/${item.img}" /> </td>
+              <td><img style = "margin-top:-10px;padding: 1px;height:50px;" src="../frontend/img/${item.img}" /> </td>
               <td style = "width: 50px;"><div style = "width: 100px; height: 20px; overflow: hidden;">${item.name}</div></td>
               <td style="width: 150px;">
-                <div class="quantity-btn" style="transform: scale(.8);">
+                <div class="quantity-btn" style="transform: scale(.8);font-size: 1.3em;">
                   <input type="button" value="-" class="arrow" onclick="minus('${item.id}', '${item.percentSugar}')" />
                   <input class="form-control" type="number" id="${item.id + item.percentSugar}" value="${Number(item.quantity)}" min="1" max="99"
                     onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
@@ -154,18 +177,19 @@ const loadCart = () => {
                 </select>
               </td>
               <td class="text-right">${item.price} VNĐ</td>
-              <td class="text-right" style="display: inline; float: right;">
-                <button class="btn btn-sm btn-danger outline" style="margin-top:15px;" onclick="removeProduct('${item.id}','${item.percentSugar}', '${item.size}')"><i class="fa fa-trash"></i></button> 
+              <td class="text-right" >
+                <button class="btn btn-sm btn-danger outline" style="margin-top:0px;" onclick="removeProduct('${item.id}','${item.percentSugar}', '${item.size}')"><i class="fa fa-trash"></i></button> 
               </td>
             </tr>`;
   });
+  str2 += str;
   str = `<tr><td colspan="7"><div id="tbl-list-cart">
   <table >
     ${str}
   </table></div></td></tr>`
   str += `<tr>
-          <td colspan="6">Tổng tiền sản phẩm</td>
-          <td class="text-right">${total} VNĐ</td>
+          <td colspan="5">Tổng tiền sản phẩm</td>
+          <td class="text-right" colspan="2">${total} VNĐ</td>
           </tr>
           <tr>
           <td colspan="5">VAT</td>
@@ -175,7 +199,21 @@ const loadCart = () => {
           <td colspan="5"><strong>Tổng tiền</strong></td>
           <td colspan="2" class="text-right"><strong>${total + vat} VNĐ</strong></td>
           </tr>`;
-  cart.innerHTML = str;
+  str2 += `<tr>
+          <td colspan="5">Tổng tiền sản phẩm</td>
+          <td class="text-right" colspan="2">${total} VNĐ</td>
+          </tr>
+          <tr>
+          <td colspan="5">VAT</td>
+          <td colspan="2" class="text-right">${vat} VNĐ</td>
+          </tr>
+          <tr>
+          <td colspan="5"><strong>Tổng tiền</strong></td>
+          <td colspan="2" class="text-right"><strong>${total + vat} VNĐ</strong></td>
+          </tr>`;
+  if(cart !== "")
+    cart.innerHTML = str;
+  return str2;
 }
 function removeProduct(id, sugar, size){
   const data = JSON.parse(sessionStorage.getItem("cart")) || [];
@@ -185,8 +223,10 @@ function removeProduct(id, sugar, size){
     }
   });
   sessionStorage.setItem("cart", JSON.stringify(data));
-  loadCart();
+  let str = loadCart();
+  document.getElementById("form-cart").innerHTML = str;
 }
+
 function saveProductSess(event, sub, id, sugar){
   let data = JSON.parse(sessionStorage.getItem('cart'));
   data.map(item => {
@@ -212,3 +252,15 @@ function saveProductSess(event, sub, id, sugar){
   sessionStorage.setItem("cart", JSON.stringify(data));
   loadCart();
 }
+//load 
+window.onload = function () {
+  if ($("#popups-cart").length > 0){
+    $(".cart").click(function () {
+      $("#popups-cart").fadeToggle();
+    });
+    $(".dash-popups").click(function () {
+      $("#popups-cart").fadeOut();
+    });
+  }
+  document.getElementById("form-cart").innerHTML = loadCart();
+};

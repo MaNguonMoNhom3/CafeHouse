@@ -37,11 +37,11 @@
                     <div class="detailProductOption">
                         <span for="sp1">Số lượng:</span>
                         <div class="quantity-btn-detail">
-                            <input type="button" value="-" class="arrow" onclick="minus('sp1')" />
+                            <input type="button" value="-" class="arrow" onclick="minusDetail('sp1')" />
                             <input class="quantity-detail form-control" type="number" id="sp1" 
                             value="1" 
                                 onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
-                            <input type="button" value="+" class="arrow" onclick="plus('sp1')" />
+                            <input type="button" value="+" class="arrow" onclick="plusDetail('sp1')" />
                         </div>
                     </div>
                     <div class="detailProductOption">
@@ -65,6 +65,7 @@
                         Thêm vào giỏ hàng
                     </button>
                 </p>
+                <input type="number" id="product-quantity" class="hide" value="{{#each product}}{{Quantity}}{{/each}}"/>
             </div>
     </section>
     <div id="title-detail"><hr><h4>Detail</h4></div>
