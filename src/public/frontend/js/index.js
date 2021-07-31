@@ -1,33 +1,58 @@
-function plus(id) {
-  var current = document.getElementById(id).value;
-  var quantity = Number(document.getElementById("product-quantity").value);
-  if(quantity===0){
-    document.getElementById(id).value = quantity;
-  }else {
-    if (current < quantity) {
-      current = Number(current) + 1;
-      document.getElementById(id).value = current;
+function plus(id, sugar) {
+  let current = Number(document.getElementById(id+sugar).value);
+  let quantity = 0;
+  let data = JSON.parse(sessionStorage.getItem('cart'));
+  data.map(item => {
+    if(item.id == id && item.percentSugar == sugar)
+    {
+      quantity = Number(item.total);
+      if(quantity===0){
+        document.getElementById(id+sugar).value = quantity;
+        item.quantity = quantity;
+      }else {
+        if (current < quantity) {
+          current += 1;
+          document.getElementById(id+sugar).value = current;
+          item.quantity = current;
+        }
+        if (current >= quantity) {
+          document.getElementById(id+sugar).value = quantity;
+          item.quantity = quantity;
+        }
+      }
     }
-    if (current >= quantity) {
-      document.getElementById(id).value = quantity;
-    }
-  }
+    
+  })
+  sessionStorage.setItem("cart", JSON.stringify(data));
+  loadCart();
 }
-function minus(id) {
-  var current = document.getElementById(id).value;
-  var quantity = Number(document.getElementById("product-quantity").value);
-  if(quantity===0){
-    document.getElementById(id).value = quantity;
-  }else{
-    if (current > 0) {
-      current = Number(current) - 1;
-      document.getElementById(id).value = current;
+function minus(id, sugar) {
+  let current = Number(document.getElementById(id+sugar).value);
+  let quantity = 0;
+  let data = JSON.parse(sessionStorage.getItem('cart'));
+  data.map(item => {
+    if(item.id === id && Number(item.percentSugar) === Number(sugar))
+    {
+      quantity = Number(item.total);
+      if(quantity===0){
+        document.getElementById(id+sugar).value = quantity;
+        item.quantity = quantity;
+      }else {
+        if (current > 0) {
+          current -= 1;
+          document.getElementById(id+sugar).value = current;
+          item.quantity = current;
+        }
+        if (current <= 0) {
+          document.getElementById(id+sugar).value = 1;
+          item.quantity = 1;
+        }
+      }
     }
-    if (current <= 0) {
-      document.getElementById(id).value = 1;
-    }
-  }
-  
+    
+  })
+  sessionStorage.setItem("cart", JSON.stringify(data));
+  loadCart();
 }
 window.onload = function () {
   $(".cart").click(function () {
@@ -39,7 +64,7 @@ window.onload = function () {
 };
 //
 //add product to cart
-function addToCart(id, discount,img){
+function addToCart(id, discount, total, img){
   try {
     const data = JSON.parse(sessionStorage.getItem('cart')) || [];
     const name = document.getElementById("name").innerHTML.trim();
@@ -54,17 +79,19 @@ function addToCart(id, discount,img){
     if(quantity <= 0) alert("Lỗi số lượng vui lòng kiểm tra lại!")
     else alert("Thêm vào giỏ hàng thành công!");
     data.map((item,index) => {
-      if(item.id === id && item.size === size && item.percentSugar === percentSugar && quantity > 0){
+      if(item.id === id && item.size === size && item.percentSugar === percentSugar && quantity > 0 && total > 0){
         item.quantity += quantity;
         check = false;
       }
     })
-    if(check && quantity > 0){
-      data.push({id: id, name: name, img: img, price: discount, size: size, quantity: quantity, percentSugar: percentSugar});
+    if(check && quantity > 0 && total > 0){
+      data.push({id: id, name: name, img: img, price: discount, size: size, quantity: quantity, total: total, percentSugar: percentSugar});
     }
     sessionStorage.setItem('cart', JSON.stringify(data));  
+    loadCart();
   } catch (error) {
     alert("Lỗi xin kiểm tra lại!");
+    sessionStorage.removeItem("cart");
   }
 }
 //
@@ -80,7 +107,7 @@ function CountProduct(data){
   });
   return countProduct;
 }
-function loadCart(){
+const loadCart = () => {
   const cart = document.getElementById("form-cart");
   let data = JSON.parse(sessionStorage.getItem('cart')) || [];
   count.innerHTML = CountProduct(data);
@@ -93,7 +120,7 @@ function loadCart(){
     let percent = "";
     let size = "";
     percentArr.map(i => {
-      if(i === item.percentSugar)
+      if(i === Number(item.percentSugar))
         percent += `<option value="${i}" selected>${i}%</option>`;
       else percent += `<option value="${i}">${i}%</option>`;
     });
@@ -110,19 +137,19 @@ function loadCart(){
               <td style = "width: 50px;"><div style = "width: 100px; height: 20px; overflow: hidden;">${item.name}</div></td>
               <td style="width: 150px;">
                 <div class="quantity-btn" style="transform: scale(.8);">
-                  <input type="button" value="-" class="arrow" onclick="minus('${item.id + item.percentSugar}')" />
+                  <input type="button" value="-" class="arrow" onclick="minus('${item.id}', '${item.percentSugar}')" />
                   <input class="form-control" type="number" id="${item.id + item.percentSugar}" value="${Number(item.quantity)}" min="1" max="99"
                     onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
-                  <input type="button" value="+" class="arrow" onclick="plus('${item.id + item.percentSugar}')"/>
+                  <input type="button" value="+" class="arrow" onclick="plus('${item.id}', '${item.percentSugar}')"/>
                 </div>
               </td>
               <td >
-                <select class="form-select form-select-lg mb-3" onchange="saveProductSess(event,2)" aria-label=".form-select-lg example" style="width: 50px;margin-top:10px;">
+                <select class="form-select form-select-lg mb-3" onchange="saveProductSess(event, 1, '${item.id}', '${item.percentSugar}')" aria-label=".form-select-lg example" style="width: 50px;margin-top:10px;">
                   ${size}
                 </select>
               </td>
               <td >
-                <select class="form-select form-select-lg mb-3" onchange="saveProductSess(event,3)" aria-label=".form-select-lg example" style="margin-top:10px;">
+                <select class="form-select form-select-lg mb-3" onchange="saveProductSess(event, 2, '${item.id}', '${item.percentSugar}')" aria-label=".form-select-lg example" style="margin-top:10px;">
                   ${percent}
                 </select>
               </td>
@@ -153,13 +180,35 @@ function loadCart(){
 function removeProduct(id, sugar, size){
   const data = JSON.parse(sessionStorage.getItem("cart")) || [];
   data.map((item,index) => {
-    if(item.id === id && item.size === size && item.percentSugar === Number(sugar)){
+    if(item.id === id && item.size === size && Number(item.percentSugar) === Number(sugar)){
       let remo = data.splice(index,1);
     }
   });
   sessionStorage.setItem("cart", JSON.stringify(data));
   loadCart();
 }
-function saveProductSess(event,sub){
-  console.log(event.target.value)
+function saveProductSess(event, sub, id, sugar){
+  let data = JSON.parse(sessionStorage.getItem('cart'));
+  data.map(item => {
+    if(item.id == id && item.percentSugar == sugar){
+      switch(sub){
+        case 1:
+          item.size = event.target.value;
+          break;
+        case 2:
+          item.percentSugar = event.target.value;
+          break;
+      }
+    }
+  });
+  for(let i = 0 ; i < data.length ; i++){
+    for(let j = data.length - 1 ; j > i ; j--){
+      if(data[i].id == data[j].id && data[i].percentSugar == data[j].percentSugar && data[i].size == data[j].size){
+        data[i].quantity += data[j].quantity;
+        let remove = data.splice(j,1);
+      }
+    }
+  }
+  sessionStorage.setItem("cart", JSON.stringify(data));
+  loadCart();
 }

@@ -59,13 +59,12 @@
                 <p>
                     <button class="btn btn-round btn-danger outline" 
                     onclick="addToCart('{{#each product}}{{_id}}{{/each}}',
-                    {{priceDiscount}},
+                    {{priceDiscount}},{{#each product}}{{Quantity}}{{/each}},
                     '{{#each product}}{{Image}}{{/each}}')">
                         <i class="fa fa-shopping-cart"></i>
                         Thêm vào giỏ hàng
                     </button>
                 </p>
-                <input type="number" id="product-quantity" class="hide" value="{{#each product}}{{Quantity}}{{/each}}"/>
             </div>
     </section>
     <div id="title-detail"><hr><h4>Detail</h4></div>
