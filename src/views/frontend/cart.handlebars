@@ -1,4 +1,4 @@
-<div class="tm-main-section light-gray-bg">
+<div class="tm-main-section light-gray-bg cart-wrap">
       <div class="container" id="main">
         <section class="jumbotron text-center">
           <div class="container">
@@ -13,106 +13,17 @@
                       <table class="table table-striped">
                           <thead>
                               <tr>
-                                  <th scope="col"> </th>
-                                  <th scope="col">Tên sản phẩm</th>
-                                  <th scope="col">Tình trạng</th>
-                                  <th scope="col">Size</th>
-                                  <th scope="col" class="text-center">Số lượng</th>
-                                  <th scope="col" class="text-right">Giá</th>
-                                  <th> </th>
+                                <th scope="col"> </th>
+                                <th scope="col">Tên sản phẩm</th>
+                                <th scope="col" >Số lượng</th>
+                                <th scope="col" >Size</th>
+                                <th scope="col" >Lượng đường</th>
+                                <th scope="col" >Giá</th>
+                                <th id="deleteIcon"> </th>
                               </tr>
                           </thead>
-                          <tbody>
-                              <tr>
-                                  <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                                  <td>Sản phẩm 1</td>
-                                  <td>Có sẵn</td>
-                                  <td>
-                                    <select name="size" id="size">
-                                      <option value="S">S</option>
-                                      <option value="M">M</option>
-                                      <option value="L">L</option>
-                                    </select>
-                                  </td>
-                                  <td>
-                                    <div class="quantity-btn">
-                                      <input type="button" value="-" class="arrow" onclick="minus('sp1')"/>
-                                      <input class="form-control" type="number" id="sp1" value="1" min="1" max="99" onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
-                                      <input type="button" value="+" class="arrow" onclick="plus('sp1')"/>  
-                                    </div>        
-                                  </td>
-                                  <td class="text-right">12 VNĐ</td>
-                                  <td class="text-right"><button class="btn btn-sm btn-danger outline"><i class="fa fa-trash"></i> </button> </td>
-                              </tr>
-                              <tr>
-                                  <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                                  <td>Sản phẩm 2</td>
-                                  <td>Có sẵn</td>
-                                  <td>
-                                    <select name="size" id="size">
-                                      <option value="S">S</option>
-                                      <option value="M">M</option>
-                                      <option value="L">L</option>
-                                    </select>
-                                  </td>
-                                  <td>
-                                    <div class="quantity-btn">
-                                      <input type="button" value="-" class="arrow" onclick="minus('sp2')"/>
-                                      <input class="form-control" type="number" id="sp2" value="1" min="1" max="99" onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
-                                      <input type="button" value="+" class="arrow" onclick="plus('sp2')"/>  
-                                    </div>        
-                                  </td>
-                                  <td class="text-right">34 VNĐ</td>
-                                  <td class="text-right"><button class="btn btn-sm btn-danger outline"><i class="fa fa-trash"></i> </button> </td>
-                              </tr>
-                              <tr>
-                                  <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                                  <td>Sản phẩm 3</td>
-                                  <td>Hết hàng</td>
-                                  <td>
-                                    <select name="size" id="size">
-                                      <option value="S">S</option>
-                                      <option value="M">M</option>
-                                      <option value="L">L</option>
-                                    </select>
-                                  </td>
-                                  <td>
-                                    <div class="quantity-btn">
-                                      <input type="button" value="-" class="arrow" onclick="minus('sp3')"/>
-                                      <input class="form-control" type="number" id="sp3" value="1" min="1" max="99" onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
-                                      <input type="button" value="+" class="arrow" onclick="plus('sp3')"/>  
-                                    </div>        
-                                  </td>
-                                  <td class="text-right">70 VNĐ</td>
-                                  <td class="text-right"><button class="btn btn-sm btn-danger outline"><i class="fa fa-trash"></i> </button> </td>
-                              </tr>
-                              <tr>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td>Tổng tiền sản phẩm</td>
-                                  <td class="text-right">255 VNĐ</td>
-                              </tr>
-                              <tr>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td>VAT</td>
-                                  <td class="text-right">6 VNĐ</td>
-                              </tr>
-                              <tr>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td><strong>Tổng tiền</strong></td>
-                                  <td class="text-right"><strong>346 VNĐ</strong></td>
-                              </tr>
+                          <tbody id="form-cart">
+
                           </tbody>
                       </table>
                   </div>

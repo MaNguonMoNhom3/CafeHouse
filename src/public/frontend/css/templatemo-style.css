@@ -16,6 +16,9 @@ COLOR CODES
 a{
   text-decoration: none!important;
 }
+th{
+  text-align: center;
+}
 #loader-wrapper {
     position: fixed;
     top: 0;
@@ -70,7 +73,9 @@ a{
     -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
       animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
 }
-
+.text-center{
+  text-align: center;
+}
 @-webkit-keyframes spin {
     0%   { 
         -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
@@ -284,6 +289,23 @@ ul {
 }
 .icon-cart{
   font-size: 32px;
+  color: #337ab7;
+}
+#form-cart img{
+  width: 50px;
+  height: 50px;
+}
+#deleteIcon{
+  width: 30px;
+}
+#tbl-list-cart{
+  height:150px; overflow:auto;
+}
+#tbl-list-cart table{
+  width: 100%;
+}
+#tbl-list-cart-img{
+  width: 35px;
 }
 /* popups cart  */
 .wrap-popups-cart{
@@ -292,7 +314,7 @@ ul {
   justify-content: center;
 
   min-height: 500px;
-  width: 700px;
+  min-width: 700px;
 
   padding: 20px;
 
@@ -310,7 +332,9 @@ ul {
   background-color: rgb(254, 255, 247);
 
   z-index: 10;
-
+}
+div.cart-wrap{
+  padding-top: 50px;
 }
 .dash-popups{
   position: absolute;
@@ -329,7 +353,12 @@ ul {
   text-align: center;
   font-weight: bold;
 }
-
+#form-cart img{
+  margin: 0!important;
+}
+#form-cart tr td{
+  vertical-align: middle;
+}
 /* Welcome */
 .tm-welcome-section {
   background: #282726;

@@ -37,11 +37,11 @@
                     <div class="detailProductOption">
                         <span for="sp1">Số lượng:</span>
                         <div class="quantity-btn-detail">
-                            <input type="button" value="-" class="arrow" onclick="minus('sp1')" />
+                            <input type="button" value="-" class="arrow" onclick="minusDetail('sp1')" />
                             <input class="quantity-detail form-control" type="number" id="sp1" 
                             value="1" 
                                 onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
-                            <input type="button" value="+" class="arrow" onclick="plus('sp1')" />
+                            <input type="button" value="+" class="arrow" onclick="plusDetail('sp1')" />
                         </div>
                     </div>
                     <div class="detailProductOption">
@@ -59,7 +59,7 @@
                 <p>
                     <button class="btn btn-round btn-danger outline" 
                     onclick="addToCart('{{#each product}}{{_id}}{{/each}}',
-                    {{priceDiscount}},
+                    {{priceDiscount}},{{#each product}}{{Quantity}}{{/each}},
                     '{{#each product}}{{Image}}{{/each}}')">
                         <i class="fa fa-shopping-cart"></i>
                         Thêm vào giỏ hàng
