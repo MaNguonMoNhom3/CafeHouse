@@ -228,15 +228,15 @@ function removeProduct(id, sugar, size){
 }
 
 function saveProductSess(event, sub, id, sugar){
-  let data = JSON.parse(sessionStorage.getItem('cart'));
+  let data = JSON.parse(sessionStorage.getItem('cart')) || [];
   data.map(item => {
-    if(item.id == id && item.percentSugar == sugar){
+    if(item.id == id && item.percentSugar == Number(sugar)){
       switch(sub){
         case 1:
           item.size = event.target.value;
           break;
         case 2:
-          item.percentSugar = event.target.value;
+          item.percentSugar = Number(event.target.value);
           break;
       }
     }
@@ -250,7 +250,7 @@ function saveProductSess(event, sub, id, sugar){
     }
   }
   sessionStorage.setItem("cart", JSON.stringify(data));
-  loadCart();
+  document.getElementById("form-cart").innerHTML = loadCart();
 }
 //load 
 window.onload = function () {
