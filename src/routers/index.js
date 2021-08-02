@@ -8,6 +8,7 @@ import signin from './signinUser.js';
 import signup from './signupUser.js';
 import profile from './profileUser.js';
 import detailProduct from './detailProduct.js';
+import order from './orderClient.js';
 //controllers
 import { getProductForTodaySpecial } from '../controllers/ProductsController.js';
 
@@ -34,15 +35,7 @@ router.use("/contact", (req, res) => {
 
 router.use("/cart", cart);
 
-router.use("/checkout", (req, res) => {
-  res.render("frontend/checkout", {
-    showHeader: false,
-    showCart: false,
-    singinup: true,
-    showHeaderContent: false,
-    layout: "home-layout",
-  });
-});
+router.use("/checkout", order);
 router.use("/product", detailProduct);
 
 router.use("/sign-in", signin);
