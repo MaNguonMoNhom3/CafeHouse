@@ -10,40 +10,41 @@ export const index = async (req, res) => {
 };
 
 //get products by name category
-export const getProductsByCategory = (req, res, next) => {
-  Product
-    .find({ CategoryId: req.params.id })
-    .then(json => {
-      json = json.map(item => item.toObject());
-      return json;
-    })
-    .then(products => {
-      Category.find()
-        .then(json => {
-          json = json.map(item => item.toObject());
-          return json;
-        })
-        .then(categories => {
-          res.render("frontend/menu", {
-            singinup: true,
-            showHeader: true,
-            menu: true,
-            showCart: true,
-            showHeaderContent: true,
-            layout: "home-layout.handlebars",
-            categories: categories,
-            products: products
-          });
-        })
+// export const getProductsByCategory = (req, res, next) => {
+//   const user = req.session.user || "";
+//   Product
+//     .find({ CategoryId: req.params.id })
+//     .then(json => {
+//       json = json.map(item => item.toObject());
+//       return json;
+//     })
+//     .then(products => {
+//       Category.find()
+//         .then(json => {
+//           json = json.map(item => item.toObject());
+//           return json;
+//         })
+//         .then(categories => {
+//           res.render("frontend/menu", {
+//             singinup: true,
+//             showHeader: true,
+//             menu: true,
+//             showCart: true,
+//             showHeaderContent: true,
+//             layout: "home-layout.handlebars",
+//             categories: categories,
+//             products: products,
+//             user: { user: user, isExist: user ? true : false },
+//           });
+//         })
 
-    })
-    .catch(next)
-}
+//     })
+//     .catch(next)
+// }
 
 //get product by hot
 export const getProductForHome = (req, res, next) => {
-  let sess = req.session;
-  let user = sess.user || "";
+  const user = req.session.user || "";
   Product.find()
     .sort({ "Hot": -1 })
     .limit(3)
@@ -60,7 +61,7 @@ export const getProductForHome = (req, res, next) => {
         showHeaderContent: true,
         layout: "home-layout.handlebars",
         products: products,
-        user: {user: user, isExist: user ? true : false},
+        user: { user: user, isExist: user ? true : false },
       });
     })
     .catch(err => {
@@ -68,6 +69,7 @@ export const getProductForHome = (req, res, next) => {
     });
 }
 export const getProductForTodaySpecial = (req, res, next) => {
+  const user = req.session.user || "";
   Product.find()
     .sort({ "Hot": -1 })
     .limit(6)
@@ -84,6 +86,7 @@ export const getProductForTodaySpecial = (req, res, next) => {
         showHeaderContent: true,
         layout: "home-layout",
         products: products,
+        user: { user: user, isExist: user ? true : false },
       });
     })
     .catch(err => {
@@ -92,9 +95,9 @@ export const getProductForTodaySpecial = (req, res, next) => {
 }
 
 export const detailProduct = async (req, res, next) => {
-  const product = await Product.findOne({Name: req.params.name});
-  let price2 = product.Price - product.Price * (product.Discount/100);
-  const user = req.session.user;
+  const product = await Product.findOne({ Name: req.params.name });
+  let price2 = product.Price - product.Price * (product.Discount / 100);
+  const user = req.session.user || "";
   await res.render("frontend/detail", {
     showHeader: false,
     showCart: true,
@@ -103,6 +106,6 @@ export const detailProduct = async (req, res, next) => {
     layout: "home-layout",
     product: product,
     priceDiscount: Math.round(price2),
-    user: {user: user, isExist: user ? true : false},
+    user: { user: user, isExist: user ? true : false },
   });
 }
