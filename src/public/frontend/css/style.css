@@ -647,7 +647,7 @@ label.valid {
 .relative{
   position: relative;
 }
-#list-products-height{
+#listProducts{
   margin-bottom: 0px;
-  min-height: 680px;
+  min-height: 50px;
 }

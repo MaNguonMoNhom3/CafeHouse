@@ -252,16 +252,15 @@ function saveProductSess(event, sub, id, sugar) {
 }
 //load 
 window.onload = function () {
-  if ($("#popups-cart").length > 0) {
+  if ($("#form-cart").length > 0 || $("#popups-cart").length > 0) {
     $(".cart").click(function () {
       $("#popups-cart").fadeToggle();
     });
     $(".dash-popups").click(function () {
       $("#popups-cart").fadeOut();
     });
-  }
-  if ($("#form-cart").length > 0)
     document.getElementById("form-cart").innerHTML = loadCart();
+  }
   totalCheckout();
   checkTotalCart();
 };

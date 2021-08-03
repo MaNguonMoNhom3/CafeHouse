@@ -307,6 +307,9 @@ ul {
 #tbl-list-cart-img{
   width: 35px;
 }
+.backToCart, .backToCart:hover{
+  background-color: #e4e4e4;
+}
 /* popups cart  */
 .wrap-popups-cart{
   display: flex;
@@ -451,7 +454,7 @@ div.cart-wrap{
 .tm-black-bg {
   background-color: #302f2f;
   color: white;
-  padding-top: 150px;
+  padding-top: 60px;
 }
 .tm-footer-div-title {
   color: white;
