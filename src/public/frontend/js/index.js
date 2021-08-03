@@ -263,15 +263,17 @@ window.onload = function () {
   if ($("#form-cart").length > 0)
     document.getElementById("form-cart").innerHTML = loadCart();
   totalCheckout();
+  checkTotalCart();
 };
 function totalCheckout() {
   let data = JSON.parse(sessionStorage.getItem('cart')) || [];
   let quantity = 0;
-  let total = 0;
+  let total = vat = 0;
   data.map(item => {
     quantity += Number(item.quantity);
     total += Number(item.quantity) * Number(item.price);
-  })
+  });
+  if (total !== 0) vat = 1.5;
   let str = `<div id="title-checkout-order">
               <h4>Thông tin đơn hàng</h4>
             </div>
@@ -281,11 +283,28 @@ function totalCheckout() {
             </div>
             <div class="amount-item horizontal-line">
               <div>VAT</div>
-              <div>${quantity ? 1.5 : 0} $</div>
+              <div>${quantity ? vat : 0} $</div>
             </div>
             <div class="amount-item horizontal-line">
               <div>Tổng cộng</div>
-              <div><input type="number" name="total" readonly value="${total + 1.5}"/>$</div>
+              <div><input type="number" name="total" readonly value="${total + vat}"/>$</div>
             </div>`;
-  document.getElementById("total-checkout").innerHTML = str;
+  if ($("#total-checkout").length > 0)
+    document.getElementById("total-checkout").innerHTML = str;
+}
+function removeSession() {
+  let data = sessionStorage.getItem('cart') || [];
+  document.getElementById('checkout-order-detail').value = data;
+  sessionStorage.removeItem('cart');
+}
+function successOrder() {
+  alert("Đặt hàng thành công!");
+}
+function reqAddToCart() {
+  alert("Giỏ hàng trống. Vui lòng thêm sản phẩm vào giỏ hàng!");
+}
+function checkTotalCart() {
+  let data = sessionStorage.getItem('cart') || [];
+  if ($("#checkTotalProduct").length > 0 && data.length === 0)
+    document.getElementById("checkTotalProduct").innerHTML = `<button class="btn btn-lg btn-block btn-success text-uppercase outline" onclick="reqAddToCart()">Thanh toán</button>`;
 }

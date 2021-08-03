@@ -12,11 +12,11 @@
           <div class="checkout-left flex-col">
             <div class="flex-col checkout-item-range">
               <label>Tên</label>
-              <div><input type="text" placeholder="Họ Tên" name="name" value="{{user.user.name}}" /></div>
+              <div><input type="text" placeholder="Họ Tên" required name="name" value="{{user.user.name}}" /></div>
             </div>
             <div class="flex-col checkout-item-range">
               <label>Số điện thoại</label>
-              <div><input type="text" placeholder="Vui lòng điền số điện thoại của bạn" name="phone"
+              <div><input type="text" required placeholder="Vui lòng điền số điện thoại của bạn" name="phone"
                   value={{user.user.phone}} />
               </div>
             </div>
@@ -27,7 +27,7 @@
           <div class="checkout-right flex-col">
             <div class="flex-col checkout-item-range">
               <label>Địa chỉ nhận hàng</label>
-              <div><input type="text" placeholder="Vui lòng nhập địa chỉ" name="detail_address"
+              <div><input type="text" placeholder="Vui lòng nhập địa chỉ" name="detail_address" required
                   value="{{user.user.detail}} - {{user.user.district}} - {{user.user.province}}" /></div>
             </div>
             <div class="flex-col choose-address">
@@ -45,7 +45,7 @@
                   <option value="">Vui lòng chọn Quận/ Huyện</option>
                 </select>
                 <input class="district hide" type="text" value="{{user.user.district}}" />
-
+                <input type="text" class="hide" name="order_detail" id="checkout-order-detail" value="" />
               </div>
             </div>
             <input class="billing_address_1" name="" type="hidden" value="">
@@ -62,7 +62,7 @@
             </div>
             <div class="col-sm-12 col-md-6 text-right">
               <input type="submit" class="btn btn-lg btn-block btn-success text-uppercase outline"
-                value="Xác nhận đơn hàng" />
+                value="Xác nhận đơn hàng" onclick="removeSession(); successOrder();" />
             </div>
           </div>
         </div>
