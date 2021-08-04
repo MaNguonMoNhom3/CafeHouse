@@ -1418,3 +1418,13 @@ button.tm-more-button {
 .detailProductOption div.quantity-btn-detail{
   transform: scale(.8);
 }
+.contact-wrap{
+  margin-top: 100px;
+}
+.contact-wrap form{
+  display: flex;
+  justify-content: center;
+}
+.contact-wrap h2{
+  text-align: center;
+}

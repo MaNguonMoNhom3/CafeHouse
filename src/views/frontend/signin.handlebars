@@ -7,7 +7,8 @@
                 <form action="/sign-in" method="POST" class="register-form" id="login-form">
                     <div class="form-group">
                         <label for="email"><i class="fas fa-envelope icon-singin"></i></label>
-                        <input type="email"  name="email" id="email" aria-describedby="emailHelp" placeholder="Your Email" value="{{email}}">
+                        <input type="email" name="email" id="email" aria-describedby="emailHelp"
+                            placeholder="Your Email" value="{{email}}">
                     </div>
                     <div class="form-group">
                         <label for="your_pass"><i class="fas fa-lock icon-singin"></i></label>
@@ -21,7 +22,8 @@
                         <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
                     </div>
                     <div class="form-group form-button">
-                        <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
+                        <input type="submit" name="signin" id="signin" onclick="remember()" class="form-submit"
+                            value="Log in" />
                     </div>
                 </form>
                 <div class="flex-row">

@@ -9,38 +9,6 @@ export const index = async (req, res) => {
   }
 };
 
-//get products by name category
-// export const getProductsByCategory = (req, res, next) => {
-//   const user = req.session.user || "";
-//   Product
-//     .find({ CategoryId: req.params.id })
-//     .then(json => {
-//       json = json.map(item => item.toObject());
-//       return json;
-//     })
-//     .then(products => {
-//       Category.find()
-//         .then(json => {
-//           json = json.map(item => item.toObject());
-//           return json;
-//         })
-//         .then(categories => {
-//           res.render("frontend/menu", {
-//             singinup: true,
-//             showHeader: true,
-//             menu: true,
-//             showCart: true,
-//             showHeaderContent: true,
-//             layout: "home-layout.handlebars",
-//             categories: categories,
-//             products: products,
-//             user: { user: user, isExist: user ? true : false },
-//           });
-//         })
-
-//     })
-//     .catch(next)
-// }
 
 //get product by hot
 export const getProductForHome = (req, res, next) => {
