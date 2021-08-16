@@ -1,27 +1,29 @@
 <div class="tm-main-section light-gray-bg">
-  <div class="container" id="main">
-    <section class="tm-section row">
+  <div class="container">
+    <section class="tm-section row contact-wrap">
       <h2 class="col-lg-12 margin-bottom-30">Send us a message</h2>
       <form action="#" method="post" class="tm-contact-form">
         <div class="col-lg-6 col-md-6">
           <div class="form-group">
-            <input type="text" id="contact_name" class="form-control-concat" placeholder="NAME" />
+            <input type="text" id="contact_name" class="form-control-concat" name="name" placeholder="NAME" readonly
+              value="{{user.user.name}}" />
           </div>
           <div class="form-group">
-            <input type="email" id="contact_email" class="form-control-concat" placeholder="EMAIL" />
+            <input type="email" id="contact_email" class="form-control-concat" name="email" placeholder="EMAIL" readonly
+              value="{{user.user.email}}" />
           </div>
           <div class="form-group">
-            <input type="text" id="contact_subject" class="form-control-concat" placeholder="SUBJECT" />
+            <input type="text" id="contact_subject" class="form-control-concat" name="subject" placeholder="SUBJECT" />
           </div>
           <div class="form-group">
-            <textarea id="contact_message" class="form-control-concat" rows="6" placeholder="MESSAGE"></textarea>
+            <textarea id="contact_message" class="form-control-concat" name="message" rows="6"
+              placeholder="MESSAGE"></textarea>
           </div>
           <div class="form-group">
-            <button class="tm-more-button" type="submit" name="submit">Send message</button>
+            <input class="tm-more-button" {{#if user.isExist}} type="submit"
+              onclick="alert('Cảm ơn bạn đã gửi ý kiến cho chúng tôi! Chúng tôi sẽ sớm liên lạc lại cho bạn.')"
+              {{else}}type="button" onclick="alert('Vui lòng đăng nhập tài khoản !')" {{/if}} value="Send message" />
           </div>
-        </div>
-        <div class="col-lg-6 col-md-6">
-          <div id="google-map"></div>
         </div>
       </form>
     </section>

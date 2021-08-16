@@ -30,18 +30,13 @@
                         <input type="password" name="pass" id="pass" placeholder="Password" pattern="^[a-zA-Z0-9]+$" title="Password contains only letters and numbers"/>
                         {{#each alert}}
                         {{#if_equal param "pass"}}
-                        <div class="form-text waring">Password is not valid</div>
+                        <div class="form-text waring">Please check password ! Must have at least 4 characters.</div>
                         {{/if_equal}}
                         {{/each}}
                     </div>
                     <div class="form-group">
                         <label for="re_pass"><i class="fas fa-lock icon-singin"></i></label>
                         <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password" pattern="^[a-zA-Z0-9]+$" title="Password contains only letters and numbers" />
-                        {{!-- {{#each alert}}
-                        {{#if_equal param "re_pass"}}
-                        <div class="form-text waring">Password Comfirm is not valid</div>
-                        {{/if_equal}}
-                        {{/each}} --}}
                     </div>
                     <div class="form-group">
                         <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />

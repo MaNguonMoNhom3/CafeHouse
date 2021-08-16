@@ -40,6 +40,7 @@ const times = function (n, block) {
 }
 
 export const getCategories = (req, res, next) => {
+  const user = req.session.user || "";
   Category.find()
     .then((categories) => {
       categories = categories.map((item) => item.toObject());
@@ -50,10 +51,10 @@ export const getCategories = (req, res, next) => {
       let category = 0;
       let pageAsNumber = req.query.page;
       let categoryAsNumber = req.query.category;
-      if(!isNaN(pageAsNumber) && pageAsNumber > 0){
+      if (!isNaN(pageAsNumber) && pageAsNumber > 0) {
         page = pageAsNumber;
       }
-      if(!isNaN(categoryAsNumber) && categoryAsNumber < categories.length && categoryAsNumber >= 0){
+      if (!isNaN(categoryAsNumber) && categoryAsNumber < categories.length && categoryAsNumber >= 0) {
         category = categoryAsNumber;
       }
       let categoryId = categories[category]._id;
@@ -62,17 +63,16 @@ export const getCategories = (req, res, next) => {
           let count = Math.ceil(pro.length / 3);
           if (count == 0) count = 1;
           let pre = false; let next = false;
-          if(page > 0 && page <= count) {
-            if(page == 1){
+          if (page > 0 && page <= count) {
+            if (page == 1) {
               pre = false;
               next = true;
-            }else
-            if(page == count)
-            {
-              pre = true;
-              next = false;
-            }
-            if(count==1){
+            } else
+              if (page == count) {
+                pre = true;
+                next = false;
+              }
+            if (count == 1) {
               pre = false;
               next = false;
             }
@@ -86,25 +86,26 @@ export const getCategories = (req, res, next) => {
             })
             .then((products) => {
 
-              res.render("frontend/menu.handlebars", {
+              res.render("frontend/menu", {
                 singinup: true,
                 showHeader: true,
                 menu: true,
                 showCart: true,
                 showHeaderContent: true,
-                layout: "home-layout.handlebars",
+                layout: "home-layout",
                 categories: categories,
                 products: products,
                 idCurrent: categoryId,
                 countPage: count,
                 currentCategory: category,
-                currentPage: page-1,
-                previous : pre,
-                next : next,
+                currentPage: page - 1,
+                previous: pre,
+                next: next,
                 helpers: {
                   if_equal: isEqualHelperHandlerbar,
                   times: times
                 },
+                user: { user: user, isExist: user ? true : false },
               });
             });
         })

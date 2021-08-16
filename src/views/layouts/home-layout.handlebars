@@ -7,13 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cafe House</title>
 
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet'type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet'
+    type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link href="/frontend/css/bootstrap.min.css" rel="stylesheet">
   <link href="/frontend/css/font-awesome.min.css" rel="stylesheet">
   <link href="/frontend/css/all.css" rel="stylesheet">
@@ -51,7 +53,13 @@
               <li><a href="/menu" class="{{#if menu }} active {{/if}}">Menu</a></li>
               <li><a href="/contact" class="{{#if contact }} active {{/if}}">Contact</a></li>
               {{#if user.isExist}}
-              <li><a href="/profile"><i class="fas fa-user icon"></i> Hi, {{user.user.name}}</a></li>
+              <li id="menu-account_wrap">
+                <a href="/profile"><i class="fas fa-user icon"></i> Hi, {{user.user.name}}</a>
+                <ul id="menu-account">
+                  <li><a href="/profile">Profile</a></li>
+                  <li><a href="/logout">Logout</a></li>
+                </ul>
+              </li>
               {{else}}
               <li><a href="/sign-in"><i class="fas fa-user icon"></i> Đăng nhập</a></li>
               {{/if}}
@@ -95,12 +103,11 @@
   {{{body}}}
   {{/if}}
   <!-- Cart  -->
-  {{#if showHeader}}
   {{#if showCart}}
   <div class="wrap-cart">
-    <div class="cart">
+    <div class="cart" onclick="loadCart()">
       <a><i class="fas fa-shopping-cart icon-cart"></i></a>
-      <div class="cart-notify">99</div>
+      <div class="cart-notify" id="count-pro-cart">0</div>
     </div>
   </div>
   <!-- popups  -->
@@ -115,92 +122,29 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th scope="col"> </th>
-                <th scope="col">Tên sản phẩm</th>
-                <th scope="col" class="text-center">Số lượng</th>
-                <th scope="col" class="text-right">Giá</th>
-                <th> </th>
+                <th scope="col" id="tbl-list-cart-img" style="width:6rem;"> </th>
+                <th scope="col" style="width:15rem;">Tên sản phẩm</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Size</th>
+                <th scope="col" style="width:13rem;">Lượng đường</th>
+                <th scope="col">Giá</th>
+                <th id="deleteIcon" style="width:4rem;"> </th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                <td>Sản phẩm 1</td>
-                <td>
-                  <div class="quantity-btn">
-                    <input type="button" value="-" class="arrow" onclick="minus('sp1')" />
-                    <input class="form-control" type="number" id="sp1" value="1" min="1" max="99"
-                      onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
-                    <input type="button" value="+" class="arrow" onclick="plus('sp1')" />
-                  </div>
-                </td>
-                <td class="text-right">12 VNĐ</td>
-                <td class="text-right"><button class="btn btn-sm btn-danger outline"><i class="fa fa-trash"></i>
-                  </button> </td>
-              </tr>
-              <tr>
-                <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                <td>Sản phẩm 2</td>
-                <td>
-                  <div class="quantity-btn">
-                    <input type="button" value="-" class="arrow" onclick="minus('sp2')" />
-                    <input class="form-control" type="number" id="sp2" value="1" min="1" max="99"
-                      onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
-                    <input type="button" value="+" class="arrow" onclick="plus('sp2')" />
-                  </div>
-                </td>
-                <td class="text-right">23 VNĐ</td>
-                <td class="text-right"><button class="btn btn-sm btn-danger outline"><i class="fa fa-trash"></i>
-                  </button> </td>
-              </tr>
-              <tr>
-                <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                <td>Sản phẩm 3</td>
-                <td>
-                  <div class="quantity-btn">
-                    <input type="button" value="-" class="arrow" onclick="minus('sp3')" />
-                    <input class="form-control" type="number" id="sp3" value="1" min="1" max="99"
-                      onkeyup="this.value=this.value.replace(/[^0-9]./g,'');" />
-                    <input type="button" value="+" class="arrow" onclick="plus('sp3')" />
-                  </div>
-                </td>
-                <td class="text-right">2 VNĐ</td>
-                <td class="text-right"><button class="btn btn-sm btn-danger outline"><i class="fa fa-trash"></i>
-                  </button> </td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>Tổng tiền sản phẩm</td>
-                <td class="text-right">235 VNĐ</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>VAT</td>
-                <td class="text-right">10 VNĐ</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><strong>Tổng tiền</strong></td>
-                <td class="text-right"><strong>346 VNĐ</strong></td>
-              </tr>
+            <tbody id="form-cart-popups">
+
             </tbody>
           </table>
         </div>
       </div>
       <div class="text-right">
         <a href="/cart">
-          <button class="btn btn-lg btn-block btn-success text-uppercase outline">Thanh toán</button>
+          <button class="btn btn-lg btn-block btn-success text-uppercase outline">Thanh
+            toán</button>
         </a>
       </div>
     </div>
   </div>
-  {{/if}}
   {{/if}}
   <footer>
     <div class="tm-black-bg">
@@ -209,11 +153,11 @@
           <nav class="col-lg-3 col-md-3 tm-footer-nav tm-footer-div">
             <h3 class="tm-footer-div-title">MAIN MENU</h3>
             <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Today special</a></li>
-              <li><a href="#">Menu</a></li>
-              <li><a href="#">Contact</a></li>
-              <li><a href="#">Account</a></li>
+              <li><a href="/">Home</a></li>
+              <li><a href="/today-special">Today special</a></li>
+              <li><a href="/menu">Menu</a></li>
+              <li><a href="/contact">Contact</a></li>
+              <li><a href="/profile">Account</a></li>
             </ul>
           </nav>
           <div class="col-lg-5 col-md-5 tm-footer-div">
@@ -253,6 +197,9 @@
   <script src="/frontend/js/all.js"></script>
   <script src="/frontend/js/index.js"></script>
   <script src='https://cdn.jsdelivr.net/gh/vietblogdao/js/districts.min.js'></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 
   <script>
     $(document).ready(function () {
@@ -271,77 +218,49 @@
         })
       }, 4000)
     });
-</script>
-{{!-- lấy thành phố và huyện  --}}
-<script>
-    if (address_2 = localStorage.getItem('address_2_saved')) {
-  $('select[name="address_district"] option').each(function() {
-    if ($(this).text() == address_2) {
-      $(this).attr('selected', '')
-    }
-  })
-  $('input.billing_address_2').attr('value', address_2)
-}
-if (district = localStorage.getItem('district')) {
-  $('select[name="address_district"]').html(district)
-  $('select[name="address_district"]').on('change', function() {
-    var target = $(this).children('option:selected')
-    target.attr('selected', '')
-    $('select[name="address_district"] option').not(target).removeAttr('selected')
-    address_2 = target.text()
-    $('input.billing_address_2').attr('value', address_2)
-    district = $('select[name="address_district"]').html()
-    localStorage.setItem('district', district)
-    localStorage.setItem('address_2_saved', address_2)
-  })
-}
-$('select[name="address_provinces"]').each(function() {
-  var $this = $(this),
-    stc = ''
-  c.forEach(function(i, e) {
-    e += +1
-    stc += '<option value="' + i + '">' + i + '</option>'
-    $this.html('<option value="">Tỉnh / Thành phố</option>' + stc)
-    if (address_1 = localStorage.getItem('address_1_saved')) {
-      $('select[name="address_provinces"] option').each(function() {
-        if ($(this).text() == address_1) {
+  </script>
+  {{!-- lấy thành phố và huyện --}}
+  <script>
+    $('select[name="address_provinces"]').each(function () {
+      var $this = $(this),
+        stc = ''
+      c.forEach(function (i, e) {
+        stc += '<option value="' + i + '">' + i + '</option>'
+        $this.html('<option value="">Tỉnh / Thành phố</option>' + stc)
+        if (address_1 = $('input.provinces').val()) {
+          $('select[name="address_provinces"] option').each(function () {
+            if ($(this).text() == address_1) {
+              $(this).attr('selected', '')
+              var str2 = ''
+              arr[$(this).index() - 1].forEach(function (el) {
+                str2 += '<option value="' + el + '">' + el + '</option>'
+                $('select[name="address_district"]').html('<option value="">Quận / Huyện</option>' + str2)
+              })
+            }
+          })
+        }
+        $this.on('change', function (i) {
+          i = $this.children('option:selected').index() - 1
+          var str = '',
+            r = $this.val()
+          if (r != '') {
+            arr[i].forEach(function (el) {
+              str += '<option value="' + el + '">' + el + '</option>'
+              $('select[name="address_district"]').html('<option value="">Quận / Huyện</option>' + str)
+            })
+          } else {
+            $('select[name="address_district"]').html('<option value="">Quận / Huyện</option>')
+          }
+        })
+      })
+    })
+    if (address_2 = $('input.district').val()) {
+      $('select[name="address_district"] option').each(function () {
+        if ($(this).text() == address_2) {
           $(this).attr('selected', '')
         }
       })
-      $('input.billing_address_1').attr('value', address_1)
     }
-    $this.on('change', function(i) {
-      i = $this.children('option:selected').index() - 1
-      var str = '',
-        r = $this.val()
-      if (r != '') {
-        arr[i].forEach(function(el) {
-          str += '<option value="' + el + '">' + el + '</option>'
-          $('select[name="address_district"]').html('<option value="">Quận / Huyện</option>' + str)
-        })
-        var address_1 = $this.children('option:selected').text()
-        var district = $('select[name="address_district"]').html()
-        localStorage.setItem('address_1_saved', address_1)
-        localStorage.setItem('district', district)
-        $('select[name="address_district"]').on('change', function() {
-          var target = $(this).children('option:selected')
-          target.attr('selected', '')
-          $('select[name="address_district"] option').not(target).removeAttr('selected')
-          var address_2 = target.text()
-          $('input.billing_address_2').attr('value', address_2)
-          district = $('select[name="address_district"]').html()
-          localStorage.setItem('district', district)
-          localStorage.setItem('address_2_saved', address_2)
-        })
-      } else {
-        $('select[name="address_district"]').html('<option value="">Quận / Huyện</option>')
-        district = $('select[name="address_district"]').html()
-        localStorage.setItem('district', district)
-        localStorage.removeItem('address_1_saved', address_1)
-      }
-    })
-  })
-})
   </script>
 
 </body>

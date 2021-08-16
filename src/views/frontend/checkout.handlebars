@@ -1,80 +1,74 @@
+{{#if user.isExist}}
 <div class="tm-main-section light-gray-bg">
   <div class="container" id="checkout">
     <section class="jumbotron text-center">
       <div class="container">
-          <h1 class="jumbotron-heading">Thông tin nhận hàng</h1>
-        </div>
+        <h1 class="jumbotron-heading">Thông tin nhận hàng</h1>
+      </div>
     </section>
-    <div >
-      {{!-- <div class="row"> --}}
-          <div class="checkout-content">
-            <div class="checkout-left flex-col">
-              <div class="flex-col checkout-item-range">
-                <label>Tên</label>
-                <div><input type="text" placeholder="Họ Tên"/></div>
-              </div>
-              <div class="flex-col checkout-item-range">
-                <label>Số điện thoại</label>
-                <div><input type="text" placeholder="Vui lòng điền số điện thoại của bạn"/></div>
-              </div>
-              <div class="total-amount">
-                <div id="title-checkout-order"><h4>Thông tin đơn hàng</h4></div>
-                <div class="amount-item horizontal-line">
-                  <div>Tạm tính (1 sản phẩm)</div>
-                  <div>14.000 đ</div>
-                </div>
-                <div class="amount-item horizontal-line">
-                  <div>VAT</div>
-                  <div>10.000 đ</div>
-                </div>
-                <div class="amount-item">
-                  <div>Tổng cộng</div>
-                  <div>10.000 đ</div>
-                </div>
+    <div>
+      <form method="post">
+        <div class="checkout-content">
+          <div class="checkout-left flex-col">
+            <div class="flex-col checkout-item-range">
+              <label>Tên</label>
+              <div><input type="text" placeholder="Họ Tên" required name="name" value="{{user.user.name}}" /></div>
+            </div>
+            <div class="flex-col checkout-item-range">
+              <label>Số điện thoại</label>
+              <div><input type="text" required placeholder="Vui lòng điền số điện thoại của bạn" name="phone"
+                  value={{user.user.phone}} />
               </div>
             </div>
-            <div class="checkout-right flex-col">
-              <div class="flex-col checkout-item-range">
-                <label>Địa chỉ nhận hàng</label>
-                <div><input type="text" placeholder="Vui lòng nhập địa chỉ"/></div>
-              </div>
-              <div class="flex-col checkout-item-range">
-                <label>Tỉnh/ Thành phố</label>
-                <select name="calc_shipping_provinces" required="">
-                  <option>Vui lòng chọn Tỉnh/ Thành phố</option>
-                </select>
-              </div>
-              <div class="flex-col checkout-item-range">
-                <label>Quận/ Huyện</label>
-                <select name="calc_shipping_district" required="">
-                  <option>Vui lòng chọn Quận/ Huyện</option>
-                </select>
-              </div>
-              <div class="flex-col checkout-item-range">
-                <label>Phường/ Xã</label>
-                <select>
-                  <option>Vui lòng chọn Phường/ Xã</option>
-                  <option>Hà Nội</option>
-                  <option>Nam Định</option>
-                </select>
-              </div>
-              <input class="billing_address_1" name="" type="hidden" value="">
-              <input class="billing_address_2" name="" type="hidden" value="">
+            <div class="total-amount" id="total-checkout">
+
             </div>
           </div>
-          <div class="col mb-2">
-              <div class="row">
-                  <div class="col-sm-12  col-md-6">
-                      <a href="/cart">
-                        <button class="btn btn-block btn-light outline btn-lg">Chở về giỏ hàng</button>
-                      </a>
-                  </div>
-                  <div class="col-sm-12 col-md-6 text-right">
-                      <button class="btn btn-lg btn-block btn-success text-uppercase outline">Xác nhận đơn hàng</button>
-                  </div>
+          <div class="checkout-right flex-col">
+            <div class="flex-col checkout-item-range">
+              <label>Địa chỉ nhận hàng</label>
+              <div><input type="text" placeholder="Vui lòng nhập địa chỉ" name="detail_address" required
+                  value="{{user.user.detail}} - {{user.user.district}} - {{user.user.province}}" /></div>
+            </div>
+            <div class="flex-col choose-address">
+              <div class="checkout-item-range text-align_left">
+                <label for="address_provinces">Tỉnh/ Thành phố</label>
+                <select name="address_provinces" id="address_provinces">
+                  <option value="">Vui lòng chọn Tỉnh/ Thành phố</option>
+                </select>
+                <input class="provinces hide" type="text" value="{{user.user.province}}" />
+
               </div>
+              <div class="checkout-item-range text-align_left">
+                <label for="address_district">Quận/ Huyện</label>
+                <select name="address_district" id="address_district">
+                  <option value="">Vui lòng chọn Quận/ Huyện</option>
+                </select>
+                <input class="district hide" type="text" value="{{user.user.district}}" />
+                <input type="text" class="hide" name="order_detail" id="checkout-order-detail" value="" />
+              </div>
+            </div>
+            <input class="billing_address_1" name="" type="hidden" value="">
+            <input class="billing_address_2" name="" type="hidden" value="">
+            <input class="hide" name="customer_id" type="text" value="{{user.user._id}}" readonly />
           </div>
-      {{!-- </div> --}}
+        </div>
+        <div class="col mb-2">
+          <div class="row">
+            <div class="col-sm-12  col-md-6">
+              <a href="/cart">
+                <input type="button" class="btn btn-block btn-light outline btn-lg backToCart"
+                  value="Chở về giỏ hàng" />
+              </a>
+            </div>
+            <div class="col-sm-12 col-md-6 text-right">
+              <input type="submit" class="btn btn-lg btn-block btn-success text-uppercase outline"
+                value="Xác nhận đơn hàng" onclick="removeSession(); successOrder();" />
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
-</div> 
+</div>
+{{/if}}
