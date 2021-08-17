@@ -1,26 +1,36 @@
 import { Product } from "../models/Product.js";
-import { Category } from '../models/Category.js';
 
-export const index = async (req, res) => {
+export const index = async (req, res, next) => {
   try {
-    res.render("backend/products", { layout: "admin-layout" });
+    Product.find({})
+      .then((product) => {
+        product = product.map((product) => product.toObject());
+        return product;
+      })
+      .then((product) => {
+        res.render("backend/products", {
+          layout: "admin-layout",
+          title: "product",
+          product: product,
+        });
+      })
+      .catch(next);
   } catch (err) {
-    res.status(500).json("error", err);
+    console.log(err);
   }
 };
-
 
 //get product by hot
 export const getProductForHome = (req, res, next) => {
   const user = req.session.user || "";
   Product.find()
-    .sort({ "Hot": -1 })
+    .sort({ Hot: -1 })
     .limit(3)
-    .then(products => {
-      products = products.map(item => item.toObject());
+    .then((products) => {
+      products = products.map((item) => item.toObject());
       return products;
     })
-    .then(products => {
+    .then((products) => {
       res.render("frontend/home", {
         singinup: true,
         showHeader: true,
@@ -32,20 +42,20 @@ export const getProductForHome = (req, res, next) => {
         user: { user: user, isExist: user ? true : false },
       });
     })
-    .catch(err => {
+    .catch((err) => {
       next(err);
     });
-}
+};
 export const getProductForTodaySpecial = (req, res, next) => {
   const user = req.session.user || "";
   Product.find()
-    .sort({ "Hot": -1 })
+    .sort({ Hot: -1 })
     .limit(6)
-    .then(products => {
-      let pro = products.map(item => item.toObject());
+    .then((products) => {
+      let pro = products.map((item) => item.toObject());
       return pro;
     })
-    .then(products => {
+    .then((products) => {
       res.render("frontend/today-special", {
         singinup: true,
         showHeader: true,
@@ -57,10 +67,10 @@ export const getProductForTodaySpecial = (req, res, next) => {
         user: { user: user, isExist: user ? true : false },
       });
     })
-    .catch(err => {
+    .catch((err) => {
       next(err);
     });
-}
+};
 
 export const detailProduct = async (req, res, next) => {
   const product = await Product.findOne({ Name: req.params.name });
@@ -76,4 +86,4 @@ export const detailProduct = async (req, res, next) => {
     priceDiscount: Math.round(price2),
     user: { user: user, isExist: user ? true : false },
   });
-}
+};

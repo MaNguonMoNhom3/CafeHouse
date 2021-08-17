@@ -21,6 +21,7 @@ export const index = async (req, res, next) => {
     res.status(500).json("error", err);
   }
 };
+
 const isEqualHelperHandlerbar = function (a, b, opts) {
   if (a == b) {
     return opts.fn(this);
@@ -28,6 +29,7 @@ const isEqualHelperHandlerbar = function (a, b, opts) {
     return opts.inverse(this);
   }
 };
+
 const times = function (n, block) {
   var accum = '';
   for (var i = 0; i < n; ++i) {
