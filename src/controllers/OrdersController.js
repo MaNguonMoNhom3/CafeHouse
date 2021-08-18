@@ -1,10 +1,22 @@
-import { Order } from '../models/Order.js';
-import { OrderDetail } from '../models/OrderDetail.js';
-export const index = async (req, res) => {
+import { Order } from "../models/Order.js";
+import { OrderDetail } from "../models/OrderDetail.js";
+export const index = async (req, res, next) => {
   try {
-    res.render("backend/orders", { layout: "admin-layout" });
+    Order.find({})
+      .then((order) => {
+        order = order.map((order) => order.toObject());
+        return order;
+      })
+      .then((order) => {
+        res.render("backend/orders", {
+          layout: "admin-layout",
+          title: "order",
+          order: order,
+        });
+      })
+      .catch(next);
   } catch (err) {
-    res.status(500).json("error", err);
+    console.log(err);
   }
 };
 //
@@ -25,7 +37,7 @@ export const checkout = (req, res) => {
   } catch (err) {
     res.status(500).json("error", err);
   }
-}
+};
 
 export const createOrder = (req, res) => {
   try {
@@ -38,23 +50,22 @@ export const createOrder = (req, res) => {
       total_price: body.total,
       district: body.address_district,
       province: body.address_provinces,
-    }
+    };
     let infOrderDetail = JSON.parse(body.order_detail);
     const order = new Order(infOrder);
-    order.save()
-      .then(item => {
-        infOrderDetail.map(value => {
-          const dt = new OrderDetail({
-            product_id: value.id,
-            order_id: item._id,
-            quantity: value.quantity,
-            sugar: value.percentSugar,
-            size: value.size,
-          });
-          dt.save();
+    order.save().then((item) => {
+      infOrderDetail.map((value) => {
+        const dt = new OrderDetail({
+          product_id: value.id,
+          order_id: item._id,
+          quantity: value.quantity,
+          sugar: value.percentSugar,
+          size: value.size,
         });
-        res.redirect("http://localhost:5500");
-      })
+        dt.save();
+      });
+      res.redirect("http://localhost:5500");
+    });
   } catch (err) {
     res.status(500).json({ error: err });
   }

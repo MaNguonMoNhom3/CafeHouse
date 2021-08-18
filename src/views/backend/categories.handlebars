@@ -1,7 +1,6 @@
 <main>
     <div class="container-fluid px-4">
         <h1 class="mt-4">Danh mục</h1>
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
         <div class="bootstrap-modal">
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">Basic
@@ -29,6 +28,7 @@
                 <table id="datatablesSimple">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>created_at</th>
                             <th>updated_at</th>
@@ -37,6 +37,7 @@
                     </thead>
                     <tfoot>
                         <tr>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>created_at</th>
                             <th>updated_at</th>
@@ -46,12 +47,14 @@
                     <tbody>
                         {{#each category}}
                         <tr>
+                            <td>{{this._id}}</td>
                             <td>{{this.name}}</td>
                             <td>{{this.createdAt}}</td>
                             <td>{{this.updatedAt}}</td>
                             <td>
                                 <a href="" class="btn btn-info">Edit</a>
-                                <a href="" class="btn btn-danger">Delete</a>
+                                <a data-confirm="Are you sure?" data-method="delete" href="/admin/category/{{this._id}}"
+                                    class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
                         {{/each}}
