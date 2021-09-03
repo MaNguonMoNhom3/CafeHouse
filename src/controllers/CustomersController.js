@@ -2,9 +2,21 @@ import {check, validationResult} from 'express-validator';
 import bcrypt from 'bcryptjs';
 import { Customers } from "../models/Customer.js";
 
-export const index = async (req, res) => {
+export const index = async (req, res, next) => {
   try {
-    res.render("backend/customers", { layout: "admin-layout" });
+    Customers.find({})
+      .then((customer) => {
+        customer = customer.map((customer) => customer.toObject());
+        return customer;
+      })
+      .then((customer) => {
+        res.render("backend/customers", {
+          layout: "admin-layout",
+          title: "Customers",
+          category: customer,
+        });
+      })
+      .catch(next);
   } catch (err) {
     res.status(500).json("error", err);
   }

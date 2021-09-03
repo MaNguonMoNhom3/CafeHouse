@@ -1,8 +1,21 @@
 import { Order } from '../models/Order.js';
 import { OrderDetail } from '../models/OrderDetail.js';
-export const index = async (req, res) => {
+
+export const index = async (req, res, next) => {
   try {
-    res.render("backend/orders", { layout: "admin-layout" });
+    Order.find({})
+      .then((order) => {
+        order = order.map((order) => order.toObject());
+        return order;
+      })
+      .then((order) => {
+        res.render("backend/categories", {
+          layout: "admin-layout",
+          title: "order",
+          order: order,
+        });
+      })
+      .catch(next);
   } catch (err) {
     res.status(500).json("error", err);
   }

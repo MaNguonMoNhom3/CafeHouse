@@ -1,11 +1,23 @@
 import { Product } from "../models/Product.js";
 import { Category } from '../models/Category.js';
 
-export const index = async (req, res) => {
+export const index = async (req, res, next) => {
   try {
-    res.render("backend/products", { layout: "admin-layout" });
+    Product.find({})
+      .then((product) => {
+        product = product.map((product) => product.toObject());
+        return product;
+      })
+      .then((product) => {
+        res.render("backend/products", {
+          layout: "admin-layout",
+          title: "product",
+          product: product,
+        });
+      })
+      .catch(next);
   } catch (err) {
-    res.status(500).json("error", err);
+    console.log(err);
   }
 };
 

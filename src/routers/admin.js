@@ -10,14 +10,18 @@ const app = express();
 const router = express.Router();
 // ngon ngu rac vcl
 // Rác rưởi
+router.use("/login", login);
 router.get("/", (req, res) => {
-  res.render("backend/home", { layout: "admin-layout" });
+  if(req.session.user) {
+    return res.render("backend/home", { layout: "admin-layout" });
+  }
+  return res.redirect("/admin/login");
 });
 router.use("/category", category);
 router.use("/product", product);
 router.use("/order", order);
 router.use("/customer", customer);
 router.use("/blog", blog);
-router.use("/login", login);
+
 router.use("/signup", signUp);
 export default router;
