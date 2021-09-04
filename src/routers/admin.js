@@ -1,16 +1,17 @@
 import express from "express";
 // router
 import category from "./category.js";
-import { login, signUp } from "../controllers/Login_SignupController.js";
+import { login, signUp, logout } from "../controllers/Login_SignupController.js";
 import product from "./product.js";
 import order from "./order.js";
 import customer from "./customer.js";
 import blog from "./blog.js";
 const app = express();
 const router = express.Router();
-// ngon ngu rac vcl
-// Rác rưởi
+
 router.use("/login", login);
+router.use("/logout", logout);
+
 router.get("/", (req, res) => {
   if(req.session.user) {
     return res.render("backend/home", { layout: "admin-layout" });
