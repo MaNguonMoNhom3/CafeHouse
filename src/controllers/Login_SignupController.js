@@ -28,3 +28,13 @@ export const signUp = async (req, res) => {
     res.status(500).json("error", err);
   }
 };
+//logout
+export const logout = async (req, res) => {
+  try {
+    req.session.destroy((err) => {
+      res.redirect("/admin/login")
+    })
+  } catch (err) {
+    res.status(500).json("error", err);
+  }
+};
